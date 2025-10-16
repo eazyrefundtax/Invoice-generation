@@ -1,0 +1,15 @@
+.custom-shadow-md{
+    box-shadow: 0 -1px 3px rgba(0,0,0,0.1), 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Hide number input spin buttons */
+.no-spin::-webkit-outer-spin-button,
+.no-spin::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.no-spin {
+  -moz-appearance: textfield; /* Firefox */
+}
