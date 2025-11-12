@@ -9,7 +9,6 @@ import { RxCross1 } from "react-icons/rx";
 import TextField from "@mui/material/TextField";
 import WashTogBill from "../components/WashTog";
 import PkBill from "../components/PkBill";
-import { use } from "react";
 
 const CleaningMaintainces = () => {
   const [open, setOpen] = useState(false);
@@ -18,7 +17,6 @@ const CleaningMaintainces = () => {
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [dueDate, setDueDate] = useState("");
-  const [amount, setAmount] = useState("");
   const [reductions, setReductions] = useState(0);
   const [interestAmount, setInterestAmount] = useState(0);
   const [items, setItems] = useState([{ item: "", quantity: "", price: "" }]);
@@ -140,7 +138,6 @@ const CleaningMaintainces = () => {
 
     setNewFinalAmount(afterReduction);
   }, [items, reductions]);
-
   const handleAddItem = () =>
     setItems([...items, { item: "", quantity: "", price: "" }]);
 
@@ -164,34 +161,21 @@ const CleaningMaintainces = () => {
     },
   });
 
-  // Safe conversion helper function
+  // to words function
   const convertToWords = (value) => {
     const num = Number(value);
     if (isNaN(num) || value === "" || value == null) {
-      return ""; // or "Zero Rupees Only"
+      return "";
     }
     return toWords.convert(num);
   };
 
-  // Usage
   const amountInWords = convertToWords(finalWithInterest);
   const ucPlatformPriceInWords = convertToWords(ucPlatformPrice);
   const ucplucPlatformgstInWords = convertToWords(ucgstAmount);
 
-  // const toWords = new ToWords({
-  //   localeCode: "en-IN",
-  //   converterOptions: {
-  //     currency: true,
-  //     ignoreDecimal: false,
-  //   },
-  // });
 
-  // const amountInWords = toWords.convert(finalWithInterest);
-
-  // const ucamountInWords = toWords.convert(ucPlatformPrice);
-  {
-    /* 1st*/
-  }
+  {/* 1st*/ }
   const handleCreateBill1 = async () => {
     console.log("Button Click");
     if (!name || !address) {
@@ -226,7 +210,6 @@ const CleaningMaintainces = () => {
         items={itemsWithTotal}
         HeaderTitles={HeaderTitles}
         gstAmount={totalGST}
-        totalBeforeGST={totalBeforeGST}
         grandtotalBeforeGST={grandtotalBeforeGST}
         onlyCGST={onlyCGST}
         finalAmount={finalAmount}
@@ -250,9 +233,9 @@ const CleaningMaintainces = () => {
     setName("");
     setAddress("");
     setPhone("");
-    setAmount("");
     setDueDate("");
     setReductions("");
+    setUpdatedAmount("");
     setItems([{ item: "", quantity: "", price: "" }]);
     setShowError(false);
   };
@@ -305,9 +288,6 @@ const CleaningMaintainces = () => {
         interestTotalAmount={interestTotalAmount}
         finalWithInterest={finalWithInterest}
         onlygstAmount={onlygstAmount}
-
-        // newFinalAmount={afterInterest.toFixed(2)}
-        // amountInWords={toWords.convert(afterInterest)}
       />
     ).toBlob();
 
@@ -572,34 +552,7 @@ const CleaningMaintainces = () => {
                     className="bg-white w-full rounded-md"
                   />
                 </div>
-
-                {/* Phone & Due Date */}
-                {/* <div className="flex flex-col sm:flex-row gap-3 justify-between">
-                  <TextField
-                    label="Phone"
-                    type="text"
-                    value={phone}
-                    onChange={(e) => {
-                      const val = e.target.value.replace(/[^0-9]/g, "");
-                      if (val.length <= 10) setPhone(val);
-                    }}
-                    className="bg-white w-full sm:w-1/2 rounded-md"
-                  />
-                  <TextField
-                    label="Due Date"
-                    type="date"
-                    value={dueDate}
-                    onChange={(e) => setDueDate(e.target.value)}
-                    InputLabelProps={{ shrink: true }}
-                    className="bg-white w-full sm:w-1/2 rounded-md"
-                  />
-                </div> */}
-
-                {/* {dueDate === "" && showError && (
-                  <p className="text-sm text-red-500 font-medium">
-                    *This field is required.
-                  </p>
-                )} */}
+                {/* Items */}
                 {items.map((item, index) => (
                   <div
                     key={index}

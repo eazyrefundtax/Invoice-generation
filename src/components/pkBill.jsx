@@ -26,15 +26,16 @@ const styles = StyleSheet.create({
   tableHeader: {
     flexDirection: "row",
     backgroundColor: "#09A3B3",
-    borderBottomWidth: 1,
-    borderColor: "none",
     padding: 5,
+    borderTopRightRadius: 3,
+    borderTopLeftRadius: 3,
   },
   tableRow: {
     flexDirection: "row",
-    borderBottomWidth: 1,
-    borderColor: "#ccc",
     paddingVertical: 8,
+    borderBottomLeftRadius: 3,
+    borderBottomRightRadius: 3,
+
   },
   cell: {
     textAlign: "center",
@@ -78,7 +79,6 @@ const CleaningMaintenanceBill = ({
   dateTime,
   HeaderTitles = [],
   grandtotalBeforeGST,
-
   amountInWords,
   gstAmount,
   interestAmount,
@@ -98,23 +98,32 @@ const CleaningMaintenanceBill = ({
           >
             {"\n"} PK{"\n"} SERVICES{"\n"} INVOICE
           </Text>
-          <View>
+          <View
+            style={{
+              backgroundColor: "green",
+              height: 16,
+              width: 30,
+              borderRadius: 5,
+              alignItems: "center",
+              justifyContent: "center",
+              marginTop: 4,
+            }}
+          >
             <Text
               style={{
-                backgroundColor: "green",
-                height: 20,
-                width: 50,
                 color: "white",
-                paddingLeft: 8,
+                fontSize: 10,
+                fontFamily: "inter",
+                textAlign: "center",
               }}
             >
-              paid
+              Paid
             </Text>
           </View>
 
           <View style={{ flexDirection: "column" }}>
-            <Text style={{ fontSize: 16 }}>PK TRAIDERS</Text>
-            <Text style={{ fontSize: 12, paddingTop: 10, width: 150 }}>
+            <Text style={{ fontSize: 14 }}>PK TRAIDERS</Text>
+            <Text style={{ fontSize: 10, paddingTop: 10, width: 150, color: "gray", }}>
               ROAD NO 3 BESIDE {"\n"}GODABVARI CUTS, HAFEEZPET,
               {"\n"}Hyderabad,Telangana, {"\n"}India - 500049
             </Text>
@@ -222,6 +231,7 @@ const CleaningMaintenanceBill = ({
                 borderLeftWidth: 1,
                 fontSize: 12,
                 marginBottom: 5,
+                color: "gray",
               }}
             >
               Payment Records
@@ -233,6 +243,7 @@ const CleaningMaintenanceBill = ({
                 fontSize: 12,
                 padding: 5,
                 gap: 20,
+
               }}
             >
               <Text>Invoice Amount</Text>
@@ -256,6 +267,7 @@ const CleaningMaintenanceBill = ({
             </View>
           </View>
         </View>
+        <View style={{ flexDirection: "row", gap: 30, marginTop: 20 }}></View>
         <View>
           <Text
             style={{
@@ -284,6 +296,7 @@ const CleaningMaintenanceBill = ({
           >
             <Text>{address}</Text>
           </View>
+
         </View>
 
         {/* Table */}
@@ -331,6 +344,7 @@ const CleaningMaintenanceBill = ({
 
         {/* Total Section */}
         <View
+          wrap={false}
           style={{
             marginTop: 15,
             display: "flex",
@@ -340,7 +354,7 @@ const CleaningMaintenanceBill = ({
           }}
         >
           <View
-            style={{ display: "flex", flexDirection: "column", width: "70%" }}
+            style={{ display: "flex", flexDirection: "column", width: "65%" }}
           >
             <Text style={{ fontSize: 12, marginTop: 20 }}>
               Total (In Words) :
@@ -348,8 +362,65 @@ const CleaningMaintenanceBill = ({
             <Text style={{ marginTop: 20, color: "#09A3B3", fontSize: 14 }}>
               {amountInWords}
             </Text>
+
+            <Text style={{ paddingTop: 20, }}>Payment</Text>
+            <View wrap={false} style={{ marginTop: 5 }}>
+              <View style={{
+                borderRadius: 6,
+                overflow: "hidden",
+                width: "100%",
+              }}>
+                {/* Header */}
+                <View style={{
+                  flexDirection: "row",
+                  backgroundColor: "#00A9AD",
+                  color: "#fff",
+                  fontSize: 10,
+                  fontWeight: "bold",
+                  paddingVertical: 6,
+                  paddingHorizontal: 4,
+                }} fixed>
+                  <Text style={{
+                    flex: 1,
+                    textAlign: "left",
+                  }}>Date</Text>
+                  <Text style={{
+                    flex: 1,
+                    textAlign: "left",
+                  }}>Mode</Text>
+                  <Text style={{
+                    flex: 1,
+                    textAlign: "right",
+                  }}>Amount</Text>
+                </View>
+
+                {/* Row */}
+                <View style={{
+                  flexDirection: "row",
+                  backgroundColor: "#fff",
+                  borderTop: "0.5px solid #ddd",
+                  fontSize: 10,
+                  paddingVertical: 6,
+                  paddingHorizontal: 4,
+                }}>
+                  <Text style={{
+                    flex: 1,
+                    textAlign: "left",
+                  }}>{dateTime}</Text>
+                  <Text style={{
+                    flex: 1,
+                    textAlign: "left",
+                  }}>Account Transfer</Text>
+                  <Text style={{
+                    flex: 1,
+                    textAlign: "right",
+                    fontFamily: "inter"
+                  }}>₹{Number(finalWithInterest).toFixed(2)}</Text>
+                </View>
+              </View>
+            </View>
           </View>
-          <View style={{ fontSize: 12, width: "30%" }}>
+          <View style={{ fontSize: 12, width: "35%" }}>
             <View
               style={{
                 flexDirection: "row",
@@ -407,7 +478,38 @@ const CleaningMaintenanceBill = ({
                 ₹{Number(finalWithInterest).toFixed(2)}
               </Text>
             </View>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                marginTop: 5,
+                marginBottom: 5,
+
+              }}
+            >
+              <Text style={{ fontSize: 12 }}>Amount Paid</Text>
+              <Text
+                style={{ color: "#09A3B3", fontSize: 16, fontFamily: "inter" }}
+              >
+                (₹{Number(finalWithInterest).toFixed(2)})
+              </Text>
+            </View>
           </View>
+        </View>
+        <View>
+          <Text
+            wrap={false}
+            style={{
+              fontSize: "9",
+              color: "black",
+              textAlign: "center",
+              height: 50,
+              backgroundColor: "#D2EEF7",
+              marginTop: 5,
+            }}
+          >
+            For any enquiry, reach out via call on +91 78159 36625
+          </Text>
         </View>
 
         <View View style={styles.footer} fixed>
@@ -462,16 +564,6 @@ const CleaningMaintenanceBill = ({
               }}
             >
               This is electrically generated document, No signature is required
-            </Text>
-            <Text
-              style={{
-                fontSize: "9",
-                color: "black",
-                textAlign: "center",
-                marginTop: 5,
-              }}
-            >
-              For any enquiry, reach out via call on +91 78159 36625
             </Text>
           </View>
         </View>

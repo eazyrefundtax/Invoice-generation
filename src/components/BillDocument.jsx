@@ -87,7 +87,6 @@ export const BillDocument = ({
   phone,
   dateTime,
 }) => {
-  console.log("Name", name);
   Font.register({
     family: "roboto",
     fonts: [{ src: lightFont, fontWeight: "200" }],

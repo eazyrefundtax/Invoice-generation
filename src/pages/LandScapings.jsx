@@ -48,7 +48,6 @@ const LandScapings = () => {
   const currentDate = today.toLocaleDateString("en-US", options);
 
   const handleModalOpen = (bill) => {
-    console.log("Bill", bill);
     setSelectedBill(bill);
     setOpen(true);
   };
@@ -105,7 +104,7 @@ const LandScapings = () => {
   };
 
   return (
-    <div className="flex align-items-center sm:grid-cols-2 lg:grid-cols-3 px-4 sm:px-8 md:px-16 gap-6 justify-items-center py-1 ">
+    <div className="flex align-items-center sm:grid-cols-2 lg:grid-cols-3 px-4 sm:px-8 md:px-16 gap-6 justify-items-center">
       <img
         src={landScaping}
         alt="Land Scaping"

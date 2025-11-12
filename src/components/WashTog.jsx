@@ -25,20 +25,19 @@ const styles = StyleSheet.create({
   },
   tableHeader: {
     flexDirection: "row",
-    backgroundColor: "#23940A",
-    borderBottomWidth: 1,
-    borderColor: "#000",
+    backgroundColor: "#2A8C2E",
     padding: 5,
-    // borderLeftColor: "white",
-    // borderLeftWidth: 1,
-    // borderRightColor: "white",
-    // borderRightWidth: 1,
+    borderTopRightRadius: 3,
+    borderTopLeftRadius: 3,
   },
   tableRow: {
     flexDirection: "row",
     borderBottomWidth: 1,
     borderColor: "#ccc",
+    borderBottomLeftRadius: 3,
+    borderBottomRightRadius: 3,
     paddingVertical: 8,
+    backgroundColor: "#ECF3F8",
   },
   cell: {
     textAlign: "center",
@@ -52,7 +51,7 @@ const styles = StyleSheet.create({
   },
   Header: {
     flexDirection: "row",
-    backgroundColor: "#DFEDF2",
+    backgroundColor: "#ECF3F8",
     height: "90px",
     minHeight: "90px",
     width: "100%",
@@ -92,14 +91,14 @@ const CleaningMaintenanceBill = ({
       <Page size="A4" style={styles.page}>
         {/* Header */}
         <View style={styles.Header} fixed>
-          <Text style={{ fontSize: 28, color: "#23940A" }}>Invoice</Text>
+          <Text style={{ fontSize: 28, color: "#2A8C2E" }}>Invoice</Text>
 
           <View style={{ flexDirection: "column", alignItems: "flex-start" }}>
             <Text style={{ fontSize: 16 }}>WASHTOG</Text>
-            <Text style={{ fontSize: 12, paddingTop: 10 }}>India</Text>
+            <Text style={{ fontSize: 12, paddingTop: 10, color: "gray" }}>India</Text>
           </View>
 
-          <Image src={logoImage} style={{ height: 50, width: 120 }} />
+          <Image src={logoImage} style={{ height: 65, width: 190 }} />
         </View>
 
         {/* Invoice + Payment + Customer Info */}
@@ -108,7 +107,7 @@ const CleaningMaintenanceBill = ({
           <View>
             <Text
               style={{
-                backgroundColor: "#DFEDF2",
+                backgroundColor: "#ECF3F8",
                 padding: 5,
                 borderLeftColor: "#23940A",
                 borderLeftWidth: 1,
@@ -150,7 +149,7 @@ const CleaningMaintenanceBill = ({
           <View>
             <Text
               style={{
-                backgroundColor: "#DFEDF2",
+                backgroundColor: "#ECF3F8",
                 padding: 5,
                 borderLeftColor: "#23940A",
                 borderLeftWidth: 1,
@@ -198,7 +197,7 @@ const CleaningMaintenanceBill = ({
           <View>
             <Text
               style={{
-                backgroundColor: "#DFEDF2",
+                backgroundColor: "#ECF3F8",
                 padding: 5,
                 borderLeftColor: "#23940A",
                 borderLeftWidth: 1,
@@ -265,6 +264,7 @@ const CleaningMaintenanceBill = ({
 
         {/* Total Section */}
         <View
+          wrap={false}
           style={{
             marginTop: 15,
             display: "flex",
@@ -279,7 +279,7 @@ const CleaningMaintenanceBill = ({
             <Text style={{ fontSize: 12, marginTop: 20 }}>
               Total (In Words) :
             </Text>
-            <Text style={{ marginTop: 20, color: "#23940A", fontSize: 14 }}>
+            <Text style={{ marginTop: 20, color: "#2A8C2E", fontSize: 14 }}>
               {amountInWords}
             </Text>
           </View>
@@ -353,8 +353,9 @@ const CleaningMaintenanceBill = ({
           </View>
         </View>
         <View
+          wrap={false}
           style={{
-            backgroundColor: "#DFEDF2",
+            backgroundColor: "#ECF3F8",
             fontSize: 10,
             margin: 20,
             height: 140,
