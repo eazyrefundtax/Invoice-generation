@@ -9,7 +9,11 @@ const MainLayouts = () => {
   const { logout, currentUser } = useAuth();
   const { pathname } = useLocation();
 
-  const isAdmin = currentUser?.email === "murthy@skygoalnext.com";
+  const adminEmails = [
+    "eazyconsultancy8096@gmail.com"
+  ];
+
+  const isAdmin = adminEmails.includes(currentUser?.email);
 
   const handleLogout = async () => {
     try {

@@ -39,6 +39,26 @@ const Supplies = () => {
   const [selectedBill, setSelectedBill] = useState(null);
   const [showError, setShowError] = useState(false);
 
+
+  const reSetValues = () => {
+    setOpen(false);
+    setName("");
+    setShippedName("");
+    setAddress("");
+    setShippingAddress("");
+    SetPhone("");
+    setItems("");
+    setDiscount("");
+    setDueDate("");
+    setinitialPayment("");
+    setFinalPayment("");
+    setChallanDate("");
+    setPaymentDate("");
+    setSelectedBill(null);
+    setShowError("false");
+
+
+  }
   const tableHead = [
     { label: "Item", width: "50%", value: "Item" },
     { label: "Rate", width: "12.5%", value: "Rate" },
@@ -158,9 +178,7 @@ const Supplies = () => {
     URL.revokeObjectURL(url);
 
 
-    setName("");
-    setAddress("");
-    SetPhone("");
+    reSetValues();
   };
 
   // 2nd bill
@@ -269,15 +287,7 @@ const Supplies = () => {
     URL.revokeObjectURL(url);
 
 
-    setOpen(true);
-    setDiscount("");
-    setShippingAddress("");
-    setShippedName("");
-    setDueDate("");
-    setFinalPayment("");
-    setinitialPayment("");
-    setShippedName("");
-    setShowError(false);
+    reSetValues();
 
   };
 
@@ -379,9 +389,7 @@ const Supplies = () => {
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
 
-    setChallanDate("");
-    setPaymentDate("");
-    setDueDate("");
+    reSetValues();
   };
 
   {/*4th bill */ }
@@ -441,12 +449,12 @@ const Supplies = () => {
     link.download = `${name}.pdf`;
     document.body.appendChild(link);
     link.click();
-
-    // Cleanup
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
-    setName("");
-    SetPhone("");
+
+
+
+    reSetValues();
   };
 
   {/*5th bill*/ }
@@ -508,6 +516,8 @@ const Supplies = () => {
     link.click();
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
+
+    reSetValues();
   };
 
   {/*6th Bill*/ }
@@ -573,6 +583,9 @@ const Supplies = () => {
     link.click();
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
+
+
+    reSetValues();
   };
 
   const handleModalOpen = (bill) => {
@@ -1050,8 +1063,8 @@ const Supplies = () => {
                     <div className="flex flex-row gap-5 mb-3">
                       <TextField
                         label="Name"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
+                        value={shippedName}
+                        onChange={(e) => setShippedName(e.target.value)}
                         className="bg-white w-full rounded-md"
                       />
                       {name === "" && showError && (
@@ -1066,8 +1079,8 @@ const Supplies = () => {
                     <div>
                       <TextField
                         label="Address"
-                        value={address}
-                        onChange={(e) => setAddress(e.target.value)}
+                        value={shippingAddress}
+                        onChange={(e) => setShippingAddress(e.target.value)}
                         className="bg-white w-full rounded-md"
                       />
                       {address === "" && showError && (

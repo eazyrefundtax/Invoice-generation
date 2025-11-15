@@ -15,13 +15,13 @@ import ActWifiBill from "../components/ActWifi";
 const Utilities = () => {
   const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState({
-    name: "test",
-    totalAmount: "1000",
-    phone: "9999999999",
+    name: "",
+    totalAmount: "",
+    phone: "",
   });
 
 
-  const [addres, setAddres] = useState("kphb, housingbard, hyderabad, telangana, pin-500072")
+  const [addres, setAddres] = useState("");
   const [showError, setShowError] = useState(false);
   const [selectedBill, setSelectedBill] = useState(null);
   const [invoiceDate, setinvoiceDate] = useState(null);
@@ -88,11 +88,7 @@ const Utilities = () => {
   const TotalCharges = totalAmountNum - gst;
   const cgst = gst / 2;
 
-  // function generateIdSimple(prefix = "P1", digits = 8) {
-  //   const max = 10 ** digits;
-  //   const num = Math.floor(Math.random() * max).toString().padStart(digits, "0");
-  //   return `${prefix}-${num}`;
-  // }
+
 
 
   useEffect(() => {
@@ -185,7 +181,7 @@ const Utilities = () => {
 
 
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 px-6 sm:px-10 lg:px-24 gap-6 sm:gap-8">
+    <div className="flex flex-col sm:flex-row justify-center items-center gap-6 px-4 sm:px-8 md:px-16">
 
       {/* Bill Images */}
       {images.map(({ id, image }) => (
@@ -207,7 +203,7 @@ const Utilities = () => {
           onClick={() => setOpen(false)}
         >
           <div
-            className="bg-white rounded-lg shadow-xl w-full max-w-[420px] p-8 relative"
+            className="bg-white rounded-lg shadow-xl w-full max-w-[750px] p-10 relative"
             onClick={(e) => e.stopPropagation()}
           >
             <button
@@ -217,7 +213,7 @@ const Utilities = () => {
               <RxCross1 />
             </button>
 
-            {/*BILL 1 */}
+            {/* BILL 1 */}
             {selectedBill?.id === 1 && (
               <div className="flex flex-col gap-6 mt-4 bg-white rounded-2xl shadow-md p-6 sm:p-8 transition-all duration-300">
                 {/* Header */}
@@ -279,101 +275,130 @@ const Utilities = () => {
               </div>
             )}
 
-
-
-            {/*2nd Bill */}
+            {/* BILL 2 */}
             {selectedBill?.id === 2 && (
-              <div className="flex flex-col gap-6 mt-4 bg-white rounded-2xl shadow-md p-6 sm:p-8 transition-all">
-                {/* Section Header */}
-                <div className="text-center">
-                  <h2 className="text-2xl font-semibold text-gray-800">Customer Details</h2>
+              <div className="bg-white border border-gray-200 shadow-sm rounded-xl p-8 mt-6">
+
+                {/* Header */}
+                <div className="mb-8">
+                  <h2 className="text-xl font-semibold text-gray-900">Customer Details</h2>
                   <p className="text-gray-500 text-sm mt-1">
-                    Please fill in the required information to generate your bill.
+                    Provide information to proceed with bill generation.
                   </p>
                 </div>
 
-                {/* Input Fields */}
-                <div className="flex flex-col gap-5">
-                  {["name", "totalAmount", "phone"].map((field, i) => (
-                    <div key={i}>
-                      <TextField
-                        label={
-                          field === "name"
-                            ? "Full Name"
-                            : field === "totalAmount"
-                              ? "Total Amount Paid"
-                              : "Phone Number"
-                        }
-                        variant="outlined"
-                        value={formData[field]}
-                        onChange={(e) => {
-                          let value = e.target.value;
-                          if (field === "phone") {
-                            value = value.replace(/[^0-9]/g, "").slice(0, 10);
-                          }
-                          setFormData({ ...formData, [field]: value });
-                        }}
-                        fullWidth
-                        InputProps={{
-                          className:
-                            "bg-gray-50 rounded-lg focus-within:border-gray-700 transition-all",
-                        }}
-                      />
-                      {formData[field] === "" && showError && (
-                        <p className="text-xs text-red-500 mt-1 italic">
-                          *This field is required.
-                        </p>
-                      )}
-                    </div>
-                  ))}
-
-                  {/* Address Field */}
-                  <div>
-                    <TextField
-                      label="Address"
-                      multiline
-                      rows={3}
-                      value={addres}
-                      onChange={(e) => setAddres(e.target.value)}
-                      fullWidth
-                      variant="outlined"
-                      InputProps={{
-                        className:
-                          "bg-gray-50 rounded-lg focus-within:border-gray-700 transition-all",
-                      }}
-                    />
-                    {addres === "" && showError && (
-                      <p className="text-xs text-red-500 mt-1 italic">
-                        *Address is required.
-                      </p>
-                    )}
-                  </div>
-                  <LocalizationProvider dateAdapter={AdapterDateFns}>
-                    <DatePicker
-                      label="Due Date"
-                      value={invoiceDate}
-                      onChange={handleDateChange}
-                      slotProps={{
-                        textField: {
-                          fullWidth: true,
-                          sx: {
-                            backgroundColor: "white",
-                            borderRadius: "8px",
-                          },
-                        },
-                      }}
-                    />
-                  </LocalizationProvider>
+                {/*  Name */}
+                <div className="mb-6">
+                  <TextField
+                    label="Full Name"
+                    variant="outlined"
+                    value={formData.name}
+                    onChange={(e) =>
+                      setFormData({ ...formData, name: e.target.value })
+                    }
+                    fullWidth
+                    InputProps={{
+                      className:
+                        "bg-gray-50 focus-within:ring-1 focus-within:ring-gray-700 rounded-md",
+                    }}
+                  />
+                  {formData.name === "" && showError && (
+                    <p className="text-xs text-red-500 italic mt-1">*Required</p>
+                  )}
                 </div>
 
-                {/* Divider */}
-                <hr className="border-gray-200 my-2" />
+                {/* Total Amount */}
+                <div className="mb-6">
+                  <TextField
+                    label="Total Amount Paid"
+                    variant="outlined"
+                    value={formData.totalAmount}
+                    onChange={(e) =>
+                      setFormData({ ...formData, totalAmount: e.target.value })
+                    }
+                    fullWidth
+                    InputProps={{
+                      className:
+                        "bg-gray-50 focus-within:ring-1 focus-within:ring-gray-700 rounded-md",
+                    }}
+                  />
+                  {formData.totalAmount === "" && showError && (
+                    <p className="text-xs text-red-500 italic mt-1">*Required</p>
+                  )}
+                </div>
 
-                {/* Submit Button */}
+                {/* Phone + Date */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+
+                  {/* Phone */}
+                  <div>
+                    <TextField
+                      label="Phone Number"
+                      variant="outlined"
+                      value={formData.phone}
+                      onChange={(e) => {
+                        let value = e.target.value.replace(/[^0-9]/g, "").slice(0, 10);
+                        setFormData({ ...formData, phone: value });
+                      }}
+                      fullWidth
+                      InputProps={{
+                        className:
+                          "bg-gray-50 focus-within:ring-1 focus-within:ring-gray-700 rounded-md",
+                      }}
+                    />
+                    {formData.phone === "" && showError && (
+                      <p className="text-xs text-red-500 italic mt-1">*Required</p>
+                    )}
+                  </div>
+
+                  {/* Due Date */}
+                  <div>
+                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                      <DatePicker
+                        label="Due Date"
+                        value={invoiceDate}
+                        onChange={handleDateChange}
+                        slotProps={{
+                          textField: {
+                            fullWidth: true,
+                            sx: {
+                              bgcolor: "#f9fafb",
+                              borderRadius: "6px",
+                            },
+                          },
+                        }}
+                      />
+                    </LocalizationProvider>
+                  </div>
+                </div>
+
+                {/*Address */}
+                <div className="mb-6">
+                  <TextField
+                    label="Address"
+                    multiline
+                    rows={3}
+                    value={addres}
+                    onChange={(e) => setAddres(e.target.value)}
+                    fullWidth
+                    variant="outlined"
+                    InputProps={{
+                      className:
+                        "bg-gray-50 focus-within:ring-1 focus-within:ring-gray-700 rounded-md",
+                    }}
+                  />
+                  {addres === "" && showError && (
+                    <p className="text-xs text-red-500 italic mt-1">*Required</p>
+                  )}
+                </div>
+
+                <div className="border-t border-gray-200 my-8"></div>
+
+                {/* Submit */}
                 <div className="flex justify-center">
                   <button
                     onClick={handleCreateBill2}
-                    className="w-full sm:w-auto px-6 py-3 bg-black text-white font-semibold rounded-lg shadow hover:bg-gray-800 transition-all duration-200"
+                    className="px-8 py-3 bg-gray-900 text-white font-medium rounded-md shadow-sm hover:bg-black transition-all"
                   >
                     Create Bill
                   </button>
@@ -385,6 +410,7 @@ const Utilities = () => {
         </div>
       )}
     </div>
+
   );
 };
 

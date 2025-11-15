@@ -1,5 +1,12 @@
 import React from "react";
-import { Page, Text, View, Document, StyleSheet } from "@react-pdf/renderer";
+import { Page, Text, View, Document, StyleSheet, Font } from "@react-pdf/renderer";
+import inter from "../fonts/Inter_18pt-Medium.ttf";
+
+
+Font.register({
+  family: "inter",
+  fonts: [{ src: inter, fontWeight: "200" }],
+});
 const styles = StyleSheet.create({
   page: {
     padding: 30,
@@ -15,10 +22,7 @@ const styles = StyleSheet.create({
     borderColor: "#000",
     padding: 5,
     alignItems: "flex-start",
-    // borderLeftColor: "white",
-    // borderLeftWidth: 1,
-    // borderRightColor: "white",
-    // borderRightWidth: 1,
+
   },
   tableRow: {
     flexDirection: "row",
@@ -31,14 +35,6 @@ const styles = StyleSheet.create({
     fontSize: 10,
     fontFamily: "inter",
   },
-  // info: {
-  //   display: "flex",
-  //   // flexDirection: "row",
-  //   justifyContent: "space-between",
-  //   fontSize: 12,
-  //   gap: 20,
-  //   marginBottom: "10px",
-  // },
   footer: {
     position: "absolute",
     bottom: 10,
@@ -93,10 +89,8 @@ const LandScaping = ({
             </View>
           </View>
 
-          {/* <View style={styles.info}>
 
-            
-          </View> */}
+
         </View>
         <View
           style={{
@@ -215,23 +209,11 @@ const LandScaping = ({
               fontSize: 10,
               display: "flex",
               flexDirection: "row",
-              justifyContent: "space-between",
               width: "100%",
+              gap: 20,
               paddingTop: 10,
             }}
           >
-            <View
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                gap: 40,
-              }}
-            >
-              <View style={styles.info}>
-                <Text>Invoice # </Text>
-                <Text>{Invoice}</Text>
-              </View>
-            </View>
             <View>
               <Text
                 style={{ color: "black" }}
@@ -240,6 +222,19 @@ const LandScaping = ({
                 }
               />
             </View>
+            <View
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                gap: 40,
+              }}
+            >
+              <View style={{ display: "flex", flexDirection: "row" }}>
+                <Text>Invoice # </Text>
+                <Text>{Invoice}</Text>
+              </View>
+            </View>
+
           </View>
         </View>
       </Page>

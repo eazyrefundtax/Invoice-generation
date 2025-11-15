@@ -442,7 +442,6 @@ const ActWifi = ({
                         <Text style={[styles.tableCol, { width: "18%" }]}>{TotalCharges}</Text>
                     </View>
                 </View>
-
                 <View style={styles.subtotalRow}>
                     <Text style={styles.subtotalText}>Sub Total:</Text>
                     <Text style={styles.subtotalValue}>{TotalCharges}</Text>
@@ -508,7 +507,6 @@ const ActWifi = ({
                                 Plan Name
                             </Text>
                         </View>
-
                         <View
                             style={{
                                 width: "15%",

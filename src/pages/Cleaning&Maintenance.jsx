@@ -28,6 +28,27 @@ const CleaningMaintainces = () => {
   const [ucitem, setucItem] = useState("");
   const [ucPlatformPrice, setucPlatformPrice] = useState("");
   const [ucprice, setucPrice] = useState("");
+
+
+  const reSetForm = () => {
+    setOpen(false);
+    setSelectedBill(null);
+    setShowError(false);
+    setName();
+    setPhone();
+    setAddress();
+    setDueDate();
+    setReductions();
+    setInterestAmount();
+    setItems();
+    setFinalAmount();
+    setUpdatedAmount();
+    setNewFinalAmount();
+    setInterestTotalAmount();
+    setucItem();
+    setucPlatformPrice();
+    setucPrice();
+  }
   const HeaderTitles = [
     { name: "S.no", width: "5%", value: "s.no" },
     { name: "Item", width: "40%", value: "item" },
@@ -89,10 +110,10 @@ const CleaningMaintainces = () => {
 
     return {
       ...item,
-      baseAmount: baseAmount.toFixed(2), // before GST
-      gstAmount: gstAmount.toFixed(2), // GST per item
-      total: total.toFixed(2), // after GST
-      onlyGstAmount: gstAmount.toFixed(2), // same as gstAmount, for clarity
+      baseAmount: baseAmount.toFixed(2),
+      gstAmount: gstAmount.toFixed(2),
+      total: total.toFixed(2),
+      onlyGstAmount: gstAmount.toFixed(2),
     };
   });
 
@@ -228,16 +249,7 @@ const CleaningMaintainces = () => {
     link.click();
     URL.revokeObjectURL(url);
 
-    setOpen(false);
-    setSelectedBill(null);
-    setName("");
-    setAddress("");
-    setPhone("");
-    setDueDate("");
-    setReductions("");
-    setUpdatedAmount("");
-    setItems([{ item: "", quantity: "", price: "" }]);
-    setShowError(false);
+    reSetForm();
   };
 
   //2nd
@@ -298,17 +310,7 @@ const CleaningMaintainces = () => {
     link.click();
     URL.revokeObjectURL(url);
 
-    // Reset state
-    setOpen(false);
-    setSelectedBill(null);
-    setName("");
-    setAddress("");
-    setPhone("");
-    setInterestAmount("");
-    setInterestTotalAmount("");
-    setDueDate("");
-    setItems([{ item: "", quantity: "", price: "" }]);
-    setShowError(false);
+    reSetForm();
   };
 
   //3rd
@@ -351,16 +353,7 @@ const CleaningMaintainces = () => {
     link.click();
     URL.revokeObjectURL(url);
 
-    setOpen(false);
-    setSelectedBill(null);
-    setName("");
-    setucItem("");
-    setucPlatformPrice("");
-    setucPrice("");
-    setAddress("");
-    setPhone("");
-    setDueDate("");
-    setShowError(false);
+    reSetForm();
   };
 
   const handleModalOpen = (bill) => {

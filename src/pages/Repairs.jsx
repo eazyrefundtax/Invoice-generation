@@ -164,7 +164,7 @@ const Repairs = () => {
     resetForm();
   };
 
-  // 🧾 2nd Bill - PK Repair
+  //  2nd Bill - PK Repair
   const handleCreateBill2 = async () => {
     if (!validatePKBill()) return;
 
@@ -234,67 +234,190 @@ const Repairs = () => {
       ))}
 
       {open && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50 px-2">
-          <div className="bg-[#EDEDED] rounded-lg shadow-lg w-full sm:w-[600px] md:w-[700px] lg:w-[800px] relative p-6 sm:p-8 md:p-10 max-h-[90vh] overflow-y-auto">
-            <div className="flex justify-between items-center">
-              <p className="text-xl sm:text-2xl font-semibold">Details</p>
-              <button className="text-black text-2xl font-bold cursor-pointer" onClick={() => setOpen(false)}>
+        <div className="fixed inset-0 flex items-center justify-center bg-black/40   z-50 px-3">
+          <div className="bg-[#f5f5f7] rounded-2xl shadow-2xl w-full sm:w-[600px] md:w-[720px] lg:w-[850px] relative p-6 sm:p-8 md:p-10 max-h-[90vh] overflow-y-auto transition-all duration-300">
+
+            {/* Header */}
+            <div className="flex justify-between items-center border-b pb-3">
+              <p className="text-2xl font-semibold tracking-tight text-gray-900">Customer Details</p>
+              <button
+                className="text-black text-2xl hover:text-red-600 transition"
+                onClick={() => setOpen(false)}
+              >
                 <RxCross1 />
               </button>
             </div>
 
             {/* Urban Company Bill */}
             {selectedBill?.id === 1 && (
-              <div className="flex flex-col gap-5 mt-4">
-                <TextField label="Name" value={name} error={!!errors.name} helperText={errors.name} onChange={(e) => setName(e.target.value)} />
-                <TextField label="Address" value={address} error={!!errors.address} helperText={errors.address} onChange={(e) => setAddress(e.target.value)} />
-                <TextField label="Item" value={ucitem} error={!!errors.ucitem} helperText={errors.ucitem} onChange={(e) => setucItem(e.target.value)} />
-                <div className="flex flex-col sm:flex-row gap-3">
-                  <TextField label="Platform Price" type="text" value={ucPlatformPrice} error={!!errors.ucPlatformPrice} helperText={errors.ucPlatformPrice} onChange={(e) => setucPlatformPrice(e.target.value.replace(/[^0-9]/g, ""))} />
-                  <TextField label="Item Price" type="text" value={ucprice} error={!!errors.ucprice} helperText={errors.ucprice} onChange={(e) => setucPrice(e.target.value.replace(/[^0-9]/g, ""))} />
+              <div className="flex flex-col gap-6 mt-6">
+
+                <TextField
+                  label="Customer Name"
+                  value={name}
+                  error={!!errors.name}
+                  helperText={errors.name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="bg-white rounded-md"
+                  fullWidth
+                />
+
+                <TextField
+                  label="Address"
+                  value={address}
+                  error={!!errors.address}
+                  helperText={errors.address}
+                  onChange={(e) => setAddress(e.target.value)}
+                  className="bg-white rounded-md"
+                  fullWidth
+                />
+
+                <TextField
+                  label="Item"
+                  value={ucitem}
+                  error={!!errors.ucitem}
+                  helperText={errors.ucitem}
+                  onChange={(e) => setucItem(e.target.value)}
+                  className="bg-white rounded-md"
+                  fullWidth
+                />
+
+                {/* Price Row */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <TextField
+                    label="Platform Price"
+                    type="text"
+                    value={ucPlatformPrice}
+                    error={!!errors.ucPlatformPrice}
+                    helperText={errors.ucPlatformPrice}
+                    onChange={(e) => setucPlatformPrice(e.target.value.replace(/[^0-9]/g, ""))}
+                    className="bg-white rounded-md"
+                  />
+
+                  <TextField
+                    label="Item Price"
+                    type="text"
+                    value={ucprice}
+                    error={!!errors.ucprice}
+                    helperText={errors.ucprice}
+                    onChange={(e) => setucPrice(e.target.value.replace(/[^0-9]/g, ""))}
+                    className="bg-white rounded-md"
+                  />
                 </div>
-                <button onClick={handleCreateBill1} className="w-full bg-black text-white py-2 px-6 rounded mt-4 cursor-pointer hover:bg-gray-900">
-                  Create Bill
+
+                {/* Submit Button */}
+                <button
+                  onClick={handleCreateBill1}
+                  className="w-full bg-black text-white py-3 rounded-lg mt-4 font-semibold tracking-wide hover:bg-gray-900 active:scale-[0.98] transition-all"
+                >
+                  Generate Bill
                 </button>
               </div>
             )}
 
             {/* PK Repair Bill */}
             {selectedBill?.id === 2 && (
-              <div className="flex flex-col gap-5 mt-4">
-                <TextField label="Name" value={name} error={!!errors.name} helperText={errors.name} onChange={(e) => setName(e.target.value)} />
-                <TextField label="Address" value={address} error={!!errors.address} helperText={errors.address} onChange={(e) => setAddress(e.target.value)} />
+              <div className="flex flex-col gap-6 mt-6">
 
+                <TextField
+                  label="Customer Name"
+                  value={name}
+                  error={!!errors.name}
+                  helperText={errors.name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="bg-white rounded-md"
+                  fullWidth
+                />
+
+                <TextField
+                  label="Address"
+                  value={address}
+                  error={!!errors.address}
+                  helperText={errors.address}
+                  onChange={(e) => setAddress(e.target.value)}
+                  className="bg-white rounded-md"
+                  fullWidth
+                />
+
+                {/* Item Repeater */}
                 {items.map((item, index) => (
-                  <div key={index} className="flex flex-col gap-3 border p-3 rounded-md bg-white">
+                  <div key={index} className="bg-white p-4 sm:p-5 rounded-xl border shadow-sm flex flex-col gap-4">
+
                     <div className="flex justify-between items-center">
-                      <p className="font-semibold text-base sm:text-lg">Item {index + 1}</p>
+                      <p className="font-semibold text-lg text-gray-800">Item {index + 1}</p>
+
                       {items.length > 1 && (
-                        <button className="text-red-500 text-sm font-medium cursor-pointer" onClick={() => handleRemoveItem(index)}>
+                        <button
+                          className="text-red-500 hover:text-red-700 text-sm font-medium"
+                          onClick={() => handleRemoveItem(index)}
+                        >
                           Remove
                         </button>
                       )}
                     </div>
-                    <TextField label="Item" value={item.item} error={!!errors[`item-${index}`]} helperText={errors[`item-${index}`]} onChange={(e) => handleItemChange(index, "item", e.target.value)} />
-                    <div className="flex flex-col sm:flex-row gap-3">
-                      <TextField label="Quantity" value={item.quantity} error={!!errors[`quantity-${index}`]} helperText={errors[`quantity-${index}`]} onChange={(e) => handleItemChange(index, "quantity", e.target.value.replace(/[^0-9]/g, ""))} />
-                      <TextField label="Price" value={item.price} error={!!errors[`price-${index}`]} helperText={errors[`price-${index}`]} onChange={(e) => handleItemChange(index, "price", e.target.value.replace(/[^0-9]/g, ""))} />
-                      <TextField label="GST (%)" value={item.gst || ""} onChange={(e) => handleItemChange(index, "gst", e.target.value.replace(/[^0-9.]/g, ""))} />
+
+                    <TextField
+                      label="Item Name"
+                      value={item.item}
+                      error={!!errors[`item-${index}`]}
+                      helperText={errors[`item-${index}`]}
+                      onChange={(e) => handleItemChange(index, "item", e.target.value)}
+                      className="bg-white rounded-md"
+                      fullWidth
+                    />
+
+                    {/* Quantity / Price / GST */}
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                      <TextField
+                        label="Quantity"
+                        value={item.quantity}
+                        error={!!errors[`quantity-${index}`]}
+                        helperText={errors[`quantity-${index}`]}
+                        onChange={(e) => handleItemChange(index, "quantity", e.target.value.replace(/[^0-9]/g, ""))}
+                        className="bg-white rounded-md"
+                      />
+
+                      <TextField
+                        label="Price"
+                        value={item.price}
+                        error={!!errors[`price-${index}`]}
+                        helperText={errors[`price-${index}`]}
+                        onChange={(e) => handleItemChange(index, "price", e.target.value.replace(/[^0-9]/g, ""))}
+                        className="bg-white rounded-md"
+                      />
+
+                      <TextField
+                        label="GST (%)"
+                        value={item.gst || ""}
+                        onChange={(e) => handleItemChange(index, "gst", e.target.value.replace(/[^0-9.]/g, ""))}
+                        className="bg-white rounded-md"
+                      />
                     </div>
                   </div>
                 ))}
 
-                <button onClick={handleAddItem} className="bg-gray-700 text-white py-2 px-4 rounded-md w-fit hover:bg-gray-800 cursor-pointer">
+                {/* Add Item Button */}
+                <button
+                  onClick={handleAddItem}
+                  className="bg-gray-800 text-white py-2 px-4 rounded-lg w-fit hover:bg-gray-900 transition-all"
+                >
                   + Add Item
                 </button>
 
-                <button onClick={handleCreateBill2} className="w-full bg-black text-white py-2 px-6 rounded mt-4 cursor-pointer hover:bg-gray-900">
-                  Create Bill
+                {/* Submit */}
+                <button
+                  onClick={handleCreateBill2}
+                  className="w-full bg-black text-white py-3 rounded-lg mt-3 font-semibold tracking-wide hover:bg-gray-900 active:scale-[0.98] transition-all"
+                >
+                  Generate Bill
                 </button>
+
               </div>
             )}
+
           </div>
         </div>
+
       )}
     </div>
   );

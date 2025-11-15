@@ -14,8 +14,8 @@ import EzyRefundBill from "../components/EzyRefundBill";
 import ER5 from "../components//ER5";
 const EazyRefund = () => {
     const [open, setOpen] = useState(false);
-    const [date, setDate] = useState("05/10/2025");
-    const [amount, SetAmount] = useState("2000");
+    const [date, setDate] = useState("");
+    const [amount, SetAmount] = useState("");
     const [showError, setShowError] = useState(false);
     const [selectedBill, setSelectedBill] = useState(null);
 
@@ -121,7 +121,7 @@ const EazyRefund = () => {
 
 
     return (
-        <div className="grid grid-cols-1 px-[7rem] md:grid-cols-2 lg:grid-cols-4 p-4 gap-8 justify-items-center">
+        <div className="flex flex-col sm:flex-row justify-center items-center gap-6 px-4 sm:px-8 md:px-16">
             {ER.map((bill) => (
                 <img
                     key={bill.id}

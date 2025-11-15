@@ -135,9 +135,7 @@ const CleaningMaintenanceBill = ({
           />
         </View>
 
-        {/* Invoice + Payment + Customer Info */}
         <View style={{ flexDirection: "row", gap: 30, marginTop: 20 }}>
-          {/* Invoice Details */}
           <View>
             <Text
               style={{
@@ -179,7 +177,6 @@ const CleaningMaintenanceBill = ({
             </View>
           </View>
 
-          {/* Billed By Record */}
           <View>
             <Text
               style={{
@@ -221,7 +218,6 @@ const CleaningMaintenanceBill = ({
             </View>
           </View>
 
-          {/* Customer Info */}
           <View>
             <Text
               style={{

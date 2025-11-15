@@ -109,9 +109,7 @@ const AnuFurniture = (
     grandtotalBeforeGST,
     sgstAmount,
     totalAmount
-    // sgstTotalAmount,
-    // itemTotalAfterDiscount,
-    // DiscountAmount,
+
   }) => {
   return (
     <Document>
