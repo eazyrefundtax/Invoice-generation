@@ -34,13 +34,13 @@ const CleaningMaintainces = () => {
     setOpen(false);
     setSelectedBill(null);
     setShowError(false);
-    setName();
-    setPhone();
-    setAddress();
+    setName("");
+    setPhone("");
+    setAddress("");
     setDueDate();
     setReductions();
     setInterestAmount();
-    setItems();
+    setItems([{ item: "", quantity: "", price: "" }]);
     setFinalAmount();
     setUpdatedAmount();
     setNewFinalAmount();
@@ -198,7 +198,6 @@ const CleaningMaintainces = () => {
 
   {/* 1st*/ }
   const handleCreateBill1 = async () => {
-    console.log("Button Click");
     if (!name || !address) {
       setShowError(true);
       return;
@@ -357,7 +356,6 @@ const CleaningMaintainces = () => {
   };
 
   const handleModalOpen = (bill) => {
-    console.log("Bill", bill);
     setSelectedBill(bill);
     setOpen(true);
   };

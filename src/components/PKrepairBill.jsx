@@ -104,8 +104,8 @@ const styles = StyleSheet.create({
     fontFamily: "inter",
   },
   footer: {
-    position: "absolute",
-    bottom: 10,
+    position: "fixed",
+    bottom: 0,
     width: "100%",
     paddingRight: 30,
     borderTopColor: "gray",

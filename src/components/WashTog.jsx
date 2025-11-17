@@ -61,8 +61,8 @@ const styles = StyleSheet.create({
     marginBottom: "20px",
   },
   footer: {
-    position: "absolute",
-    bottom: 10,
+    position: "fixed",
+    bottom: 0,
     width: "100%",
     paddingRight: 30,
     borderTopColor: "gray",
@@ -224,43 +224,46 @@ const CleaningMaintenanceBill = ({
           </View>
         </View>
 
-        {/* Table */}
-        <View style={{ marginTop: 20, borderRadius: 5 }}>
-          {/* Header */}
-          <View style={styles.tableHeader}>
-            {HeaderTitles.map((header, index) => (
-              <Text
-                key={index}
-                style={[
-                  styles.cell,
-                  {
-                    width: header.width || "45%",
-                    fontWeight: "bold",
-                    color: "#fff",
-                  },
-                ]}
-              >
-                {header.name}
+        <View style={{ marginBottom: 140 }}>
+
+          {/* Table */}
+          <View style={{ marginTop: 20, borderRadius: 5 }}>
+            {/* Header */}
+            <View style={styles.tableHeader}>
+              {HeaderTitles.map((header, index) => (
+                <Text
+                  key={index}
+                  style={[
+                    styles.cell,
+                    {
+                      width: header.width || "45%",
+                      fontWeight: "bold",
+                      color: "#fff",
+                    },
+                  ]}
+                >
+                  {header.name}
+                </Text>
+              ))}
+            </View>
+          </View>
+
+          {/* Rows */}
+
+          {items?.map((item, index) => (
+            <View style={styles.tableRow} key={index}>
+              <Text style={[styles.cell, { width: "5%" }]}>{index + 1}</Text>
+              <Text style={[styles.cell, { width: "40%" }]}>{item.item}</Text>
+              <Text style={[styles.cell, { width: "7%" }]}>18%</Text>
+              <Text style={[styles.cell, { width: "12%" }]}>{item.quantity}</Text>
+              <Text style={[styles.cell, { width: "12%" }]}>₹{item.price}</Text>
+              <Text style={[styles.cell, { width: "12%" }]}>
+                ₹{item?.baseAmount}
               </Text>
-            ))}
-          </View>
+              <Text style={[styles.cell, { width: "12%" }]}>₹{item?.total}</Text>
+            </View>
+          ))}
         </View>
-
-        {/* Rows */}
-
-        {items?.map((item, index) => (
-          <View style={styles.tableRow} key={index}>
-            <Text style={[styles.cell, { width: "5%" }]}>{index + 1}</Text>
-            <Text style={[styles.cell, { width: "40%" }]}>{item.item}</Text>
-            <Text style={[styles.cell, { width: "7%" }]}>18%</Text>
-            <Text style={[styles.cell, { width: "12%" }]}>{item.quantity}</Text>
-            <Text style={[styles.cell, { width: "12%" }]}>₹{item.price}</Text>
-            <Text style={[styles.cell, { width: "12%" }]}>
-              ₹{item?.baseAmount}
-            </Text>
-            <Text style={[styles.cell, { width: "12%" }]}>₹{item?.total}</Text>
-          </View>
-        ))}
 
         {/* Total Section */}
         <View
@@ -381,11 +384,10 @@ const CleaningMaintenanceBill = ({
             cleaned or avoided.
           </Text>
         </View>
-        <View View style={styles.footer} fixed>
+        <View style={styles.footer} fixed wrap={false}>
           <View
             style={{
               fontSize: 10,
-              display: "flex",
               flexDirection: "row",
               justifyContent: "space-between",
               width: "100%",
@@ -394,28 +396,26 @@ const CleaningMaintenanceBill = ({
           >
             <View
               style={{
-                display: "flex",
                 flexDirection: "row",
                 gap: 40,
               }}
             >
               <View>
                 <Text style={{ fontSize: 8 }}>Invoice No </Text>
-                <Text style={{ color: "black", fontSize: 12 }}>
-                  {InvoiceNo}{" "}
-                </Text>
+                <Text style={{ color: "black", fontSize: 12 }}>{InvoiceNo}</Text>
               </View>
+
               <View>
                 <Text style={{ fontSize: 8 }}>Invoice Date </Text>
-                <Text style={{ color: "black", fontSize: 12 }}>
-                  {dateTime}{" "}
-                </Text>
+                <Text style={{ color: "black", fontSize: 12 }}>{dateTime}</Text>
               </View>
+
               <View>
                 <Text style={{ fontSize: 8 }}>Billing To </Text>
-                <Text style={{ color: "black", fontSize: 12 }}>{name} </Text>
+                <Text style={{ color: "black", fontSize: 12 }}>{name}</Text>
               </View>
             </View>
+
             <View>
               <Text
                 style={{ color: "black" }}
@@ -425,10 +425,11 @@ const CleaningMaintenanceBill = ({
               />
             </View>
           </View>
+
           <View>
             <Text
               style={{
-                fontSize: "9",
+                fontSize: 9,
                 color: "black",
                 textAlign: "center",
                 marginTop: 5,
@@ -438,8 +439,9 @@ const CleaningMaintenanceBill = ({
             </Text>
           </View>
         </View>
+        {/* </View> */}
       </Page>
-    </Document>
+    </Document >
   );
 };
 

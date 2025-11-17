@@ -157,7 +157,7 @@ const Royal = ({ name, address, dateTime, dueDate, RoyalTitles = [], items = [],
                     <View style={styles.divider} />
                 </View>
             </View>
-            <View style={{ padding: 15, }}>
+            <View style={{ padding: 15, marginBottom: 140 }}>
                 {/* Table */}
                 <View style={{ marginTop: 20, borderRadius: 5, }}>
                     {/* Header */}
@@ -179,11 +179,11 @@ const Royal = ({ name, address, dateTime, dueDate, RoyalTitles = [], items = [],
                                     {header.name}
                                 </Text>
                             ))}
+
                     </View>
                 </View>
 
                 {/* Rows */}
-
                 {items?.map((item, index) => (
                     <View style={styles.tableRow} key={index}>
                         <Text style={[styles.cell, { width: "4%" }]}>{index + 1}</Text>
@@ -208,6 +208,7 @@ const Royal = ({ name, address, dateTime, dueDate, RoyalTitles = [], items = [],
                     <Text>Any materials used in repairs may carry a manufacturer's warranty,
                         subject to the manufacturer's terms and conditions.</Text>
                 </View>
+
                 <View style={{ width: "30%", fontFamily: "inter", }}>
                     <View style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", paddingBottom: 15, }}>
                         <Text style={{ color: "gray" }}>Amount</Text>
@@ -240,12 +241,12 @@ const Royal = ({ name, address, dateTime, dueDate, RoyalTitles = [], items = [],
                         <Text>Total (INR)</Text>
                         <Text style={{ fontWeight: "bold" }}>₹{totalAmount}</Text>
                     </View>
-
                 </View>
+
             </View>
             <View style={{
-                position: "absolute",
-                bottom: 10,
+                position: "fixed",
+                bottom: 0,
                 width: "100%",
                 paddingRight: 30,
                 borderTopColor: "gray",
@@ -258,7 +259,6 @@ const Royal = ({ name, address, dateTime, dueDate, RoyalTitles = [], items = [],
             }} fixed>
                 <Text style={{ paddingTop: 10, }}> This is an electronically generated document, no signature is required</Text>
             </View>
-
         </Page >
     </Document >
 );

@@ -60,8 +60,8 @@ const styles = StyleSheet.create({
         alignSelf: "flex-start",
     },
     footer: {
-        position: "absolute",
-        bottom: 10,
+        position: "fixed",
+        bottom: 0,
         width: "100%",
         paddingRight: 30,
         borderTopColor: "gray",
@@ -447,7 +447,7 @@ const PkSuppliesbill = ({
                 </View>
 
                 {/* Table */}
-                <View style={{ marginTop: 20, borderRadius: 5 }}>
+                <View style={{ marginTop: 20, borderRadius: 5, marginBottom: 140 }}>
                     {/* Table Header*/}
                     <View
                         style={[

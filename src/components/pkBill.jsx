@@ -33,8 +33,12 @@ const styles = StyleSheet.create({
   tableRow: {
     flexDirection: "row",
     paddingVertical: 8,
+    borderBottomWidth: 1,
+    borderColor: "#ccc",
     borderBottomLeftRadius: 3,
     borderBottomRightRadius: 3,
+    backgroundColor: "#ECF3F8",
+
 
   },
   cell: {
@@ -59,8 +63,8 @@ const styles = StyleSheet.create({
     alignSelf: "flex-start",
   },
   footer: {
-    position: "absolute",
-    bottom: 10,
+    position: "fixed",
+    bottom: 0,
     width: "100%",
     paddingRight: 30,
     borderTopColor: "gray",
@@ -294,49 +298,50 @@ const CleaningMaintenanceBill = ({
           </View>
 
         </View>
-
-        {/* Table */}
-        <View style={{ marginTop: 20, borderRadius: 5 }}>
-          {/* Header */}
-          <View style={styles.tableHeader}>
-            {Array.isArray(HeaderTitles) &&
-              HeaderTitles.map((header, index) => (
-                <Text
-                  key={index}
-                  style={[
-                    styles.cell,
-                    {
-                      width: header.width || "45%",
-                      fontWeight: "bold",
-                      color: "#fff",
-                    },
-                  ]}
-                >
-                  {header.name}
-                </Text>
-              ))}
+        <View style={{ marginBottom: 140 }}>
+          {/* Table */}
+          <View style={{ marginTop: 20, borderRadius: 5 }}>
+            {/* Header */}
+            <View style={styles.tableHeader}>
+              {Array.isArray(HeaderTitles) &&
+                HeaderTitles.map((header, index) => (
+                  <Text
+                    key={index}
+                    style={[
+                      styles.cell,
+                      {
+                        width: header.width || "45%",
+                        fontWeight: "bold",
+                        color: "#fff",
+                      },
+                    ]}
+                  >
+                    {header.name}
+                  </Text>
+                ))}
+            </View>
           </View>
+
+          {/* Rows */}
+
+          {items?.map((item, index) => (
+            <View style={styles.tableRow} key={index}>
+              <Text style={[styles.cell, { width: "3%" }]}>{index + 1}</Text>
+              <Text style={[styles.cell, { width: "35%" }]}>{item.item}</Text>
+              <Text style={[styles.cell, { width: "7%" }]}>18%</Text>
+              <Text style={[styles.cell, { width: "8%" }]}>{item.quantity}</Text>
+              <Text style={[styles.cell, { width: "12%" }]}>₹{item.price}</Text>
+              <Text style={[styles.cell, { width: "12%" }]}>
+                ₹{item?.baseAmount}
+              </Text>
+              <Text style={[styles.cell, { width: "13%" }]}>
+                ₹{item.gstAmount}
+              </Text>
+
+              <Text style={[styles.cell, { width: "12%" }]}>₹{item?.total}</Text>
+            </View>
+          ))}
         </View>
-
-        {/* Rows */}
-
-        {items?.map((item, index) => (
-          <View style={styles.tableRow} key={index}>
-            <Text style={[styles.cell, { width: "3%" }]}>{index + 1}</Text>
-            <Text style={[styles.cell, { width: "35%" }]}>{item.item}</Text>
-            <Text style={[styles.cell, { width: "7%" }]}>18%</Text>
-            <Text style={[styles.cell, { width: "8%" }]}>{item.quantity}</Text>
-            <Text style={[styles.cell, { width: "12%" }]}>₹{item.price}</Text>
-            <Text style={[styles.cell, { width: "12%" }]}>
-              ₹{item?.baseAmount}
-            </Text>
-            <Text style={[styles.cell, { width: "13%" }]}>
-              ₹{item.gstAmount}
-            </Text>
-
-            <Text style={[styles.cell, { width: "12%" }]}>₹{item?.total}</Text>
-          </View>
-        ))}
 
         {/* Total Section */}
         <View

@@ -153,30 +153,33 @@ const VPSS = (
                     <Text style={styles.addres}>{address}</Text>
                     <Text style={styles.phone}>{phone}</Text>
                 </View>
-                <View style={styles.tableheading}>
-                    <View style={styles.VpssHeadinger}>
-                        {VpssHeading.map((head, index) => (
-                            <Text key={index}
-                                style={[styles.cell,
-                                {
-                                    width: head.width || "",
-                                    fontWeight: "bold",
-                                },
-                                ]}
-                            >
-                                {head.label}
-                            </Text>
-                        ))}
+                <View style={{ marginBottom: 30 }}>
+                    <View style={styles.tableheading}>
+                        <View style={styles.VpssHeadinger}>
+                            {VpssHeading.map((head, index) => (
+                                <Text key={index}
+                                    style={[styles.cell,
+                                    {
+                                        width: head.width || "",
+                                        fontWeight: "bold",
+                                    },
+                                    ]}
+                                >
+                                    {head.label}
+                                </Text>
+                            ))}
+                        </View>
                     </View>
+                    {items?.map((item, index) => (
+                        <View style={styles.tableRow} key={index}>
+                            <Text style={[styles.cell, { width: "70%" }]}>{item.item}</Text>
+                            <Text style={[styles.cell, { width: "10%" }]}>Rs. {item.price}</Text>
+                            <Text style={[styles.cell, { width: "10%" }]}>{item.quantity}</Text>
+                            <Text style={[styles.cell, { width: "10%" }]}>Rs. {item.itemTotalAfterDiscount?.toFixed(2)}</Text>
+                        </View>
+                    ))}
                 </View>
-                {items?.map((item, index) => (
-                    <View style={styles.tableRow} key={index}>
-                        <Text style={[styles.cell, { width: "70%" }]}>{item.item}</Text>
-                        <Text style={[styles.cell, { width: "10%" }]}>Rs. {item.price}</Text>
-                        <Text style={[styles.cell, { width: "10%" }]}>{item.quantity}</Text>
-                        <Text style={[styles.cell, { width: "10%" }]}>Rs. {item.itemTotalAfterDiscount?.toFixed(2)}</Text>
-                    </View>
-                ))}
+
                 <View
                     style={{
                         display: "flex",

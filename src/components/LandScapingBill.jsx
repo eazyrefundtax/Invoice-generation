@@ -36,8 +36,8 @@ const styles = StyleSheet.create({
     fontFamily: "inter",
   },
   footer: {
-    position: "absolute",
-    bottom: 10,
+    position: "fixed",
+    bottom: 0,
     width: "100%",
     paddingRight: 40,
 
@@ -128,7 +128,7 @@ const LandScaping = ({
           </view>
         </View>
 
-        <View style={{ marginTop: 20, borderRadius: 5 }}>
+        <View style={{ marginTop: 20, borderRadius: 5, marginBottom: 140, }}>
           {/* Header */}
           <View style={styles.tableHeader}>
             {HeaderTitles.map((header, index) => (
@@ -234,7 +234,6 @@ const LandScaping = ({
                 <Text>{Invoice}</Text>
               </View>
             </View>
-
           </View>
         </View>
       </Page>
