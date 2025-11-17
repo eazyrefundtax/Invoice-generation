@@ -595,7 +595,7 @@ const Supplies = () => {
 
 
   return (
-    <div className="grid grid-cols-1 px-[7rem] md:grid-cols-2 lg:grid-cols-4 p-4 gap-8 justify-items-center">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 px-4 sm:px-8 md:px-16 gap-6 justify-items-center">
       {bills.map((bill) => (
         <img
           key={bill.id}

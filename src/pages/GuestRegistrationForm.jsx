@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
+
 import {
   Button,
   Dialog,
@@ -14,8 +15,9 @@ import { AiOutlinePlus, AiOutlineDelete } from "react-icons/ai";
 
 const GuestExcelGenerator = () => {
   const [open, setOpen] = useState(false);
+
   const [guests, setGuests] = useState([
-    { name: "", guests: "", timing: "", phone: "", email: "" },
+    { name: "", guests: "", date: "", timing: "", phone: "", email: "" },
   ]);
 
   const handleChange = (index, field, value) => {
@@ -27,7 +29,7 @@ const GuestExcelGenerator = () => {
   const addGuest = () => {
     setGuests([
       ...guests,
-      { name: "", guests: "", timing: "", phone: "", email: "" },
+      { name: "", guests: "", date: "", timing: "", phone: "", email: "" },
     ]);
   };
 
@@ -39,20 +41,27 @@ const GuestExcelGenerator = () => {
   const handleGenerateExcel = () => {
     if (
       guests.some(
-        (g) => !g.name || !g.guests || !g.timing || !g.phone || !g.email
+        (g) =>
+          !g.name ||
+          !g.guests ||
+          !g.date ||
+          !g.timing ||
+          !g.phone ||
+          !g.email
       )
     ) {
-      alert("Please fill out all fields before generating Excel.");
+      alert("Please fill all fields before generating Excel.");
       return;
     }
 
     const sheetData = [
       ["Guest Details Sheet"],
       [],
-      ["Name", "No. of Guests", "Timing", "Phone Number", "Email"],
+      ["Name", "No. of Guests", "Date", "Timing", "Phone Number", "Email"],
       ...guests.map((g) => [
         g.name,
         g.guests,
+        g.date,
         g.timing,
         g.phone,
         g.email,
@@ -60,10 +69,12 @@ const GuestExcelGenerator = () => {
     ];
 
     const ws = XLSX.utils.aoa_to_sheet(sheetData);
+
     ws["!cols"] = [
       { wch: 20 },
       { wch: 15 },
-      { wch: 20 },
+      { wch: 15 },
+      { wch: 15 },
       { wch: 20 },
       { wch: 30 },
     ];
@@ -72,6 +83,7 @@ const GuestExcelGenerator = () => {
     XLSX.utils.book_append_sheet(wb, ws, "Guest Info");
 
     const wbout = XLSX.write(wb, { bookType: "xlsx", type: "array" });
+
     saveAs(
       new Blob([wbout], {
         type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
@@ -79,21 +91,19 @@ const GuestExcelGenerator = () => {
       `Guest_Details_List.xlsx`
     );
 
-    setOpen(false);
-    alert("Excel file generated successfully!");
+    setOpen(false); // success: JUST closes dialog
   };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[90vh] bg-[#F9FAFB] p-6">
-      <div className="bg-white rounded-2xl shadow-lg p-10 flex flex-col items-center border border-gray-200 hover:shadow-xl transition duration-300">
-        {/* Excel Icon */}
+      <div className="bg-white rounded-2xl shadow-lg p-10 flex flex-col items-center border border-gray-200 hover:shadow-xl transition duration-300 max-w-[95%] md:max-w-[70%] lg:max-w-[50%]">
+
         <FaFileExcel size={100} className="text-[#217346] mb-6" />
 
         <p className="text-gray-600 text-center mb-8 max-w-md">
           Click below to generate a Guest Excel Sheet.
         </p>
 
-        {/* Open Popup Button */}
         <Button
           variant="contained"
           color="success"
@@ -116,16 +126,18 @@ const GuestExcelGenerator = () => {
           </div>
 
           <DialogContent>
-            <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+            <div className="flex flex-col gap-6">
               {guests.map((guest, index) => (
                 <div
                   key={index}
-                  style={{
-                    display: "grid",
-                    gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr auto",
-                    gap: 8,
-                    alignItems: "center",
-                  }}
+                  className="
+                    grid
+                    grid-cols-1
+                    sm:grid-cols-2
+                    md:grid-cols-3
+                    gap-4
+                    items-center
+                  "
                 >
                   <TextField
                     label="Name"
@@ -133,7 +145,9 @@ const GuestExcelGenerator = () => {
                     onChange={(e) =>
                       handleChange(index, "name", e.target.value)
                     }
+                    fullWidth
                   />
+
                   <TextField
                     label="No. of Guests"
                     type="number"
@@ -141,7 +155,20 @@ const GuestExcelGenerator = () => {
                     onChange={(e) =>
                       handleChange(index, "guests", e.target.value)
                     }
+                    fullWidth
                   />
+
+                  <TextField
+                    label="Date"
+                    type="date"
+                    value={guest.date}
+                    onChange={(e) =>
+                      handleChange(index, "date", e.target.value)
+                    }
+                    InputLabelProps={{ shrink: true }}
+                    fullWidth
+                  />
+
                   <TextField
                     label="Timing"
                     type="time"
@@ -149,14 +176,18 @@ const GuestExcelGenerator = () => {
                     onChange={(e) =>
                       handleChange(index, "timing", e.target.value)
                     }
+                    fullWidth
                   />
+
                   <TextField
                     label="Phone"
                     value={guest.phone}
                     onChange={(e) =>
                       handleChange(index, "phone", e.target.value)
                     }
+                    fullWidth
                   />
+
                   <TextField
                     label="Email"
                     type="email"
@@ -164,11 +195,14 @@ const GuestExcelGenerator = () => {
                     onChange={(e) =>
                       handleChange(index, "email", e.target.value)
                     }
+                    fullWidth
                   />
+
                   {guests.length > 1 && (
                     <IconButton
                       color="error"
                       onClick={() => removeGuest(index)}
+
                     >
                       <AiOutlineDelete />
                     </IconButton>
@@ -181,7 +215,7 @@ const GuestExcelGenerator = () => {
                 startIcon={<AiOutlinePlus />}
                 variant="outlined"
                 color="success"
-                style={{ width: "fit-content" }}
+                className="w-fit"
               >
                 Add Guest
               </Button>

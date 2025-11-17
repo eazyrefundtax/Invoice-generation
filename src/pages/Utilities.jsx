@@ -248,7 +248,7 @@ const Utilities = () => {
                         }}
                         InputProps={{
                           className:
-                            "bg-gray-50 rounded-lg focus-within:border-gray-700 focus-within:ring-1 focus-within:ring-gray-600 transition-all duration-200",
+                            "bg-gray-50 rounded-lg focus-within:border-gray-700  transition-all duration-200",
                         }}
                       />
                       {formData[field] === "" && showError && (
@@ -299,7 +299,7 @@ const Utilities = () => {
                     fullWidth
                     InputProps={{
                       className:
-                        "bg-gray-50 focus-within:ring-1 focus-within:ring-gray-700 rounded-md",
+                        "bg-gray-50  rounded-md",
                     }}
                   />
                   {formData.name === "" && showError && (
@@ -319,7 +319,7 @@ const Utilities = () => {
                     fullWidth
                     InputProps={{
                       className:
-                        "bg-gray-50 focus-within:ring-1 focus-within:ring-gray-700 rounded-md",
+                        "bg-gray-50 focus-within:ring-gray-700 rounded-md",
                     }}
                   />
                   {formData.totalAmount === "" && showError && (
@@ -343,7 +343,7 @@ const Utilities = () => {
                       fullWidth
                       InputProps={{
                         className:
-                          "bg-gray-50 focus-within:ring-1 focus-within:ring-gray-700 rounded-md",
+                          "bg-gray-50 focus-within:ring-gray-700 rounded-md",
                       }}
                     />
                     {formData.phone === "" && showError && (
@@ -363,7 +363,7 @@ const Utilities = () => {
                             fullWidth: true,
                             sx: {
                               bgcolor: "#f9fafb",
-                              borderRadius: "6px",
+                              // borderRadius: "6px",
                             },
                           },
                         }}
@@ -384,7 +384,7 @@ const Utilities = () => {
                     variant="outlined"
                     InputProps={{
                       className:
-                        "bg-gray-50 focus-within:ring-1 focus-within:ring-gray-700 rounded-md",
+                        "bg-gray-50 focus-within:ring-gray-700 rounded-md",
                     }}
                   />
                   {addres === "" && showError && (
@@ -393,7 +393,6 @@ const Utilities = () => {
                 </div>
 
                 <div className="border-t border-gray-200 my-8"></div>
-
                 {/* Submit */}
                 <div className="flex justify-center">
                   <button
@@ -405,7 +404,6 @@ const Utilities = () => {
                 </div>
               </div>
             )}
-
           </div>
         </div>
       )}

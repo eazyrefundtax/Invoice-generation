@@ -35,6 +35,7 @@ export default function Login() {
         <div className="flex items-center justify-center min-h-screen bg-gray-100 px-4">
             <div className="bg-white shadow-lg rounded-xl p-8 w-full max-w-sm flex flex-col gap-6">
                 <h2 className="text-2xl font-semibold text-center text-gray-800">Login</h2>
+
                 <div>
                     <label className="block text-sm text-gray-600">Email</label>
                     <input
