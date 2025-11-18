@@ -30,12 +30,10 @@ export default function Login() {
         }
         setIsLoading(false);
     };
-
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100 px-4">
             <div className="bg-white shadow-lg rounded-xl p-8 w-full max-w-sm flex flex-col gap-6">
                 <h2 className="text-2xl font-semibold text-center text-gray-800">Login</h2>
-
                 <div>
                     <label className="block text-sm text-gray-600">Email</label>
                     <input
@@ -58,7 +56,6 @@ export default function Login() {
                             className="border border-gray-300 rounded-lg p-3 w-full pr-12 focus:outline-none"
                             aria-label="Password"
                         />
-
                         <button
                             type="button"
                             onClick={() => setShowPassword((s) => !s)}

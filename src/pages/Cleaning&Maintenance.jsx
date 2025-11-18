@@ -8,7 +8,7 @@ import UrbanCompany1Bill from "../components/urbanCompany1Bill";
 import { RxCross1 } from "react-icons/rx";
 import TextField from "@mui/material/TextField";
 import WashTogBill from "../components/WashTog";
-import PkBill from "../components/PkBill";
+import CleaningMaintenanceBill from "../components/PkBill.jsx"
 
 const CleaningMaintainces = () => {
   const [open, setOpen] = useState(false);
@@ -275,7 +275,7 @@ const CleaningMaintainces = () => {
     });
     const onlygstAmount = itemsWithTotal.map((item) => item.gstAmount);
     const blob = await pdf(
-      <PkBill
+      <CleaningMaintenanceBill
         name={name}
         address={address}
         InvoiceNo={invoiceNumber}

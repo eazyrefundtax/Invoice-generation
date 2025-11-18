@@ -174,7 +174,6 @@ const LandScaping = ({
             }}
           >
             <Text>Subtotal</Text>
-
             <Text> INR {grandtotal}</Text>
           </View>
 
