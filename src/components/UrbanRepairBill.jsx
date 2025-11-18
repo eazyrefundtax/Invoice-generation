@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const UrbanCompanyRepairBill = ({
+const UrbanRepairBill = ({
   name,
   address,
   dateTime,
@@ -566,4 +566,4 @@ const UrbanCompanyRepairBill = ({
   );
 };
 
-export default UrbanCompanyRepairBill;
+export default UrbanRepairBill;

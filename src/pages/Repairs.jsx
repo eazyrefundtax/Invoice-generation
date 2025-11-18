@@ -6,8 +6,7 @@ import { pdf } from "@react-pdf/renderer";
 import { ToWords } from "to-words";
 import TextField from "@mui/material/TextField";
 import PKsupply from "../components/PKrepairBill";
-import UrbanCompanyRepairBill from "../components/UrbanCompanyRepairBill.jsx";
-
+import UrbanRepairBill from "../components/UrbanRepairBill";
 const Repairs = () => {
   const [open, setOpen] = useState(false);
   const [selectedBill, setSelectedBill] = useState(null);
@@ -135,7 +134,7 @@ const Repairs = () => {
     });
 
     const blob = await pdf(
-      <UrbanCompanyRepairBill
+      <UrbanRepairBill
         name={name}
         address={address}
         InvoiceNo={invoiceNumber1}
@@ -157,7 +156,7 @@ const Repairs = () => {
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = `UrbanCompanyRepairBill.pdf`;
+    link.download = `UrbanRepairBill.pdf`;
     link.click();
     URL.revokeObjectURL(url);
 
