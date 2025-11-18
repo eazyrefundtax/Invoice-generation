@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const CleaningMaintenanceBill = ({
+const WashTogBill = ({
   name,
   address,
   items = [],
@@ -445,4 +445,4 @@ const CleaningMaintenanceBill = ({
   );
 };
 
-export default CleaningMaintenanceBill;
+export default WashTogBill;

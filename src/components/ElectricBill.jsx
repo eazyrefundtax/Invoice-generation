@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
   text: { fontFamily: "robotoreg", fontSize: 16 },
 });
 
-const UtilitiesBillDocument = ({
+const ElectricBill = ({
   name,
   phone,
   OrderNo,
@@ -265,4 +265,4 @@ const UtilitiesBillDocument = ({
   </Document>
 );
 
-export default UtilitiesBillDocument;
+export default ElectricBill;

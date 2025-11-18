@@ -8,7 +8,7 @@ import { DatePicker } from "@mui/x-date-pickers";
 import { format } from "date-fns";
 import { pdf } from "@react-pdf/renderer";
 import AnuFurniture from "../components/AnuFurniture";
-import Nandibill from "../components/NandiSupplyBill";
+import NandiSupplyBill from "../components/NandiSupplyBill";
 import PkSuppliesbill from "../components/PksuppliesBill";
 import JBMBill from "../components/JBMBill";
 import VpssBill from "../components/VPSSBill";
@@ -243,7 +243,7 @@ const Supplies = () => {
     console.log("Generating PDF...");
 
     const blob = await pdf(
-      <Nandibill
+      <NandiSupplyBill
         HeaderTitles={[
           { name: "", width: "3%" },
           { name: "Item", width: "35%" },

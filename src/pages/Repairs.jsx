@@ -5,7 +5,7 @@ import { RxCross1 } from "react-icons/rx";
 import { pdf } from "@react-pdf/renderer";
 import { ToWords } from "to-words";
 import TextField from "@mui/material/TextField";
-import UrbanCompany1Bill from "../components/urbanCompanyRepairBill";
+import UrbanCompanyRepairBill from "../components/UrbanCompanyRepairBill";
 import PKsupply from "../components/PKrepairBill";
 
 const Repairs = () => {
@@ -135,7 +135,7 @@ const Repairs = () => {
     });
 
     const blob = await pdf(
-      <UrbanCompany1Bill
+      <UrbanCompanyRepairBill
         name={name}
         address={address}
         InvoiceNo={invoiceNumber1}
@@ -157,7 +157,7 @@ const Repairs = () => {
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = `UrbanCompany1Bill.pdf`;
+    link.download = `UrbanCompanyRepairBill.pdf`;
     link.click();
     URL.revokeObjectURL(url);
 

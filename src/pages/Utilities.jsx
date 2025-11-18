@@ -9,7 +9,7 @@ import { DatePicker } from "@mui/x-date-pickers";
 import { addDays } from "date-fns";
 import { subMonths, startOfMonth, endOfMonth, format, getDaysInMonth } from "date-fns";
 import TextField from "@mui/material/TextField";
-import UtilitiesBillDocument from "../components/UtilitiesBillDocument";
+import ElectricBill from "../components/ElectricBill";
 import ActWifiBill from "../components/ActWifi";
 
 const Utilities = () => {
@@ -106,7 +106,7 @@ const Utilities = () => {
     }
 
     const blob = await pdf(
-      <UtilitiesBillDocument
+      <ElectricBill
         name={name}
         totalAmount={totalAmount}
         phone={phone}

@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const CleaningMaintenanceBill = ({
+const NandiSupplyBill = ({
   name,
   shippedName,
   address,
@@ -763,4 +763,4 @@ const CleaningMaintenanceBill = ({
   );
 };
 
-export default CleaningMaintenanceBill;
+export default NandiSupplyBill;

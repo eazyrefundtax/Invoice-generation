@@ -4,7 +4,6 @@ import JBMLogo from "../assets/JBMLogo.png";
 import jblogo from "../assets/jblogo.png";
 import inter from "../fonts/Inter_18pt-Medium.ttf";
 
-
 Font.register({
     family: "inter",
     fonts: [{ src: inter, fontWeight: "200" }],

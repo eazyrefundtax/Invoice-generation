@@ -4,11 +4,11 @@ import { pdf } from "@react-pdf/renderer";
 import WashTog from "../assets/CLEANING SOUMYA_page-0001.jpg";
 import PK from "../assets/Cleaning bill 2021_page-0001.jpg";
 import UrbanCompany1 from "../assets/JAN - JUNE Cleaning and Maintenance_page-0001.jpg";
-import UrbanCompany1Bill from "../components/urbanCompany1Bill";
+import UrbanCompany1Bill from "../components/UrbanCompany1Bill.jsx";
 import { RxCross1 } from "react-icons/rx";
 import TextField from "@mui/material/TextField";
-import WashTogBill from "../components/WashTog";
-import CleaningMaintenanceBill from "../components/PkBill.jsx"
+import WashTogBill from "../components/WashTogBill.jsx";
+import PkBill from "../components/PkBill.jsx"
 
 const CleaningMaintainces = () => {
   const [open, setOpen] = useState(false);
@@ -275,7 +275,7 @@ const CleaningMaintainces = () => {
     });
     const onlygstAmount = itemsWithTotal.map((item) => item.gstAmount);
     const blob = await pdf(
-      <CleaningMaintenanceBill
+      <PkBill
         name={name}
         address={address}
         InvoiceNo={invoiceNumber}

@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const CleaningMaintenanceBill = ({
+const PkBill = ({
   name,
   address,
   items = [],
@@ -573,4 +573,4 @@ const CleaningMaintenanceBill = ({
   );
 };
 
-export default CleaningMaintenanceBill;
+export default PkBill;
