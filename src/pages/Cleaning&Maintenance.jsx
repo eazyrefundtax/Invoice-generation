@@ -7,8 +7,9 @@ import UrbanCompany1 from "../assets/JAN - JUNE Cleaning and Maintenance_page-00
 import { RxCross1 } from "react-icons/rx";
 import TextField from "@mui/material/TextField";
 import WashTogBill from "../components/WashTogBill.jsx";
-import PkBill from "../components/PkBill.jsx"
 import UrbanCompany1Bill from "../components/urbanCompany1Bill.jsx";
+import CleaningPk from "../components/CleaningPk.jsx";
+
 
 const CleaningMaintainces = () => {
   const [open, setOpen] = useState(false);
@@ -275,7 +276,7 @@ const CleaningMaintainces = () => {
     });
     const onlygstAmount = itemsWithTotal.map((item) => item.gstAmount);
     const blob = await pdf(
-      <PkBill
+      <CleaningPk
         name={name}
         address={address}
         InvoiceNo={invoiceNumber}
@@ -305,7 +306,7 @@ const CleaningMaintainces = () => {
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = `PkBill.pdf`;
+    link.download = `CleaningPk.pdf`;
     link.click();
     URL.revokeObjectURL(url);
 
