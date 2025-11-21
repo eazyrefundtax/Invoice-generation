@@ -187,7 +187,7 @@ const VPSS = (
                         justifyContent: "space-between",
                         fontSize: 11,
                         width: "40%",
-                        alignSelf: "flex-end",
+
                         marginTop: 10,
                         marginRight: 30,
                     }}

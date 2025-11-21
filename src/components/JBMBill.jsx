@@ -64,8 +64,6 @@ const styles = StyleSheet.create({
         padding: 4,
         fontFamily: "inter"
     },
-
-
 });
 
 const JBMBill = ({

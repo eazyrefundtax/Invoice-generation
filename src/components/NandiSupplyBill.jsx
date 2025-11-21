@@ -418,11 +418,10 @@ const NandiSupplyBill = ({
                 ))}
             </View>
           </View>
-
           {/* Rows */}
 
           {items?.map((item, index) => (
-            <View style={styles.tableRow} key={index}>
+            <View style={styles.tableRow} key={index} wrap={false}>
               <Text style={[styles.cell, { width: "3%" }]}>{index + 1}</Text>
               <Text style={[styles.cell, { width: "35%" }]}>{item.item}</Text>
               <Text style={[styles.cell, { width: "7%" }]}>{item.gst}%</Text>
@@ -439,7 +438,6 @@ const NandiSupplyBill = ({
             </View>
           ))}
         </View>
-
 
         {/* Total Section */}
         <View

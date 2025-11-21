@@ -91,7 +91,7 @@ const GuestExcelGenerator = () => {
       `Guest_Details_List.xlsx`
     );
 
-    setOpen(false); // success: JUST closes dialog  
+    setOpen(false);
   };
 
   return (
@@ -103,7 +103,6 @@ const GuestExcelGenerator = () => {
         <p className="text-gray-600 text-center mb-8 max-w-md">
           Click below to generate a Guest Excel Sheet.
         </p>
-
         <Button
           variant="contained"
           color="success"

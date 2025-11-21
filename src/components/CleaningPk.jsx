@@ -327,7 +327,7 @@ const CleaningPk = ({
             </View>
 
             {/* WRAPPABLE TABLE ROWS */}
-            <View wrap={false}>
+            <View>
               {items.map((item, index) => (
                 <View style={styles.tableRow} key={index} wrap={false}>
                   <Text style={[styles.cell, { width: "3%" }]}>{index + 1}</Text>
@@ -516,7 +516,7 @@ const CleaningPk = ({
 
           </View>
         </View>
-        <View View style={styles.footer} fixed debug>
+        <View View style={styles.footer} fixed>
           <View
             style={{
               fontSize: 10,
