@@ -98,6 +98,12 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
 
   },
+
+  body: {
+    display: "flex",
+    flexDirection: "column",
+    gap: 0,
+  },
   cell: {
     textAlign: "center",
     fontSize: 10,
@@ -189,193 +195,192 @@ const PKsupply = ({ name, address, dateTime, PKheadings = [], items = [], onlyAm
           <View style={styles.divider} />
         </View>
       </View>
-      <View style={{ padding: 15 }}>
-        <View
-          style={{
-            borderWidth: 1,
-            borderColor: "#0072CE",
-            borderRadius: 5,
-            overflow: "hidden",
-            borderTopLeftRadius: 3,
-            borderTopRightRadius: 3,
+      <View style={styles.body}>
+        <View style={{ padding: 15 }}>
+          <View
+            style={{
+              borderWidth: 1,
+              borderColor: "#0072CE",
+              borderRadius: 5,
+              overflow: "hidden",
+              borderTopLeftRadius: 3,
+              borderTopRightRadius: 3,
 
-          }}
-        >
-          {/* Header */}
-          <View style={styles.tableHeader}>
-            {Array.isArray(PKheadings) &&
-              PKheadings.map((header, index) => (
-                <Text
-                  key={index}
-                  style={[
-                    styles.cell,
-                    {
-                      width: header.width || "45%",
-                      fontWeight: "bold",
-                      color: "#0072CE",
-                    },
-                  ]}
-                >
-                  {header.name}
-                </Text>
-              ))}
+            }}
+          >
+            {/* Header */}
+            <View style={styles.tableHeader}>
+              {Array.isArray(PKheadings) &&
+                PKheadings.map((header, index) => (
+                  <Text
+                    key={index}
+                    style={[
+                      styles.cell,
+                      {
+                        width: header.width || "45%",
+                        fontWeight: "bold",
+                        color: "#0072CE",
+                      },
+                    ]}
+                  >
+                    {header.name}
+                  </Text>
+                ))}
+            </View>
+
+            {/* Rows */}
+            {items?.map((item, index) => (
+              <View
+                style={[
+                  styles.tableRow,
+                  {
+                    borderTopWidth: 1,
+                    borderColor: "#0072CE",
+                  },
+                ]}
+                key={index} wrap={false}
+              >
+                <Text style={[styles.cell, { width: "3%" }]}>{index + 1}</Text>
+                <Text style={[styles.cell, { width: "35%" }]}>{item.item}</Text>
+                <Text style={[styles.cell, { width: "7%" }]}>{item.gst}%</Text>
+                <Text style={[styles.cell, { width: "8%" }]}>{item.quantity}</Text>
+                <Text style={[styles.cell, { width: "12%" }]}>₹{item.price}</Text>
+                <Text style={[styles.cell, { width: "12%" }]}>₹{item?.baseAmount}</Text>
+                <Text style={[styles.cell, { width: "13%" }]}>₹{item.gstAmount}</Text>
+                <Text style={[styles.cell, { width: "12%" }]}>₹{item?.total}</Text>
+              </View>
+            ))}
           </View>
-
-          {/* Rows */}
-          {items?.map((item, index) => (
+        </View>
+        <View style={{ paddingTop: 20, display: "flex", flexDirection: "row", gap: 100, padding: 15, }}>
+        </View>
+        <View style={{ display: "flex", alignItems: "flex-end" }}>
+          <View style={{ fontFamily: "inter", paddingVertical: 10, width: "70%", }}>
             <View
-              style={[
-                styles.tableRow,
-                {
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                paddingBottom: 8,
+              }}
+            >
+              <Text style={{ color: "gray" }}>Amount</Text>
+              <Text style={{ fontWeight: "bold" }}>₹{onlyAmount}</Text>
+            </View>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                paddingBottom: 8,
+              }}
+            >
+              <Text style={{ color: "gray" }}>IGST</Text>
+              <Text style={{ fontWeight: "bold" }}>₹{totalGST}</Text>
+            </View>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                paddingBottom: 8,
+              }}
+            >
+              <Text style={{ color: "gray" }}>INTREST AMOUNT</Text>
+              <Text style={{ fontWeight: "bold" }}>₹0</Text>
+            </View>
+            <View style={{ marginTop: 10 }}>
+              <View
+                style={{
+                  backgroundColor: "#0072CE",
+                  paddingVertical: 10,
+                  paddingHorizontal: 10,
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                }}
+              >
+                <Text style={{ color: "white", fontWeight: "bold" }}>Total (INR)</Text>
+                <Text style={{ color: "white", fontWeight: "bold" }}>₹{grandTotal}</Text>
+              </View>
+              <View
+                style={{
+                  backgroundColor: "#0072CE",
+                  paddingVertical: 10,
+                  paddingHorizontal: 10,
+                  flexDirection: "row",
+                  justifyContent: "space-between",
                   borderTopWidth: 1,
-                  borderColor: "#0072CE", // internal row separator
-                },
-              ]}
-              key={index}
-            >
-              <Text style={[styles.cell, { width: "3%" }]}>{index + 1}</Text>
-              <Text style={[styles.cell, { width: "35%" }]}>{item.item}</Text>
-              <Text style={[styles.cell, { width: "7%" }]}>{item.gst}%</Text>
-              <Text style={[styles.cell, { width: "8%" }]}>{item.quantity}</Text>
-              <Text style={[styles.cell, { width: "12%" }]}>₹{item.price}</Text>
-              <Text style={[styles.cell, { width: "12%" }]}>₹{item?.baseAmount}</Text>
-              <Text style={[styles.cell, { width: "13%" }]}>₹{item.gstAmount}</Text>
-              <Text style={[styles.cell, { width: "12%" }]}>₹{item?.total}</Text>
+                  borderTopColor: "white",
+                }}
+              >
+                <Text style={{ color: "white", fontWeight: "bold" }}>Amount Paid</Text>
+                <Text style={{ color: "white", fontWeight: "bold" }}>
+                  (₹{grandTotal})
+                </Text>
+              </View>
             </View>
-          ))}
-        </View>
-      </View>
-
-
-      <View style={{ paddingTop: 20, display: "flex", flexDirection: "row", gap: 100, padding: 15, }}>
-      </View>
-      <View style={{ display: "flex", alignItems: "flex-end" }}>
-        <View style={{ fontFamily: "inter", paddingVertical: 10, width: "70%", }}>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              paddingBottom: 8,
-            }}
-          >
-            <Text style={{ color: "gray" }}>Amount</Text>
-            <Text style={{ fontWeight: "bold" }}>₹{onlyAmount}</Text>
-          </View>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              paddingBottom: 8,
-            }}
-          >
-            <Text style={{ color: "gray" }}>IGST</Text>
-            <Text style={{ fontWeight: "bold" }}>₹{totalGST}</Text>
-          </View>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              paddingBottom: 8,
-            }}
-          >
-            <Text style={{ color: "gray" }}>INTREST AMOUNT</Text>
-            <Text style={{ fontWeight: "bold" }}>₹0</Text>
-          </View>
-          <View style={{ marginTop: 10 }}>
-            <View
-              style={{
-                backgroundColor: "#0072CE",
-                paddingVertical: 10,
-                paddingHorizontal: 10,
-                flexDirection: "row",
-                justifyContent: "space-between",
-              }}
-            >
-              <Text style={{ color: "white", fontWeight: "bold" }}>Total (INR)</Text>
-              <Text style={{ color: "white", fontWeight: "bold" }}>₹{grandTotal}</Text>
+            <View>
+              <Text style={{ color: "#0072CE", paddingTop: 10, }}>TOTAL (IN WORDS) :</Text>
+              <Text style={{ paddingTop: 10, }}>{amountInWords}</Text>
             </View>
-            <View
-              style={{
-                backgroundColor: "#0072CE",
-                paddingVertical: 10,
-                paddingHorizontal: 10,
-                flexDirection: "row",
-                justifyContent: "space-between",
-                borderTopWidth: 1,
-                borderTopColor: "white",
-              }}
-            >
-              <Text style={{ color: "white", fontWeight: "bold" }}>Amount Paid</Text>
-              <Text style={{ color: "white", fontWeight: "bold" }}>
-                (₹{grandTotal})
-              </Text>
-            </View>
-          </View>
-          <View>
-            <Text style={{ color: "#0072CE", paddingTop: 10, }}>TOTAL (IN WORDS) :</Text>
-            <Text style={{ paddingTop: 10, }}>{amountInWords}</Text>
           </View>
         </View>
-      </View>
-
-      <View wrap={false} style={{ marginTop: 5 }}>
-        <View style={{
-          borderRadius: 6,
-          overflow: "hidden",
-          width: "100%",
-        }}>
-          {/* Header */}
+        <View wrap={false} style={{ marginTop: 5 }}>
           <View style={{
-            flexDirection: "row",
-            backgroundColor: "#ACC3F2",
-            fontSize: 10,
-            paddingVertical: 6,
-            paddingHorizontal: 4,
-          }} fixed>
-            <Text style={{
-              flex: 1,
-              textAlign: "left",
-            }}>Date</Text>
-            <Text style={{
-              flex: 1,
-              textAlign: "left",
-            }}>Mode</Text>
-            <Text style={{
-              flex: 1,
-              textAlign: "right",
-            }}>Amount</Text>
-          </View>
-
-          {/* Row */}
-          <View style={{
-            flexDirection: "row",
-            backgroundColor: "#fff",
-            borderTop: "0.5px solid #ddd",
-            fontSize: 10,
-            paddingVertical: 6,
-            paddingHorizontal: 4,
+            borderRadius: 6,
+            overflow: "hidden",
+            width: "100%",
           }}>
-            <Text style={{
-              flex: 1,
-              textAlign: "left",
-            }}>{dateTime}</Text>
-            <Text style={{
-              flex: 1,
-              textAlign: "left",
-            }}>Cash Payment</Text>
-            <Text style={{
-              flex: 1,
-              textAlign: "right",
-              fontFamily: "inter"
-            }}>₹{Number(grandTotal).toFixed(2)}</Text>
+            {/* Header */}
+            <View style={{
+              flexDirection: "row",
+              backgroundColor: "#ACC3F2",
+              fontSize: 10,
+              paddingVertical: 6,
+              paddingHorizontal: 4,
+            }} fixed>
+              <Text style={{
+                flex: 1,
+                textAlign: "left",
+              }}>Date</Text>
+              <Text style={{
+                flex: 1,
+                textAlign: "left",
+              }}>Mode</Text>
+              <Text style={{
+                flex: 1,
+                textAlign: "right",
+              }}>Amount</Text>
+            </View>
+
+            {/* Row */}
+            <View style={{
+              flexDirection: "row",
+              backgroundColor: "#fff",
+              borderTop: "0.5px solid #ddd",
+              fontSize: 10,
+              paddingVertical: 6,
+              paddingHorizontal: 4,
+            }}>
+              <Text style={{
+                flex: 1,
+                textAlign: "left",
+              }}>{dateTime}</Text>
+              <Text style={{
+                flex: 1,
+                textAlign: "left",
+              }}>Cash Payment</Text>
+              <Text style={{
+                flex: 1,
+                textAlign: "right",
+                fontFamily: "inter"
+              }}>₹{Number(grandTotal).toFixed(2)}</Text>
+            </View>
           </View>
+
+        </View>
+        <View style={{ borderColor: "#ACC3F2", borderWidth: 1, textAlign: "center", marginTop: 20, }}>
+          <Text style={{ marginTop: 10, marginBottom: 10, }}>For any enquiry, reach out via call on +91 78159 36625</Text>
         </View>
 
       </View>
-      <View style={{ borderColor: "#ACC3F2", borderWidth: 1, textAlign: "center", marginTop: 20, }}>
-        <Text style={{ marginTop: 10, marginBottom: 10, }}>For any enquiry, reach out via call on +91 78159 36625</Text>
-      </View>
-
       <View View style={styles.footer} fixed>
         <View>
           <View

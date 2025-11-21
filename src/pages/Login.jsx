@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { IoMdEye } from "react-icons/io";
 import { IoEyeOff } from "react-icons/io5";
+import { getFirebaseErrorMessage } from "../helper/firebaseErrors";
 
 export default function Login() {
 
@@ -15,25 +16,31 @@ export default function Login() {
 
     const navigate = useNavigate();
 
-    const loginUser = async () => {
+    const loginUser = async (e) => {
+        e.preventDefault();
         try {
             setIsLoading(true);
-            const result = await signInWithEmailAndPassword(auth, email, password);
-            console.log("Result from Firebase", result);
+            await signInWithEmailAndPassword(auth, email, password);
             toast.success("Successfully logged in");
             setEmail("");
             setPassword("");
             navigate("/");
-            return;
         } catch (err) {
-            toast.error(err.message);
+            toast.error(getFirebaseErrorMessage(err));
+            console.error("Login error:", err);
+        } finally {
+            setIsLoading(false);
         }
-        setIsLoading(false);
     };
+
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100 px-4">
-            <div className="bg-white shadow-lg rounded-xl p-8 w-full max-w-sm flex flex-col gap-6">
+            <form
+                onSubmit={loginUser}
+                className="bg-white shadow-lg rounded-xl p-8 w-full max-w-sm flex flex-col gap-6"
+            >
                 <h2 className="text-2xl font-semibold text-center text-gray-800">Login</h2>
+
                 <div>
                     <label className="block text-sm text-gray-600">Email</label>
                     <input
@@ -43,8 +50,10 @@ export default function Login() {
                         onChange={(e) => setEmail(e.target.value)}
                         type="email"
                         aria-label="Email"
+                        required
                     />
                 </div>
+
                 <div>
                     <label className="block text-sm text-gray-600">Password</label>
                     <div className="relative">
@@ -55,14 +64,13 @@ export default function Login() {
                             placeholder="Enter your password"
                             className="border border-gray-300 rounded-lg p-3 w-full pr-12 focus:outline-none"
                             aria-label="Password"
+                            required
                         />
                         <button
                             type="button"
                             onClick={() => setShowPassword((s) => !s)}
-                            aria-pressed={showPassword}
                             aria-label={showPassword ? "Hide password" : "Show password"}
                             className="absolute right-2 top-1/2 transform -translate-y-1/2"
-                            title={showPassword ? "Hide password" : "Show password"}
                         >
                             {showPassword ? (
                                 <IoEyeOff className="text-[1.3rem] cursor-pointer" />
@@ -72,14 +80,14 @@ export default function Login() {
                         </button>
                     </div>
                 </div>
+
                 <button
+                    type="submit"
                     className={`${isLoading && "cursor-not-allowed"} bg-black/50 hover:bg-black transition-colors text-white w-full p-3 rounded-lg font-medium mt-4`}
-                    onClick={loginUser}
-                    disabled={isLoading}
-                >
+                    disabled={isLoading}>
                     {isLoading ? "Logging..." : "Login"}
                 </button>
-            </div>
+            </form>
         </div>
     );
 }

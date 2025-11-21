@@ -30,7 +30,6 @@ const CleaningMaintainces = () => {
   const [ucPlatformPrice, setucPlatformPrice] = useState("");
   const [ucprice, setucPrice] = useState("");
 
-
   const reSetForm = () => {
     setOpen(false);
     setSelectedBill(null);

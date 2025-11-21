@@ -9,7 +9,7 @@ Font.register({
     fonts: [{ src: inter, fontWeight: "200" }],
 });
 
-// Styles for PDF
+// Styles for PDF  
 const styles = StyleSheet.create({
     page: {
         flexDirection: "column", // better for vertical layout
@@ -115,8 +115,7 @@ const JBMBill = ({
                             height: 20,
                             alignItems: "center",
                             justifyContent: "center",
-                        }}
-                    >
+                        }}    >
                         <Text style={{ fontWeight: "bold", textAlign: "center", fontSize: 10 }}>
                             Kohler Quotation
                         </Text>

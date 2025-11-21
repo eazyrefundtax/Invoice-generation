@@ -38,8 +38,6 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 3,
     borderBottomRightRadius: 3,
     backgroundColor: "#ECF3F8",
-
-
   },
   cell: {
     textAlign: "center",
@@ -62,16 +60,26 @@ const styles = StyleSheet.create({
     marginBottom: "20px",
     alignSelf: "flex-start",
   },
+
   footer: {
-    position: "fixed",
+    position: "absolute",
     bottom: 0,
-    width: "100%",
+    left: 0,
+    right: 0,
+    marginTop: "30px",
     paddingRight: 30,
+    paddingLeft: 30,
     borderTopColor: "gray",
     borderTopWidth: 1,
-    minHeight: 30,
-    maxHeight: 300,
-    marginTop: 20,
+    height: "60px",
+    justifyContent: "center",
+    backgroundColor: "#fff",
+    minHeight: "60px",
+  },
+  body: {
+    display: "flex",
+    flexDirection: "column",
+    gap: 0,
   },
 });
 
@@ -139,381 +147,376 @@ const CleaningPk = ({
           />
         </View>
 
-        <View style={{ flexDirection: "row", gap: 30, marginTop: 20 }}>
-          <View>
-            <Text
-              style={{
-                backgroundColor: "#D2EEF7",
-                padding: 5,
-                borderLeftColor: "#09A3B3",
-                borderLeftWidth: 1,
-                fontSize: 12,
-                marginBottom: 5,
-                color: "gray",
-              }}
-            >
-              Invoice Details
-            </Text>
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                fontSize: 12,
-                padding: 5,
-                gap: 20,
-              }}
-            >
-              <Text>Invoice No #</Text>
-              <Text style={{ color: "gray" }}>{InvoiceNo}</Text>
-            </View>
-            <View
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-                fontSize: 12,
-                padding: 5,
-                gap: 20,
-              }}
-            >
-              <Text>Invoice Date:</Text>
-              <Text style={{ color: "gray" }}>{dateTime}</Text>
-            </View>
-          </View>
-
-          <View>
-            <Text
-              style={{
-                backgroundColor: "#D2EEF7",
-                padding: 5,
-                borderLeftColor: "#09A3B3",
-                borderLeftWidth: 1,
-                fontSize: 12,
-                gap: 20,
-                marginBottom: 5,
-                color: "gray",
-              }}
-            >
-              Billed BY
-            </Text>
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                fontSize: 12,
-                padding: 5,
-                gap: 20,
-              }}
-            >
-              <Text>GSTIN:</Text>
-              <Text style={{ color: "gray" }}>36DLUPP5801F1ZQ</Text>
-            </View>
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                fontSize: 12,
-                padding: 5,
-                gap: 20,
-              }}
-            >
-              <Text>PAN:</Text>
-              <Text style={{ color: "gray" }}>DLVPP5801F</Text>
-            </View>
-          </View>
-
-          <View>
-            <Text
-              style={{
-                backgroundColor: "#D2EEF7",
-                padding: 5,
-                borderLeftColor: "#09A3B3",
-                borderLeftWidth: 1,
-                fontSize: 12,
-                marginBottom: 5,
-                color: "gray",
-              }}
-            >
-              Payment Records
-            </Text>
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                fontSize: 12,
-                padding: 5,
-                gap: 20,
-
-              }}
-            >
-              <Text>Invoice Amount</Text>
-              <Text style={{ color: "gray", fontFamily: "inter" }}>
-                ₹{Number(finalWithInterest).toFixed(2)}
+        <View style={styles.body}>
+          <View style={{ flexDirection: "row", gap: 30, marginTop: 20 }}>
+            <View>
+              <Text
+                style={{
+                  backgroundColor: "#D2EEF7",
+                  padding: 5,
+                  borderLeftColor: "#09A3B3",
+                  borderLeftWidth: 1,
+                  fontSize: 12,
+                  marginBottom: 5,
+                  color: "gray",
+                }}
+              >
+                Invoice Details
               </Text>
-            </View>
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                fontSize: 12,
-                padding: 5,
-                gap: 20,
-              }}
-            >
-              <Text>Paid Amount</Text>
-              <Text style={{ color: "gray", fontFamily: "inter" }}>
-                ₹{Number(finalWithInterest).toFixed(2)}
-              </Text>
-            </View>
-          </View>
-        </View>
-        <View style={{ flexDirection: "row", gap: 30, marginTop: 20 }}></View>
-        <View>
-          <Text
-            style={{
-              backgroundColor: "#D2EEF7",
-              padding: 5,
-              width: 120,
-              borderLeftColor: "#09A3B3",
-              borderLeftWidth: 1,
-              fontSize: 12,
-              marginBottom: 5,
-              color: "gray",
-            }}
-          >
-            Billed To
-          </Text>
-          <View style={{ fontSize: 12, padding: 5, width: "140px" }}>
-            <Text>{name}</Text>
-          </View>
-          <View
-            style={{
-              fontSize: 12,
-              padding: 5,
-              width: "140px",
-              color: "gray",
-            }}
-          >
-            <Text>{address}</Text>
-          </View>
-
-        </View>
-        <View style={{ marginBottom: 140 }}>
-          {/* Table */}
-          <View style={{ marginTop: 20, borderRadius: 5 }}>
-            {/* Header */}
-            <View style={styles.tableHeader}>
-              {Array.isArray(HeaderTitles) &&
-                HeaderTitles.map((header, index) => (
-                  <Text
-                    key={index}
-                    style={[
-                      styles.cell,
-                      {
-                        width: header.width || "45%",
-                        fontWeight: "bold",
-                        color: "#fff",
-                      },
-                    ]}
-                  >
-                    {header.name}
-                  </Text>
-                ))}
-            </View>
-          </View>
-
-          {/* Rows */}
-
-          {items?.map((item, index) => (
-            <View style={styles.tableRow} key={index}>
-              <Text style={[styles.cell, { width: "3%" }]}>{index + 1}</Text>
-              <Text style={[styles.cell, { width: "35%" }]}>{item.item}</Text>
-              <Text style={[styles.cell, { width: "7%" }]}>18%</Text>
-              <Text style={[styles.cell, { width: "8%" }]}>{item.quantity}</Text>
-              <Text style={[styles.cell, { width: "12%" }]}>₹{item.price}</Text>
-              <Text style={[styles.cell, { width: "12%" }]}>
-                ₹{item?.baseAmount}
-              </Text>
-              <Text style={[styles.cell, { width: "13%" }]}>
-                ₹{item.gstAmount}
-              </Text>
-
-              <Text style={[styles.cell, { width: "12%" }]}>₹{item?.total}</Text>
-            </View>
-          ))}
-        </View>
-
-        {/* Total Section */}
-        <View
-          wrap={false}
-          style={{
-            marginTop: 15,
-            display: "flex",
-            flexDirection: "row",
-            gap: 25,
-            marginBottom: 20,
-          }}
-        >
-          <View
-            style={{ display: "flex", flexDirection: "column", width: "65%" }}
-          >
-            <Text style={{ fontSize: 12, marginTop: 20 }}>
-              Total (In Words) :
-            </Text>
-            <Text style={{ marginTop: 20, color: "#09A3B3", fontSize: 14 }}>
-              {amountInWords}
-            </Text>
-
-            <Text style={{ paddingTop: 20, }}>Payment</Text>
-            <View wrap={false} style={{ marginTop: 5 }}>
-              <View style={{
-                borderRadius: 6,
-                overflow: "hidden",
-                width: "100%",
-              }}>
-                {/* Header */}
-                <View style={{
+              <View
+                style={{
                   flexDirection: "row",
-                  backgroundColor: "#00A9AD",
-                  color: "#fff",
-                  fontSize: 10,
-                  fontWeight: "bold",
-                  paddingVertical: 6,
-                  paddingHorizontal: 4,
-                }} fixed>
-                  <Text style={{
-                    flex: 1,
-                    textAlign: "left",
-                  }}>Date</Text>
-                  <Text style={{
-                    flex: 1,
-                    textAlign: "left",
-                  }}>Mode</Text>
-                  <Text style={{
-                    flex: 1,
-                    textAlign: "right",
-                  }}>Amount</Text>
-                </View>
-
-                {/* Row */}
-                <View style={{
+                  justifyContent: "space-between",
+                  fontSize: 12,
+                  padding: 5,
+                  gap: 20,
+                }}
+              >
+                <Text>Invoice No #</Text>
+                <Text style={{ color: "gray" }}>{InvoiceNo}</Text>
+              </View>
+              <View
+                style={{
+                  display: "flex",
                   flexDirection: "row",
-                  backgroundColor: "#fff",
-                  borderTop: "0.5px solid #ddd",
-                  fontSize: 10,
-                  paddingVertical: 6,
-                  paddingHorizontal: 4,
-                }}>
-                  <Text style={{
-                    flex: 1,
-                    textAlign: "left",
-                  }}>{dateTime}</Text>
-                  <Text style={{
-                    flex: 1,
-                    textAlign: "left",
-                  }}>Account Transfer</Text>
-                  <Text style={{
-                    flex: 1,
-                    textAlign: "right",
-                    fontFamily: "inter"
-                  }}>₹{Number(finalWithInterest).toFixed(2)}</Text>
-                </View>
+                  justifyContent: "space-between",
+                  fontSize: 12,
+                  padding: 5,
+                  gap: 20,
+                }}
+              >
+                <Text>Invoice Date:</Text>
+                <Text style={{ color: "gray" }}>{dateTime}</Text>
+              </View>
+            </View>
+
+            <View>
+              <Text
+                style={{
+                  backgroundColor: "#D2EEF7",
+                  padding: 5,
+                  borderLeftColor: "#09A3B3",
+                  borderLeftWidth: 1,
+                  fontSize: 12,
+                  gap: 20,
+                  marginBottom: 5,
+                  color: "gray",
+                }}
+              >
+                Billed BY
+              </Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  fontSize: 12,
+                  padding: 5,
+                  gap: 20,
+                }}
+              >
+                <Text>GSTIN:</Text>
+                <Text style={{ color: "gray" }}>36DLUPP5801F1ZQ</Text>
+              </View>
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  fontSize: 12,
+                  padding: 5,
+                  gap: 20,
+                }}
+              >
+                <Text>PAN:</Text>
+                <Text style={{ color: "gray" }}>DLVPP5801F</Text>
+              </View>
+            </View>
+
+            <View>
+              <Text
+                style={{
+                  backgroundColor: "#D2EEF7",
+                  padding: 5,
+                  borderLeftColor: "#09A3B3",
+                  borderLeftWidth: 1,
+                  fontSize: 12,
+                  marginBottom: 5,
+                  color: "gray",
+                }}
+              >
+                Payment Records
+              </Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  fontSize: 12,
+                  padding: 5,
+                  gap: 20,
+
+                }}
+              >
+                <Text>Invoice Amount</Text>
+                <Text style={{ color: "gray", fontFamily: "inter" }}>
+                  ₹{Number(finalWithInterest).toFixed(2)}
+                </Text>
+              </View>
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  fontSize: 12,
+                  padding: 5,
+                  gap: 20,
+                }}
+              >
+                <Text>Paid Amount</Text>
+                <Text style={{ color: "gray", fontFamily: "inter" }}>
+                  ₹{Number(finalWithInterest).toFixed(2)}
+                </Text>
               </View>
             </View>
           </View>
-          <View style={{ fontSize: 12, width: "35%" }}>
-            <View
+          <View style={{ flexDirection: "row", gap: 30, marginTop: 20 }}></View>
+          <View>
+            <Text
               style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                marginTop: 5,
+                backgroundColor: "#D2EEF7",
+                padding: 5,
+                width: 120,
+                borderLeftColor: "#09A3B3",
+                borderLeftWidth: 1,
+                fontSize: 12,
                 marginBottom: 5,
+                color: "gray",
               }}
             >
-              <Text style={{ color: "gray" }}>Amount</Text>
-              <Text style={{ fontFamily: "inter" }}>
-                ₹{grandtotalBeforeGST}
-              </Text>
+              Billed To
+            </Text>
+            <View style={{ fontSize: 12, padding: 5, width: "140px" }}>
+              <Text>{name}</Text>
             </View>
             <View
               style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                marginTop: 5,
-                marginBottom: 5,
+                fontSize: 12,
+                padding: 5,
+                width: "140px",
+                color: "gray",
               }}
             >
-              <Text style={{ color: "gray" }}>IGST</Text>
+              <Text>{address}</Text>
+            </View>
 
-              <Text style={{ fontFamily: "inter" }}>₹{gstAmount}</Text>
+          </View>
+          <View style={{ marginBottom: "40px" }}>
+            <View style={[styles.tableHeader]} fixed >
+              {HeaderTitles.map((header, index) => (
+                <Text
+                  key={index}
+                  style={[
+                    styles.cell,
+                    {
+                      width: header.width || "45%",
+                      fontWeight: "bold",
+                      color: "#fff",
+                    },
+                  ]}
+                >
+                  {header.name}
+                </Text>
+              ))}
             </View>
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                marginTop: 5,
-                marginBottom: 5,
-                borderBottomColor: "gray",
-                borderBottomWidth: 1,
-              }}
-            >
-              <Text style={{ color: "gray" }}>INTREST AMOUNT</Text>
-              <Text style={{ fontFamily: "inter", paddingBottom: 8 }}>
-                ₹{Number(interestAmount).toFixed(2)}
-              </Text>
-            </View>
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                marginTop: 5,
-                marginBottom: 5,
-                borderBottomColor: "gray",
-                borderBottomWidth: 1,
-              }}
-            >
-              <Text style={{ fontSize: 12 }}>Total(INR)</Text>
-              <Text
-                style={{ color: "#09A3B3", fontSize: 16, fontFamily: "inter" }}
-              >
-                ₹{Number(finalWithInterest).toFixed(2)}
-              </Text>
-            </View>
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                marginTop: 5,
-                marginBottom: 5,
 
-              }}
-            >
-              <Text style={{ fontSize: 12 }}>Amount Paid</Text>
-              <Text
-                style={{ color: "#09A3B3", fontSize: 16, fontFamily: "inter" }}
-              >
-                (₹{Number(finalWithInterest).toFixed(2)})
-              </Text>
+            {/* WRAPPABLE TABLE ROWS */}
+            <View wrap={false}>
+              {items.map((item, index) => (
+                <View style={styles.tableRow} key={index} wrap={false}>
+                  <Text style={[styles.cell, { width: "3%" }]}>{index + 1}</Text>
+                  <Text style={[styles.cell, { width: "35%" }]}>{item.item}</Text>
+                  <Text style={[styles.cell, { width: "7%" }]}>18%</Text>
+                  <Text style={[styles.cell, { width: "8%" }]}>{item.quantity}</Text>
+                  <Text style={[styles.cell, { width: "12%" }]}>₹{item.price}</Text>
+                  <Text style={[styles.cell, { width: "12%" }]}>₹{item.baseAmount}</Text>
+                  <Text style={[styles.cell, { width: "13%" }]}>₹{item.gstAmount}</Text>
+                  <Text style={[styles.cell, { width: "12%" }]}>₹{item.total}</Text>
+                </View>
+              ))}
             </View>
           </View>
-        </View>
-        <View>
-          <Text
+
+          {/* Total Section */}
+          <View
             wrap={false}
             style={{
-              fontSize: "9",
-              color: "black",
-              textAlign: "center",
-              height: 50,
-              backgroundColor: "#D2EEF7",
               marginTop: 5,
-            }}
-          >
-            For any enquiry, reach out via call on +91 78159 36625
-          </Text>
-        </View>
+              display: "flex",
+              flexDirection: "row",
+              gap: 25,
+              marginBottom: 20,
+            }}>
+            <View
+              style={{ display: "flex", flexDirection: "column", width: "65%" }}>
+              <Text style={{ fontSize: 12, marginTop: 20 }}>
+                Total (In Words) :
+              </Text>
+              <Text style={{ marginTop: 20, color: "#09A3B3", fontSize: 14 }}>
+                {amountInWords}
+              </Text>
 
-        <View View style={styles.footer} fixed>
+              <Text style={{ paddingTop: 20, }}>Payment</Text>
+              <View wrap={false} style={{ marginTop: 5 }}>
+                <View style={{
+                  borderRadius: 6,
+                  overflow: "hidden",
+                  width: "100%",
+                }}>
+                  {/* Header */}
+                  <View style={{
+                    flexDirection: "row",
+                    backgroundColor: "#00A9AD",
+                    color: "#fff",
+                    fontSize: 10,
+                    fontWeight: "bold",
+                    paddingVertical: 6,
+                    paddingHorizontal: 4,
+                  }} fixed>
+                    <Text style={{
+                      flex: 1,
+                      textAlign: "left",
+                    }}>Date</Text>
+                    <Text style={{
+                      flex: 1,
+                      textAlign: "left",
+                    }}>Mode</Text>
+                    <Text style={{
+                      flex: 1,
+                      textAlign: "right",
+                    }}>Amount</Text>
+                  </View>
+                  {/* Row */}
+                  <View style={{
+                    flexDirection: "row",
+                    backgroundColor: "#fff",
+                    borderTop: "0.5px solid #ddd",
+                    fontSize: 10,
+                    paddingVertical: 6,
+                    paddingHorizontal: 4,
+                  }}>
+                    <Text style={{
+                      flex: 1,
+                      textAlign: "left",
+                    }}>{dateTime}</Text>
+                    <Text style={{
+                      flex: 1,
+                      textAlign: "left",
+                    }}>Account Transfer</Text>
+                    <Text style={{
+                      flex: 1,
+                      textAlign: "right",
+                      fontFamily: "inter"
+                    }}>₹{Number(finalWithInterest).toFixed(2)}</Text>
+                  </View>
+                </View>
+              </View>
+            </View>
+            <View style={{ fontSize: 12, width: "35%" }}>
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  marginTop: 5,
+                  marginBottom: 5,
+                }}
+              >
+                <Text style={{ color: "gray" }}>Amount</Text>
+                <Text style={{ fontFamily: "inter" }}>
+                  ₹{grandtotalBeforeGST}
+                </Text>
+              </View>
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  marginTop: 5,
+                  marginBottom: 5,
+                }}>
+                <Text style={{ color: "gray" }}>IGST</Text>
+                <Text style={{ fontFamily: "inter" }}>₹{gstAmount}</Text>
+              </View>
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  marginTop: 5,
+                  marginBottom: 5,
+                  borderBottomColor: "gray",
+                  borderBottomWidth: 1,
+                }}
+              >
+                <Text style={{ color: "gray" }}>INTREST AMOUNT</Text>
+                <Text style={{ fontFamily: "inter", paddingBottom: 8 }}>
+                  ₹{Number(interestAmount).toFixed(2)}
+                </Text>
+              </View>
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  marginTop: 5,
+                  marginBottom: 5,
+                  borderBottomColor: "gray",
+                  borderBottomWidth: 1,
+                }}
+              >
+                <Text style={{ fontSize: 12 }}>Total(INR)</Text>
+                <Text
+                  style={{ color: "#09A3B3", fontSize: 16, fontFamily: "inter" }}
+                >
+                  ₹{Number(finalWithInterest).toFixed(2)}
+                </Text>
+              </View>
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  marginTop: 5,
+                  marginBottom: 5,
+
+                }}
+              >
+                <Text style={{ fontSize: 12 }}>Amount Paid</Text>
+                <Text
+                  style={{ color: "#09A3B3", fontSize: 16, fontFamily: "inter" }}
+                >
+                  (₹{Number(finalWithInterest).toFixed(2)})
+                </Text>
+              </View>
+            </View>
+          </View>
+          <View>
+            <View
+              style={{
+                height: 50,
+                backgroundColor: "#D2EEF7",
+                marginTop: 5,
+                justifyContent: "center",   // vertical center
+                alignItems: "center",       // horizontal center
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: 9,
+                  color: "black",
+                  textAlign: "center",
+                }}
+                wrap={false}
+              >
+                For any enquiry, reach out via call on +91 78159 36625
+              </Text>
+            </View>
+
+          </View>
+        </View>
+        <View View style={styles.footer} fixed debug>
           <View
             style={{
               fontSize: 10,
@@ -568,6 +571,7 @@ const CleaningPk = ({
             </Text>
           </View>
         </View>
+
       </Page>
     </Document>
   );

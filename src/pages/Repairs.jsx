@@ -217,7 +217,6 @@ const Repairs = () => {
 
     resetForm();
   };
-
   return (
     <div className="flex flex-col sm:flex-row justify-center items-center gap-6 px-4 sm:px-8 md:px-16">
       {repairBill.map((RepairBill) => (

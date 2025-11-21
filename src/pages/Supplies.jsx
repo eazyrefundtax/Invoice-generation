@@ -47,7 +47,7 @@ const Supplies = () => {
     setAddress("");
     setShippingAddress("");
     SetPhone("");
-    setItems("");
+    setItems([{ item: "", quantity: "", price: "" }]);
     setDiscount("");
     setDueDate("");
     setinitialPayment("");
@@ -55,7 +55,7 @@ const Supplies = () => {
     setChallanDate("");
     setPaymentDate("");
     setSelectedBill(null);
-    setShowError("false");
+    setShowError(false);
 
 
   }
