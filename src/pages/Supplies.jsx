@@ -39,7 +39,6 @@ const Supplies = () => {
   const [selectedBill, setSelectedBill] = useState(null);
   const [showError, setShowError] = useState(false);
 
-
   const reSetValues = () => {
     setOpen(false);
     setName("");

@@ -105,6 +105,11 @@ const styles = StyleSheet.create({
         fontSize: 10,
         fontFamily: "inter",
     },
+    body: {
+        display: "flex",
+        flexDirection: "column",
+        flex: 1,
+    }
 });
 
 const Royal = ({ name, address, dateTime, dueDate, RoyalTitles = [], items = [], grandtotalBeforeGST, sgstAmount, totalAmount, invoiceNo }) => (
@@ -157,93 +162,96 @@ const Royal = ({ name, address, dateTime, dueDate, RoyalTitles = [], items = [],
                     <View style={styles.divider} />
                 </View>
             </View>
-            <View style={{ padding: 15, marginBottom: 140 }}>
-                {/* Table */}
-                <View style={{ marginTop: 20, borderRadius: 5, }}>
-                    {/* Header */}
-                    <View style={styles.tableHeader}>
-                        {Array.isArray(RoyalTitles) &&
-                            RoyalTitles.map((header, index) => (
-                                <Text
-                                    key={index}
-                                    style={[
-                                        styles.cell,
-                                        {
-                                            width: header.width || "45%",
-                                            fontWeight: "bold",
-                                            // color: "#fff",
-                                            color: "#0072CE"
-                                        },
-                                    ]}
-                                >
-                                    {header.name}
-                                </Text>
-                            ))}
+            <View style={styles.body}>
+                <View style={{ padding: 15, marginBottom: 140 }}>
+                    {/* Table */}
+                    <View style={{ marginTop: 20, borderRadius: 5, }}>
+                        {/* Header */}
+                        <View style={styles.tableHeader}>
+                            {Array.isArray(RoyalTitles) &&
+                                RoyalTitles.map((header, index) => (
+                                    <Text
+                                        key={index}
+                                        style={[
+                                            styles.cell,
+                                            {
+                                                width: header.width || "45%",
+                                                fontWeight: "bold",
+                                                // color: "#fff",
+                                                color: "#0072CE"
+                                            },
+                                        ]}
+                                    >
+                                        {header.name}
+                                    </Text>
+                                ))}
 
+                        </View>
                     </View>
+
+                    {/* Rows */}
+                    {items?.map((item, index) => (
+                        <View style={styles.tableRow} key={index}>
+                            <Text style={[styles.cell, { width: "4%" }]}>{index + 1}</Text>
+                            <Text style={[styles.cell, { width: "40%" }]}>{item.item}</Text>
+                            <Text style={[styles.cell, { width: "8%" }]}>18%</Text>
+                            <Text style={[styles.cell, { width: "12%" }]}>{item.quantity}</Text>
+                            <Text style={[styles.cell, { width: "12%" }]}>₹{Number(item.price).toFixed(2)}</Text>
+                            <Text style={[styles.cell, { width: "13%" }]}>₹{Number(item?.itemTotal).toFixed(2)}</Text>
+                            <Text style={[styles.cell, { width: "13%" }]}>₹{Number(item?.total).toFixed(2)}</Text>
+                        </View>
+                    ))}
                 </View>
 
-                {/* Rows */}
-                {items?.map((item, index) => (
-                    <View style={styles.tableRow} key={index}>
-                        <Text style={[styles.cell, { width: "4%" }]}>{index + 1}</Text>
-                        <Text style={[styles.cell, { width: "40%" }]}>{item.item}</Text>
-                        <Text style={[styles.cell, { width: "8%" }]}>18%</Text>
-                        <Text style={[styles.cell, { width: "12%" }]}>{item.quantity}</Text>
-                        <Text style={[styles.cell, { width: "12%" }]}>₹{Number(item.price).toFixed(2)}</Text>
-                        <Text style={[styles.cell, { width: "13%" }]}>₹{Number(item?.itemTotal).toFixed(2)}</Text>
-                        <Text style={[styles.cell, { width: "13%" }]}>₹{Number(item?.total).toFixed(2)}</Text>
+                <View style={{ paddingTop: 20, display: "flex", flexDirection: "row", justifyContent: "space-between", padding: 15, }}>
+                    <View style={{ width: "65%" }}>
+                        <Text style={{ color: "#0072CE", paddingBottom: 10, }}>TERMS AND CONDITIONS</Text>
+                        <Text style={{ paddingBottom: 10, }}> Please pay within 15 days from the date of invoice, overdue interest @
+                            14% will be charged on delayed payments.</Text>
+                        <Text style={{ paddingBottom: 10, }}> Please quote invoice number when remitting funds.</Text>
+                        <Text style={{ paddingBottom: 10, }}>A deposit may be required before the work begins, particularly for
+                            large or complex projects.</Text>
+                        <Text>Any materials used in repairs may carry a manufacturer's warranty,
+                            subject to the manufacturer's terms and conditions.</Text>
                     </View>
-                ))}
+
+                    <View style={{ width: "30%", fontFamily: "inter", }}>
+                        <View style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", paddingBottom: 15, }}>
+                            <Text style={{ color: "gray" }}>Amount</Text>
+                            <Text style={{ fontWeight: "bold" }}>₹ {grandtotalBeforeGST}</Text>
+                        </View>
+                        <View style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", paddingBottom: 15, }}>
+                            <Text style={{ color: "gray" }}>CGST</Text>
+                            <Text style={{ fontWeight: "bold" }}>₹ {sgstAmount}</Text>
+                        </View>
+                        <View style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", paddingBottom: 15, }}>
+                            <Text style={{ color: "gray" }}>SGST</Text>
+                            <Text style={{ fontWeight: "bold" }}>₹ {sgstAmount}</Text>
+                        </View>
+                        <View style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", paddingBottom: 15, }}>
+                            <Text style={{ color: "gray" }}>Reductinon</Text>
+                            <Text style={{ fontWeight: "bold" }}>₹ 0.00</Text>
+                        </View>
+                        <View
+                            style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                justifyContent: "space-between",
+                                alignItems: "center",
+                                color: "white",
+                                backgroundColor: "#0072CE",
+                                height: 25,
+                                paddingHorizontal: 5,
+                            }}
+                        >
+                            <Text>Total (INR)</Text>
+                            <Text style={{ fontWeight: "bold" }}>₹{totalAmount}</Text>
+                        </View>
+                    </View>
+
+                </View>
             </View>
 
-            <View style={{ paddingTop: 20, display: "flex", flexDirection: "row", justifyContent: "space-between", padding: 15, }}>
-                <View style={{ width: "65%" }}>
-                    <Text style={{ color: "#0072CE", paddingBottom: 10, }}>TERMS AND CONDITIONS</Text>
-                    <Text style={{ paddingBottom: 10, }}> Please pay within 15 days from the date of invoice, overdue interest @
-                        14% will be charged on delayed payments.</Text>
-                    <Text style={{ paddingBottom: 10, }}> Please quote invoice number when remitting funds.</Text>
-                    <Text style={{ paddingBottom: 10, }}>A deposit may be required before the work begins, particularly for
-                        large or complex projects.</Text>
-                    <Text>Any materials used in repairs may carry a manufacturer's warranty,
-                        subject to the manufacturer's terms and conditions.</Text>
-                </View>
-
-                <View style={{ width: "30%", fontFamily: "inter", }}>
-                    <View style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", paddingBottom: 15, }}>
-                        <Text style={{ color: "gray" }}>Amount</Text>
-                        <Text style={{ fontWeight: "bold" }}>₹ {grandtotalBeforeGST}</Text>
-                    </View>
-                    <View style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", paddingBottom: 15, }}>
-                        <Text style={{ color: "gray" }}>CGST</Text>
-                        <Text style={{ fontWeight: "bold" }}>₹ {sgstAmount}</Text>
-                    </View>
-                    <View style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", paddingBottom: 15, }}>
-                        <Text style={{ color: "gray" }}>SGST</Text>
-                        <Text style={{ fontWeight: "bold" }}>₹ {sgstAmount}</Text>
-                    </View>
-                    <View style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", paddingBottom: 15, }}>
-                        <Text style={{ color: "gray" }}>Reductinon</Text>
-                        <Text style={{ fontWeight: "bold" }}>₹ 0.00</Text>
-                    </View>
-                    <View
-                        style={{
-                            display: "flex",
-                            flexDirection: "row",
-                            justifyContent: "space-between",
-                            alignItems: "center",
-                            color: "white",
-                            backgroundColor: "#0072CE",
-                            height: 25,
-                            paddingHorizontal: 5,
-                        }}
-                    >
-                        <Text>Total (INR)</Text>
-                        <Text style={{ fontWeight: "bold" }}>₹{totalAmount}</Text>
-                    </View>
-                </View>
-
-            </View>
             <View style={{
                 position: "fixed",
                 bottom: 0,

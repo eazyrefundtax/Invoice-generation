@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
   body: {
     display: "flex",
     flexDirection: "column",
-    gap: 0,
+    flex: 1,
   },
   tableHeader: {
     flexDirection: "row",
@@ -125,7 +125,7 @@ const WashTogBill = ({
                   padding: 5,
                   borderLeftColor: "#23940A",
                   borderLeftWidth: 1,
-                  fontSize: 12,
+                  fontSize: 10,
                   marginBottom: 5,
                   color: "gray",
                 }}
@@ -136,7 +136,7 @@ const WashTogBill = ({
                 style={{
                   flexDirection: "row",
                   justifyContent: "space-between",
-                  fontSize: 12,
+                  fontSize: 10,
                   padding: 5,
                   gap: 20,
                 }}
@@ -149,7 +149,7 @@ const WashTogBill = ({
                   display: "flex",
                   flexDirection: "row",
                   justifyContent: "space-between",
-                  fontSize: 12,
+                  fontSize: 10,
                   padding: 5,
                   gap: 20,
                 }}
@@ -167,7 +167,7 @@ const WashTogBill = ({
                   padding: 5,
                   borderLeftColor: "#23940A",
                   borderLeftWidth: 1,
-                  fontSize: 12,
+                  fontSize: 10,
                   gap: 20,
                   marginBottom: 5,
                   color: "gray",
@@ -179,7 +179,7 @@ const WashTogBill = ({
                 style={{
                   flexDirection: "row",
                   justifyContent: "space-between",
-                  fontSize: 12,
+                  fontSize: 10,
                   padding: 5,
                   gap: 20,
                 }}
@@ -193,7 +193,7 @@ const WashTogBill = ({
                 style={{
                   flexDirection: "row",
                   justifyContent: "space-between",
-                  fontSize: 12,
+                  fontSize: 10,
                   padding: 5,
                   gap: 20,
                 }}
@@ -202,7 +202,7 @@ const WashTogBill = ({
                 <Text
                   style={{
                     color: "#23940A",
-                    fontSize: 14,
+                    fontSize: 10,
                     fontFamily: "inter",
                   }}
                 >
@@ -219,7 +219,7 @@ const WashTogBill = ({
                   padding: 5,
                   borderLeftColor: "#23940A",
                   borderLeftWidth: 1,
-                  fontSize: 12,
+                  fontSize: 10,
                   marginBottom: 5,
                   color: "gray",
                 }}
@@ -231,7 +231,7 @@ const WashTogBill = ({
               </View>
               <View
                 style={{
-                  fontSize: 12,
+                  fontSize: 10,
                   padding: 5,
                   width: "140px",
                   color: "gray",

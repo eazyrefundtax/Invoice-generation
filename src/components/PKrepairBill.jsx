@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
   headerContainer: {
     backgroundColor: "#0072CE",
     color: "#fff",
+    marginBottom: "20px",
     paddingVertical: 20,
     paddingHorizontal: 25,
     borderTopLeftRadius: 6,
@@ -102,7 +103,7 @@ const styles = StyleSheet.create({
   body: {
     display: "flex",
     flexDirection: "column",
-    gap: 0,
+    flex: 1,
   },
   cell: {
     textAlign: "center",
@@ -112,14 +113,19 @@ const styles = StyleSheet.create({
   footer: {
     position: "fixed",
     bottom: 0,
+    left: 0,
+    right: 0,
     width: "100%",
-    paddingRight: 30,
+    paddingHorizontal: 30,
+    paddingVertical: 6,
     borderTopColor: "gray",
     borderTopWidth: 1,
-    minHeight: 30,
-    maxHeight: 300,
-    marginTop: 20,
+    height: 60,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#fff"
   },
+
 });
 
 const PKsupply = ({ name, address, dateTime, PKheadings = [], items = [], onlyAmount, totalGST, PKInvoiceNo, grandTotal, amountInWords }) => (
@@ -196,7 +202,7 @@ const PKsupply = ({ name, address, dateTime, PKheadings = [], items = [], onlyAm
         </View>
       </View>
       <View style={styles.body}>
-        <View style={{ padding: 15 }}>
+        <View style={{}}>
           <View
             style={{
               borderWidth: 1,
@@ -209,7 +215,7 @@ const PKsupply = ({ name, address, dateTime, PKheadings = [], items = [], onlyAm
             }}
           >
             {/* Header */}
-            <View style={styles.tableHeader}>
+            <View style={styles.tableHeader} fixed>
               {Array.isArray(PKheadings) &&
                 PKheadings.map((header, index) => (
                   <Text
@@ -297,7 +303,7 @@ const PKsupply = ({ name, address, dateTime, PKheadings = [], items = [], onlyAm
                 }}
               >
                 <Text style={{ color: "white", fontWeight: "bold" }}>Total (INR)</Text>
-                <Text style={{ color: "white", fontWeight: "bold" }}>₹{grandTotal}</Text>
+                <Text style={{ color: "white", fontWeight: "bold" }}>₹{Number(grandTotal).toFixed(2)}</Text>
               </View>
               <View
                 style={{
@@ -312,7 +318,7 @@ const PKsupply = ({ name, address, dateTime, PKheadings = [], items = [], onlyAm
               >
                 <Text style={{ color: "white", fontWeight: "bold" }}>Amount Paid</Text>
                 <Text style={{ color: "white", fontWeight: "bold" }}>
-                  (₹{grandTotal})
+                  (₹{Number(grandTotal).toFixed(2)})
                 </Text>
               </View>
             </View>
@@ -381,52 +387,46 @@ const PKsupply = ({ name, address, dateTime, PKheadings = [], items = [], onlyAm
         </View>
 
       </View>
-      <View View style={styles.footer} fixed>
-        <View>
-          <View
-            style={{
-              fontSize: 8,
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-              width: "100%",
-              paddingTop: 10,
-            }}
-          >
-            <View
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                gap: 40,
-              }}
-            >
-              <View>
-                <Text style={{ fontSize: 8 }}>Invoice No </Text>
-                <Text style={{ color: "black", fontSize: 12 }}>
-                  {PKInvoiceNo}
-                </Text>
-              </View>
-              <View>
-                <Text style={{ fontSize: 8 }}>Invoice Date </Text>
-                <Text style={{ color: "black", fontSize: 12 }}>{dateTime}</Text>
-              </View>
-              <View>
-                <Text style={{ fontSize: 8 }}>Billing To </Text>
-                <Text style={{ color: "black", fontSize: 12 }}>{name} </Text>
-              </View>
+      <View style={styles.footer} fixed>
+        <View style={{
+          fontSize: 8,
+          flexDirection: "row",
+          justifyContent: "space-between",
+          width: "100%",
+          paddingTop: 6,
+          alignItems: "center"
+        }}>
+          <View style={{ flexDirection: "row" }}>
+            <View style={{ marginRight: 30 }}>
+              <Text style={{ fontSize: 8 }}>Invoice No</Text>
+              <Text style={{ color: "black", fontSize: 12 }}>{PKInvoiceNo}</Text>
             </View>
+
+            <View style={{ marginRight: 30 }}>
+              <Text style={{ fontSize: 8 }}>Invoice Date</Text>
+              <Text style={{ color: "black", fontSize: 12 }}>{dateTime}</Text>
+            </View>
+
             <View>
-              <Text
-                style={{ color: "black" }}
-                render={({ pageNumber, totalPages }) =>
-                  `Page ${pageNumber} of ${totalPages}`
-                }
-              />
+              <Text style={{ fontSize: 8 }}>Billing To</Text>
+              <Text style={{ color: "black", fontSize: 12 }}>{name}</Text>
             </View>
           </View>
-          <View style={{ textAlign: "center", fontSize: 8 }}>
-            <Text>This is an electronically generated document, no signature is required</Text>
+
+          <View>
+            <Text
+              style={{ color: "black" }}
+              render={({ pageNumber, totalPages }) =>
+                `Page ${pageNumber} of ${totalPages}`
+              }
+            />
           </View>
+        </View>
+
+        <View style={{ textAlign: "center", fontSize: 8, marginTop: 4 }}>
+          <Text>
+            This is an electronically generated document, no signature is required
+          </Text>
         </View>
       </View>
 

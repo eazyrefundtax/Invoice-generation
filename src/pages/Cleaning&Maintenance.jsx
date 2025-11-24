@@ -252,7 +252,8 @@ const CleaningMaintainces = () => {
   };
 
   //2nd
-  const handleCreateBill2 = async () => {
+  const handleCreateBill2 = async (e) => {
+    e.preventDefault();
     if (!name || !address) {
       setShowError(true);
       return;
@@ -623,6 +624,7 @@ const CleaningMaintainces = () => {
                 {/* Create Bill */}
                 <button
                   onClick={handleCreateBill2}
+                  type="submit"
                   className="w-full bg-black text-white py-2 px-6 rounded mt-4 cursor-pointer hover:bg-gray-900"
                 >
                   Create Bill

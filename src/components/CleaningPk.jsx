@@ -62,24 +62,24 @@ const styles = StyleSheet.create({
   },
 
   footer: {
-    position: "absolute",
+    position: "fixed",
     bottom: 0,
     left: 0,
     right: 0,
-    marginTop: "30px",
-    paddingRight: 30,
-    paddingLeft: 30,
+    paddingHorizontal: 30,
+    marginTop: "20px",
     borderTopColor: "gray",
     borderTopWidth: 1,
-    height: "60px",
-    justifyContent: "center",
+    height: 45,
+    // minHeight: 0,
     backgroundColor: "#fff",
-    minHeight: "60px",
   },
+
   body: {
     display: "flex",
     flexDirection: "column",
-    gap: 0,
+    flex: 1,
+    // position: "relative"
   },
 });
 
@@ -99,7 +99,7 @@ const CleaningPk = ({
   return (
     <Document>
       <Page size="A4" style={styles.page}>
-        {/* Header */}
+
         <View style={styles.Header} fixed>
           <Text
             style={{
@@ -148,6 +148,7 @@ const CleaningPk = ({
         </View>
 
         <View style={styles.body}>
+          {/* Header */}
           <View style={{ flexDirection: "row", gap: 30, marginTop: 20 }}>
             <View>
               <Text
@@ -156,7 +157,7 @@ const CleaningPk = ({
                   padding: 5,
                   borderLeftColor: "#09A3B3",
                   borderLeftWidth: 1,
-                  fontSize: 12,
+                  fontSize: 10,
                   marginBottom: 5,
                   color: "gray",
                 }}
@@ -167,7 +168,7 @@ const CleaningPk = ({
                 style={{
                   flexDirection: "row",
                   justifyContent: "space-between",
-                  fontSize: 12,
+                  fontSize: 10,
                   padding: 5,
                   gap: 20,
                 }}
@@ -180,7 +181,7 @@ const CleaningPk = ({
                   display: "flex",
                   flexDirection: "row",
                   justifyContent: "space-between",
-                  fontSize: 12,
+                  fontSize: 10,
                   padding: 5,
                   gap: 20,
                 }}
@@ -197,7 +198,7 @@ const CleaningPk = ({
                   padding: 5,
                   borderLeftColor: "#09A3B3",
                   borderLeftWidth: 1,
-                  fontSize: 12,
+                  fontSize: 10,
                   gap: 20,
                   marginBottom: 5,
                   color: "gray",
@@ -209,7 +210,7 @@ const CleaningPk = ({
                 style={{
                   flexDirection: "row",
                   justifyContent: "space-between",
-                  fontSize: 12,
+                  fontSize: 10,
                   padding: 5,
                   gap: 20,
                 }}
@@ -221,7 +222,7 @@ const CleaningPk = ({
                 style={{
                   flexDirection: "row",
                   justifyContent: "space-between",
-                  fontSize: 12,
+                  fontSize: 10,
                   padding: 5,
                   gap: 20,
                 }}
@@ -238,7 +239,7 @@ const CleaningPk = ({
                   padding: 5,
                   borderLeftColor: "#09A3B3",
                   borderLeftWidth: 1,
-                  fontSize: 12,
+                  fontSize: 10,
                   marginBottom: 5,
                   color: "gray",
                 }}
@@ -249,7 +250,7 @@ const CleaningPk = ({
                 style={{
                   flexDirection: "row",
                   justifyContent: "space-between",
-                  fontSize: 12,
+                  fontSize: 10,
                   padding: 5,
                   gap: 20,
 
@@ -264,7 +265,7 @@ const CleaningPk = ({
                 style={{
                   flexDirection: "row",
                   justifyContent: "space-between",
-                  fontSize: 12,
+                  fontSize: 10,
                   padding: 5,
                   gap: 20,
                 }}
@@ -285,7 +286,7 @@ const CleaningPk = ({
                 width: 120,
                 borderLeftColor: "#09A3B3",
                 borderLeftWidth: 1,
-                fontSize: 12,
+                fontSize: 10,
                 marginBottom: 5,
                 color: "gray",
               }}
@@ -297,7 +298,7 @@ const CleaningPk = ({
             </View>
             <View
               style={{
-                fontSize: 12,
+                fontSize: 10,
                 padding: 5,
                 width: "140px",
                 color: "gray",
@@ -307,7 +308,7 @@ const CleaningPk = ({
             </View>
 
           </View>
-          <View style={{ marginBottom: "40px" }}>
+          <View>
             <View style={[styles.tableHeader]} fixed >
               {HeaderTitles.map((header, index) => (
                 <Text
@@ -327,7 +328,9 @@ const CleaningPk = ({
             </View>
 
             {/* WRAPPABLE TABLE ROWS */}
-            <View>
+            <View style={{
+              marginBottom: "50px"
+            }}>
               {items.map((item, index) => (
                 <View style={styles.tableRow} key={index} wrap={false}>
                   <Text style={[styles.cell, { width: "3%" }]}>{index + 1}</Text>
@@ -492,86 +495,77 @@ const CleaningPk = ({
               </View>
             </View>
           </View>
-          <View>
-            <View
-              style={{
-                height: 50,
-                backgroundColor: "#D2EEF7",
-                marginTop: 5,
-                justifyContent: "center",   // vertical center
-                alignItems: "center",       // horizontal center
-              }}
-            >
-              <Text
-                style={{
-                  fontSize: 9,
-                  color: "black",
-                  textAlign: "center",
-                }}
-                wrap={false}
-              >
-                For any enquiry, reach out via call on +91 78159 36625
-              </Text>
-            </View>
-
-          </View>
-        </View>
-        <View View style={styles.footer} fixed>
           <View
             style={{
-              fontSize: 10,
-              display: "flex",
+              height: 50,
+              backgroundColor: "#D2EEF7",
+              marginTop: 5,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Text
+              style={{
+                fontSize: 9,
+                color: "black",
+                textAlign: "center",
+              }}
+              wrap={false}
+            >
+              For any enquiry, reach out via call on +91 78159 36625
+            </Text>
+          </View>
+        </View>
+        <View style={styles.footer} fixed>
+          <View
+            style={{
               flexDirection: "row",
               justifyContent: "space-between",
               width: "100%",
               paddingTop: 10,
-            }}
-          >
-            <View
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                gap: 40,
-              }}
-            >
-              <View>
-                <Text style={{ fontSize: 8 }}>Invoice No </Text>
-                <Text style={{ color: "black", fontSize: 12 }}>
-                  {InvoiceNo}{" "}
-                </Text>
+              alignItems: "center",
+            }}>
+            <View style={{ flexDirection: "row", }}>
+              <View style={{ marginRight: 40 }}>
+                <Text style={{ fontSize: 8 }}>Invoice No</Text>
+                <Text style={{ color: "black", fontSize: 12 }}>{InvoiceNo}</Text>
               </View>
-              <View>
-                <Text style={{ fontSize: 8 }}>Invoice Date </Text>
+
+              <View style={{ marginRight: 40 }}>
+                <Text style={{ fontSize: 8 }}>Invoice Date</Text>
                 <Text style={{ color: "black", fontSize: 12 }}>{dateTime}</Text>
               </View>
+
               <View>
-                <Text style={{ fontSize: 8 }}>Billing To </Text>
-                <Text style={{ color: "black", fontSize: 12 }}>{name} </Text>
+                <Text style={{ fontSize: 8 }}>Billing To</Text>
+                <Text style={{ color: "black", fontSize: 12 }}>{name}</Text>
               </View>
             </View>
+
+            {/* Page Number */}
             <View>
               <Text
-                style={{ color: "black" }}
+                style={{ color: "black", fontSize: 10 }}
                 render={({ pageNumber, totalPages }) =>
                   `Page ${pageNumber} of ${totalPages}`
-                }
-              />
+                } />
             </View>
           </View>
+
+          {/* Center Text */}
           <View>
             <Text
               style={{
-                fontSize: "9",
+                fontSize: 9,
                 color: "black",
                 textAlign: "center",
                 marginTop: 5,
               }}
             >
-              This is electrically generated document, No signature is required
+              This is an electronically generated document, no signature is required
             </Text>
           </View>
         </View>
-
       </Page>
     </Document>
   );
