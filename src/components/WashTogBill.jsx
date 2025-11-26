@@ -24,11 +24,7 @@ const styles = StyleSheet.create({
     paddingBottom: 20, // reserve space for footer
     position: "relative",
   },
-  body: {
-    display: "flex",
-    flexDirection: "column",
-    flex: 1,
-  },
+
   tableHeader: {
     flexDirection: "row",
     backgroundColor: "#2A8C2E",
@@ -65,6 +61,11 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     paddingHorizontal: 20,
     marginBottom: "20px",
+  },
+  body: {
+    display: "flex",
+    flexDirection: "column",
+    flex: 1,
   },
   footer: {
     position: "absolute",
@@ -263,6 +264,7 @@ const WashTogBill = ({
                 ))}
               </View>
             </View>
+
 
             {/* Rows */}
             {items?.map((item, index) => (

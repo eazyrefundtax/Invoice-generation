@@ -10,7 +10,6 @@ import WashTogBill from "../components/WashTogBill.jsx";
 import UrbanCompany1Bill from "../components/urbanCompany1Bill.jsx";
 import CleaningPk from "../components/CleaningPk.jsx";
 
-
 const CleaningMaintainces = () => {
   const [open, setOpen] = useState(false);
   const [selectedBill, setSelectedBill] = useState(null);
@@ -18,8 +17,8 @@ const CleaningMaintainces = () => {
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [dueDate, setDueDate] = useState("");
-  const [reductions, setReductions] = useState(0);
-  const [interestAmount, setInterestAmount] = useState(0);
+  const [reductions, setReductions] = useState("");
+  const [interestAmount, setInterestAmount] = useState("");
   const [items, setItems] = useState([{ item: "", quantity: "", price: "" }]);
   const [finalAmount, setFinalAmount] = useState(0);
   const [updatedAmount, setUpdatedAmount] = useState(0);
@@ -30,25 +29,30 @@ const CleaningMaintainces = () => {
   const [ucPlatformPrice, setucPlatformPrice] = useState("");
   const [ucprice, setucPrice] = useState("");
 
-  const reSetForm = () => {
-    setOpen(false);
-    setSelectedBill(null);
+  const clearForm = () => {
     setShowError(false);
     setName("");
     setPhone("");
     setAddress("");
-    setDueDate();
-    setReductions();
-    setInterestAmount();
+    setDueDate("");
+    setReductions("");
+    setInterestAmount("");
     setItems([{ item: "", quantity: "", price: "" }]);
-    setFinalAmount();
-    setUpdatedAmount();
-    setNewFinalAmount();
-    setInterestTotalAmount();
-    setucItem();
-    setucPlatformPrice();
-    setucPrice();
-  }
+    setFinalAmount(0);
+    setUpdatedAmount(0);
+    setNewFinalAmount(0);
+    setInterestTotalAmount(0);
+    setucItem("");
+    setucPlatformPrice("");
+    setucPrice("");
+  };
+
+  const reSetForm = () => {
+    setOpen(false);
+    setSelectedBill(null);
+    clearForm();
+  };
+
   const HeaderTitles = [
     { name: "S.no", width: "5%", value: "s.no" },
     { name: "Item", width: "40%", value: "item" },
@@ -64,39 +68,26 @@ const CleaningMaintainces = () => {
     { id: 2, img: PK },
     { id: 3, img: UrbanCompany1 },
   ];
-  {
-    /*invoice numbers */
-  }
+
   const generateInvoiceNo = () => {
     const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    const randomLetter = () =>
-      letters[Math.floor(Math.random() * letters.length)];
-
+    const randomLetter = () => letters[Math.floor(Math.random() * letters.length)];
     const letterPart = randomLetter() + randomLetter();
     const numberPart = Math.floor(100000 + Math.random() * 900000);
-
     return letterPart + numberPart;
   };
   const generateInvoiceNo1 = () => {
     const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    const randomLetter = () =>
-      letters[Math.floor(Math.random() * letters.length)];
-
-    const letterPart =
-      randomLetter() + randomLetter() + randomLetter() + randomLetter();
+    const randomLetter = () => letters[Math.floor(Math.random() * letters.length)];
+    const letterPart = randomLetter() + randomLetter() + randomLetter() + randomLetter();
     const numberPart = Math.floor(1000000000 + Math.random() * 900000000);
-
     return letterPart + numberPart;
   };
   const generateInvoiceNo2 = () => {
     const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    const randomLetter = () =>
-      letters[Math.floor(Math.random() * letters.length)];
-
-    const letterPart =
-      randomLetter() + randomLetter() + randomLetter() + randomLetter();
+    const randomLetter = () => letters[Math.floor(Math.random() * letters.length)];
+    const letterPart = randomLetter() + randomLetter() + randomLetter() + randomLetter();
     const numberPart = Math.floor(1000000000 + Math.random() * 900000000);
-
     return letterPart + numberPart;
   };
 
@@ -119,29 +110,19 @@ const CleaningMaintainces = () => {
 
   const claculationPlatformPrice = Number(ucPlatformPrice) || 0;
   const ucgstAmount = (claculationPlatformPrice * 0.18).toFixed(2);
-  const uctotalPlatformFee = (
-    claculationPlatformPrice +
-    claculationPlatformPrice * 0.18
-  ).toFixed(2);
+  const uctotalPlatformFee = (claculationPlatformPrice + claculationPlatformPrice * 0.18).toFixed(2);
 
   const partenarinvoice = Number(ucprice) || 0;
   const ucigstAmount = (partenarinvoice * 0.025).toFixed(2);
-  const ucPartnerTotalFee = (partenarinvoice + partenarinvoice * 0.05).toFixed(
-    2
-  );
+  const ucPartnerTotalFee = (partenarinvoice + partenarinvoice * 0.05).toFixed(2);
 
-  const totalGST = itemsWithTotal
-    .reduce((sum, item) => sum + Number(item.gstAmount), 0)
-    .toFixed(2);
-  const grandtotalBeforeGST = itemsWithTotal
-    .reduce((sum, item) => sum + Number(item.baseAmount), 0)
-    .toFixed(2);
+  const totalGST = itemsWithTotal.reduce((sum, item) => sum + Number(item.gstAmount), 0).toFixed(2);
+  const grandtotalBeforeGST = itemsWithTotal.reduce((sum, item) => sum + Number(item.baseAmount), 0).toFixed(2);
   const onlyCGST = (grandtotalBeforeGST * 0.09).toFixed(2);
 
-  const finalWithInterest =
-    Number(newFinalAmount) + Number(interestAmount || 0);
+  const finalWithInterest = Number(newFinalAmount) + Number(interestAmount || 0);
+
   useEffect(() => {
-    // Calculate total before reduction
     const total = items.reduce((sum, item) => {
       const quantity = Number(item.quantity || 0);
       const price = Number(item.price || 0);
@@ -152,42 +133,29 @@ const CleaningMaintainces = () => {
     }, 0);
 
     setFinalAmount(total);
-
-    // Apply reduction
     const reducedValue = Number(reductions) || 0;
     const afterReduction = total - reducedValue > 0 ? total - reducedValue : 0;
-
     setNewFinalAmount(afterReduction);
   }, [items, reductions]);
-  const handleAddItem = () =>
-    setItems([...items, { item: "", quantity: "", price: "" }]);
+
+  const handleAddItem = () => setItems((s) => [...s, { item: "", quantity: "", price: "" }]);
 
   const handleRemoveItem = (index) => {
-    const newItems = [...items];
-    newItems.splice(index, 1);
-    setItems(newItems);
+    setItems((prev) => prev.filter((_, i) => i !== index));
   };
 
   const handleItemChange = (index, field, value) => {
-    const newItems = [...items];
-    newItems[index][field] = value;
-    setItems(newItems);
+    setItems((prev) => {
+      const copy = [...prev];
+      copy[index] = { ...copy[index], [field]: value };
+      return copy;
+    });
   };
 
-  const toWords = new ToWords({
-    localeCode: "en-IN",
-    converterOptions: {
-      currency: true,
-      ignoreDecimal: false,
-    },
-  });
-
-  // to words function
+  const toWords = new ToWords({ localeCode: "en-IN", converterOptions: { currency: true, ignoreDecimal: false } });
   const convertToWords = (value) => {
     const num = Number(value);
-    if (isNaN(num) || value === "" || value == null) {
-      return "";
-    }
+    if (isNaN(num) || value === "" || value == null) return "";
     return toWords.convert(num);
   };
 
@@ -195,30 +163,23 @@ const CleaningMaintainces = () => {
   const ucPlatformPriceInWords = convertToWords(ucPlatformPrice);
   const ucplucPlatformgstInWords = convertToWords(ucgstAmount);
 
-
-  {/* 1st*/ }
+  //Bill 1
   const handleCreateBill1 = async () => {
     if (!name || !address) {
       setShowError(true);
       return;
     }
-
-    const hasEmptyFields = items.some(
-      (i) => !i.item || !i.quantity || !i.price
-    );
-
+    const hasEmptyFields = items.some((i) => !i.item || !i.quantity || !i.price);
     if (hasEmptyFields) {
       setShowError(true);
       return;
     }
 
-    // Generate Invoice
     const invoiceNumber = generateInvoiceNo();
     const today = new Date();
     const options = { year: "numeric", month: "short", day: "numeric" };
     const currentDate = today.toLocaleDateString("en-US", options);
 
-    // Generate the PDF
     const blob = await pdf(
       <WashTogBill
         name={name}
@@ -246,35 +207,30 @@ const CleaningMaintainces = () => {
     link.download = `WashTogBill.pdf`;
     document.body.appendChild(link);
     link.click();
+    document.body.removeChild(link);
     URL.revokeObjectURL(url);
 
     reSetForm();
   };
 
-  //2nd
+
+  //Bill 2
   const handleCreateBill2 = async (e) => {
-    e.preventDefault();
+    e?.preventDefault?.();
     if (!name || !address) {
       setShowError(true);
       return;
     }
-
-    const hasEmptyFields = items.some(
-      (i) => !i.item || !i.quantity || !i.price
-    );
+    const hasEmptyFields = items.some((i) => !i.item || !i.quantity || !i.price);
     if (hasEmptyFields) {
       setShowError(true);
       return;
     }
-
     const invoiceNumber = generateInvoiceNo();
     const today = new Date();
-    const currentDate = today.toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
+    const currentDate = today.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
     const onlygstAmount = itemsWithTotal.map((item) => item.gstAmount);
+
     const blob = await pdf(
       <CleaningPk
         name={name}
@@ -307,19 +263,21 @@ const CleaningMaintainces = () => {
     const link = document.createElement("a");
     link.href = url;
     link.download = `CleaningPk.pdf`;
+    document.body.appendChild(link);
     link.click();
+    document.body.removeChild(link);
     URL.revokeObjectURL(url);
 
     reSetForm();
   };
 
-  //3rd
+
+  //Bill 3
   const handleCreateBill3 = async () => {
     if (!ucitem || !ucprice || !ucPlatformPrice) {
       setShowError(true);
       return;
     }
-
     const invoiceNumber1 = generateInvoiceNo1();
     const inVoiceNumber2 = generateInvoiceNo2();
     const today = new Date();
@@ -350,13 +308,16 @@ const CleaningMaintainces = () => {
     const link = document.createElement("a");
     link.href = url;
     link.download = `UrbanCompany1Bill.pdf`;
+    document.body.appendChild(link);
     link.click();
+    document.body.removeChild(link);
     URL.revokeObjectURL(url);
 
     reSetForm();
   };
 
   const handleModalOpen = (bill) => {
+    clearForm();
     setSelectedBill(bill);
     setOpen(true);
   };
@@ -367,6 +328,7 @@ const CleaningMaintainces = () => {
         <img
           key={bill.id}
           src={bill.img}
+          alt={`bill-${bill.id}`}
           className="h-auto w-[250px] md:w-[300px] hover:scale-105 duration-300 cursor-pointer border border-black rounded-lg"
           onClick={() => handleModalOpen(bill)}
         />
@@ -379,139 +341,68 @@ const CleaningMaintainces = () => {
               <p className="text-xl sm:text-2xl font-semibold">Details</p>
               <button
                 className="text-black text-2xl font-bold cursor-pointer"
-                onClick={() => setOpen(false)}
+                onClick={reSetForm}
               >
                 <RxCross1 />
               </button>
             </div>
-            {/*1st*/}
+
+            {/* Bill 1 */}
             {selectedBill?.id === 1 && (
               <div className="flex flex-col gap-5 mt-4">
-                {/* Name */}
-                <TextField
-                  label="Name"
+                <TextField label="Name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="bg-white w-full rounded-md"
-                />
-                {name === "" && showError && (
-                  <p className="text-sm text-red-500 font-medium">
-                    *This field is required.
-                  </p>
-                )}
+                  className="bg-white w-full rounded-md" />
+                {
+                  name === "" && showError &&
+                  <p className="text-sm text-red-500 font-medium">*This field is required.</p>
+                }
+
                 <div className=" flex flex-col sm:flex-row gap-3">
-                  {/* Address */}
-                  <TextField
-                    label="Address"
+                  <TextField label="Address"
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
-                    className="bg-white w-full rounded-md"
-                  />
-                  {address === "" && showError && (
-                    <p className="text-sm text-red-500 font-medium">
-                      *This field is required.
-                    </p>
-                  )}
-                  {/*Reduction amount */}
+                    className="bg-white w-full rounded-md" />
+                  {
+                    address === "" && showError &&
+                    <p className="text-sm text-red-500 font-medium">*This field is required.</p>}
+
                   <TextField
                     label="Reductions Amount"
                     value={reductions}
-                    onChange={(e) => setReductions(e.target.value)}
-                    className="bg-white w-full rounded-md"
-                  />
+                    onChange={(e) =>
+                      setReductions(e.target.value.replace(/[^0-9]/g, ""))}
+                    className="bg-white w-full rounded-md" />
                 </div>
 
-                {/* Items */}
                 {items.map((item, index) => (
-                  <div
-                    key={index}
-                    className="flex flex-col gap-3 border p-3 rounded-md bg-white"
-                  >
+                  <div key={index} className="flex flex-col gap-3 border p-3 rounded-md bg-white">
                     <div className="flex justify-between items-center">
-                      <p className="font-semibold text-base sm:text-lg">
-                        Item {index + 1}
-                      </p>
-                      {items.length > 1 && (
-                        <button
-                          className="text-red-500 text-sm font-medium cursor-pointer"
-                          onClick={() => handleRemoveItem(index)}
-                        >
-                          Remove
-                        </button>
-                      )}
+                      <p className="font-semibold text-base sm:text-lg">Item {index + 1}</p>
+                      {items.length > 1 && <button className="text-red-500 text-sm font-medium cursor-pointer" onClick={() => handleRemoveItem(index)}>Remove</button>}
                     </div>
 
-                    <TextField
-                      label="Item"
-                      value={item.item}
-                      onChange={(e) =>
-                        handleItemChange(index, "item", e.target.value)
-                      }
-                      className="bg-white w-full rounded-md"
-                    />
+                    <TextField label="Item" value={item.item} onChange={(e) => handleItemChange(index, "item", e.target.value)} className="bg-white w-full rounded-md" />
 
                     <div className="flex flex-col sm:flex-row gap-3">
-                      <TextField
-                        label="Quantity"
-                        type="text"
-                        value={item.quantity}
-                        onChange={(e) =>
-                          handleItemChange(
-                            index,
-                            "quantity",
-                            e.target.value.replace(/[^0-9]/g, "")
-                          )
-                        }
-                        className="bg-white w-full sm:w-1/2 rounded-md"
-                      />
-                      <TextField
-                        label="Price"
-                        type="text"
-                        value={item.price}
-                        onChange={(e) =>
-                          handleItemChange(
-                            index,
-                            "price",
-                            e.target.value.replace(/[^0-9]/g, "")
-                          )
-                        }
-                        className="bg-white w-full sm:w-1/2 rounded-md"
-                      />
+                      <TextField label="Quantity" type="text" value={item.quantity} onChange={(e) => handleItemChange(index, "quantity", e.target.value.replace(/[^0-9]/g, ""))} className="bg-white w-full sm:w-1/2 rounded-md" />
+                      <TextField label="Price" type="text" value={item.price} onChange={(e) => handleItemChange(index, "price", e.target.value.replace(/[^0-9]/g, ""))} className="bg-white w-full sm:w-1/2 rounded-md" />
                     </div>
 
-                    {showError &&
-                      (item.item === "" ||
-                        item.quantity === "" ||
-                        item.price === "") && (
-                        <p className="text-sm text-red-500 font-medium">
-                          *All fields are required for this item.
-                        </p>
-                      )}
+                    {showError && (item.item === "" || item.quantity === "" || item.price === "") && <p className="text-sm text-red-500 font-medium">*All fields are required for this item.</p>}
                   </div>
                 ))}
 
-                {/* Add Item */}
-                <button
-                  onClick={handleAddItem}
-                  className="bg-gray-700 text-white py-2 px-4 rounded-md w-fit hover:bg-gray-800 cursor-pointer"
-                >
-                  + Add Item
-                </button>
+                <button onClick={handleAddItem} className="bg-gray-700 text-white py-2 px-4 rounded-md w-fit hover:bg-gray-800 cursor-pointer">+ Add Item</button>
 
-                {/* Create Bill */}
-                <button
-                  onClick={handleCreateBill1}
-                  className="w-full bg-black text-white py-2 px-6 rounded mt-4 cursor-pointer hover:bg-gray-900"
-                >
-                  Create Bill
-                </button>
+                <button onClick={handleCreateBill1} className="w-full bg-black text-white py-2 px-6 rounded mt-4 cursor-pointer hover:bg-gray-900">Create Bill</button>
               </div>
             )}
 
-            {/*2nd */}
+            {/* Bill 2 */}
             {selectedBill?.id === 2 && (
               <div className="flex flex-col gap-5 mt-4">
-                {/* Name */}
                 <TextField
                   label="Name"
                   value={name}
@@ -523,8 +414,8 @@ const CleaningMaintainces = () => {
                     *This field is required.
                   </p>
                 )}
+
                 <div className="flex gap-3">
-                  {/* Address */}
                   <TextField
                     label="Address"
                     value={address}
@@ -536,40 +427,39 @@ const CleaningMaintainces = () => {
                       *This field is required.
                     </p>
                   )}
-                  {/* Address */}
                   <TextField
                     label="Interest"
                     value={interestAmount}
-                    onChange={(e) => setInterestAmount(e.target.value)}
-                    className="bg-white w-full rounded-md"
-                  />
+                    onChange={(e) => setInterestAmount(e.target.value.replace(/[^0-9]/g, ""))}
+                    className="bg-white w-full rounded-md" />
+                  {interestAmount === "" && showError && (
+                    <p className="text-sm text-red-500 font-medium">
+                      *This field is required.
+                    </p>
+                  )}
                 </div>
-                {/* Items */}
+
                 {items.map((item, index) => (
                   <div
                     key={index}
-                    className="flex flex-col gap-3 border p-3 rounded-md bg-white"
-                  >
+                    className="flex flex-col gap-3 border p-3 rounded-md bg-white">
                     <div className="flex justify-between items-center">
                       <p className="font-semibold text-base sm:text-lg">
                         Item {index + 1}
                       </p>
-                      {items.length > 1 && (
+                      {items.length > 1 &&
                         <button
                           className="text-red-500 text-sm font-medium cursor-pointer"
-                          onClick={() => handleRemoveItem(index)}
-                        >
+                          onClick={() => handleRemoveItem(index)}>
                           Remove
                         </button>
-                      )}
+                      }
                     </div>
 
                     <TextField
                       label="Item"
                       value={item.item}
-                      onChange={(e) =>
-                        handleItemChange(index, "item", e.target.value)
-                      }
+                      onChange={(e) => handleItemChange(index, "item", e.target.value)}
                       className="bg-white w-full rounded-md"
                     />
 
@@ -578,143 +468,59 @@ const CleaningMaintainces = () => {
                         label="Quantity"
                         type="text"
                         value={item.quantity}
-                        onChange={(e) =>
-                          handleItemChange(
-                            index,
-                            "quantity",
-                            e.target.value.replace(/[^0-9]/g, "")
-                          )
-                        }
+                        onChange={(e) => handleItemChange(index, "quantity", e.target.value.replace(/[^0-9]/g, ""))}
                         className="bg-white w-full sm:w-1/2 rounded-md"
                       />
                       <TextField
                         label="Price"
                         type="text"
                         value={item.price}
-                        onChange={(e) =>
-                          handleItemChange(
-                            index,
-                            "price",
-                            e.target.value.replace(/[^0-9]/g, "")
-                          )
-                        }
+                        onChange={(e) => handleItemChange(index, "price", e.target.value.replace(/[^0-9]/g, ""))}
                         className="bg-white w-full sm:w-1/2 rounded-md"
                       />
                     </div>
 
-                    {showError &&
-                      (item.item === "" ||
-                        item.quantity === "" ||
-                        item.price === "") && (
-                        <p className="text-sm text-red-500 font-medium">
-                          *All fields are required for this item.
-                        </p>
-                      )}
+                    {showError && (item.item === "" || item.quantity === "" || item.price === "") &&
+                      <p className="text-sm text-red-500 font-medium">
+                        *All fields are required for this item.
+                      </p>
+                    }
                   </div>
                 ))}
 
-                {/* Add Item */}
                 <button
                   onClick={handleAddItem}
-                  className="bg-gray-700 text-white py-2 px-4 rounded-md w-fit hover:bg-gray-800 cursor-pointer"
-                >
+                  className="bg-gray-700 text-white py-2 px-4 rounded-md w-fit hover:bg-gray-800 cursor-pointer">
                   + Add Item
                 </button>
-
-                {/* Create Bill */}
                 <button
                   onClick={handleCreateBill2}
                   type="submit"
-                  className="w-full bg-black text-white py-2 px-6 rounded mt-4 cursor-pointer hover:bg-gray-900"
-                >
+                  className="w-full bg-black text-white py-2 px-6 rounded mt-4 cursor-pointer hover:bg-gray-900">
                   Create Bill
                 </button>
               </div>
             )}
-            {/*3rd*/}
+
+            {/* Bill 3 */}
             {selectedBill?.id === 3 && (
               <div className="flex flex-col gap-5 mt-4">
-                {/* Name */}
-                <TextField
-                  label="Name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  className="bg-white w-full rounded-md"
-                />
-                {name === "" && showError && (
-                  <p className="text-sm text-red-500 font-medium">
-                    *This field is required.
-                  </p>
-                )}
+                <TextField label="Name" value={name} onChange={(e) => setName(e.target.value)} className="bg-white w-full rounded-md" />
+                {name === "" && showError && <p className="text-sm text-red-500 font-medium">*This field is required.</p>}
 
-                {/* Address */}
-                <TextField
-                  label="Address"
-                  value={address}
-                  onChange={(e) => setAddress(e.target.value)}
-                  className="bg-white w-full rounded-md"
-                />
-                {address === "" && showError && (
-                  <p className="text-sm text-red-500 font-medium">
-                    *This field is required.
-                  </p>
-                )}
+                <TextField label="Address" value={address} onChange={(e) => setAddress(e.target.value)} className="bg-white w-full rounded-md" />
+                {address === "" && showError && <p className="text-sm text-red-500 font-medium">*This field is required.</p>}
 
-                {/* Items */}
-
-                <TextField
-                  label="Item"
-                  value={ucitem}
-                  onChange={(e) => setucItem(e.target.value)}
-                  className="bg-white w-full rounded-md"
-                />
+                <TextField label="Item" value={ucitem} onChange={(e) => setucItem(e.target.value)} className="bg-white w-full rounded-md" />
 
                 <div className="flex flex-col sm:flex-row gap-3">
-                  <TextField
-                    label="Platform price"
-                    type="text"
-                    value={ucPlatformPrice}
-                    onChange={(e) => {
-                      const numericValue = e.target.value.replace(
-                        /[^0-9]/g,
-                        ""
-                      );
-                      setucPlatformPrice(numericValue);
-                    }}
-                    className="bg-white w-full sm:w-1/2 rounded-md"
-                  />
-
-                  <TextField
-                    label="Item Price"
-                    type="text"
-                    value={ucprice}
-                    onChange={(e) => {
-                      const numericValue = e.target.value.replace(
-                        /[^0-9]/g,
-                        ""
-                      );
-                      setucPrice(numericValue);
-                    }}
-                    className="bg-white w-full sm:w-1/2 rounded-md"
-                  />
+                  <TextField label="Platform price" type="text" value={ucPlatformPrice} onChange={(e) => setucPlatformPrice(e.target.value.replace(/[^0-9]/g, ""))} className="bg-white w-full sm:w-1/2 rounded-md" />
+                  <TextField label="Item Price" type="text" value={ucprice} onChange={(e) => setucPrice(e.target.value.replace(/[^0-9]/g, ""))} className="bg-white w-full sm:w-1/2 rounded-md" />
                 </div>
 
-                {showError &&
-                  (ucitem === "" ||
-                    ucPlatformPrice === "" ||
-                    ucprice === "") && (
-                    <p className="text-sm text-red-500 font-medium">
-                      *All fields are required for this item.
-                    </p>
-                  )}
+                {showError && (ucitem === "" || ucPlatformPrice === "" || ucprice === "") && <p className="text-sm text-red-500 font-medium">*All fields are required for this item.</p>}
 
-                {/* Create Bill */}
-                <button
-                  onClick={handleCreateBill3}
-                  className="w-full bg-black text-white py-2 px-6 rounded mt-4 cursor-pointer hover:bg-gray-900"
-                >
-                  Create Bill
-                </button>
+                <button onClick={handleCreateBill3} className="w-full bg-black text-white py-2 px-6 rounded mt-4 cursor-pointer hover:bg-gray-900">Create Bill</button>
               </div>
             )}
           </div>
