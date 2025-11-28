@@ -44,9 +44,13 @@ const styles = StyleSheet.create({
     },
 
     row: {
-        flexDirection: "row",
-        justifyContent: "space-between",
+        display: "flex",
+        flexDirection: "column",
+        // flexDirection: "row",
+        // justifyContent: "space-between",
+        gap: 50,
         marginBottom: 6,
+        alignItems: "flex-start "
     },
 
     label: {
@@ -143,19 +147,27 @@ const AutoServices = ({
                 {/* CUSTOMER INFO */}
                 <View style={styles.body}>
                     <Text style={styles.sectionTitle}>Customer Details</Text>
-                    <View style={styles.row}>
-                        <Text style={styles.label}>Name:</Text>
-                        <Text>{name}</Text>
-                    </View>
+                    <View
+                        style={{
+                            flexDirection: "row",
+                            justifyContent: "flex-start",
+                            gap: 50, // space between label & values
+                            marginTop: 10,
+                        }}
+                    >
+                        {/* Left Column — Labels */}
+                        <View>
+                            <Text>Name:</Text>
+                            <Text>Invoice No:</Text>
+                            <Text>Invoice Date:</Text>
+                        </View>
 
-                    <View style={styles.row}>
-                        <Text style={styles.label}>Invoice No:</Text>
-                        <Text>{BillingNumber}</Text>
-                    </View>
-
-                    <View style={styles.row}>
-                        <Text style={styles.label}>Invoice Date:</Text>
-                        <Text>{invoiceDate}</Text>
+                        {/* Right Column — Values */}
+                        <View>
+                            <Text>{name}</Text>
+                            <Text>{BillingNumber}</Text>
+                            <Text>{invoiceDate}</Text>
+                        </View>
                     </View>
 
 

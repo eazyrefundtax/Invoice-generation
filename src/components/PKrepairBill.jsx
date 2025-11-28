@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
 
 });
 
-const PKsupply = ({ name, address, dateTime, PKheadings = [], items = [], onlyAmount, totalGST, PKInvoiceNo, grandTotal, amountInWords }) => (
+const PKsupply = ({ name, address, invoiceDate, PKheadings = [], items = [], onlyAmount, totalGST, PKInvoiceNo, grandTotal, amountInWords }) => (
   <Document>
     <Page size="A4" style={styles.page}>
 
@@ -194,7 +194,7 @@ const PKsupply = ({ name, address, dateTime, PKheadings = [], items = [], onlyAm
             </View>
             <View>
               <Text style={styles.datesLabel}>Invoice Date</Text>
-              <Text style={styles.datesValue}>{dateTime}</Text>
+              <Text style={styles.datesValue}>{invoiceDate}</Text>
             </View>
           </View>
 
@@ -368,7 +368,7 @@ const PKsupply = ({ name, address, dateTime, PKheadings = [], items = [], onlyAm
               <Text style={{
                 flex: 1,
                 textAlign: "left",
-              }}>{dateTime}</Text>
+              }}>{invoiceDate}</Text>
               <Text style={{
                 flex: 1,
                 textAlign: "left",
@@ -404,7 +404,7 @@ const PKsupply = ({ name, address, dateTime, PKheadings = [], items = [], onlyAm
 
             <View style={{ marginRight: 30 }}>
               <Text style={{ fontSize: 8 }}>Invoice Date</Text>
-              <Text style={{ color: "black", fontSize: 12 }}>{dateTime}</Text>
+              <Text style={{ color: "black", fontSize: 12 }}>{invoiceDate}</Text>
             </View>
 
             <View>

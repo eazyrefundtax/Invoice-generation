@@ -48,8 +48,7 @@ const styles = StyleSheet.create({
 });
 const LandScaping = ({
   Invoice,
-  issueDate,
-  dueDate,
+  invoiceDate,
   name,
   phone,
   HeaderTitles,
@@ -84,8 +83,8 @@ const LandScaping = ({
 
             <View>
               <Text style={{ marginBottom: 10 }}>{Invoice}</Text>
-              <Text style={{ marginBottom: 10 }}>{issueDate}</Text>
-              <Text style={{ marginBottom: 10 }}> {dueDate}</Text>
+              <Text style={{ marginBottom: 10 }}>{invoiceDate}</Text>
+              <Text style={{ marginBottom: 10 }}> {invoiceDate}</Text>
             </View>
           </View>
 
@@ -127,7 +126,6 @@ const LandScaping = ({
             <Text style={{ fontSize: 10 }}>{phone}</Text>
           </view>
         </View>
-
         <View style={{ marginTop: 20, borderRadius: 5, marginBottom: 140, }}>
           {/* Header */}
           <View style={styles.tableHeader}>
@@ -149,7 +147,7 @@ const LandScaping = ({
           </View>
           {items?.map((item, index) => (
             <View style={styles.tableRow} key={index}>
-              <Text style={[styles.cell, { width: "15%" }]}> {issueDate}</Text>
+              <Text style={[styles.cell, { width: "15%" }]}> {invoiceDate}</Text>
               <View style={{ width: "50%" }}>
                 <Text style={styles.cell}>{item.item}</Text>
                 <Text style={styles.cell}>{item.Discription}</Text>

@@ -61,10 +61,11 @@ const ElectricBill = ({
   name,
   phone,
   OrderNo,
-  dateTime,
   billPaymentOfNumber,
   totalAmount,
+  billedDate,
   generateRandom11Digit,
+
 }) => (
   <Document>
     <Page size="A4" style={styles.page}>
@@ -89,7 +90,7 @@ const ElectricBill = ({
           }}
         >
           <Text>OrderNo. {OrderNo}</Text>
-          <Text>{dateTime}</Text>
+          <Text>{billedDate}</Text>
         </view>
         <View
           style={{

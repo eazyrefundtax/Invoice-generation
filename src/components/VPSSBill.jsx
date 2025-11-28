@@ -105,7 +105,7 @@ const VPSS = (
         invoiceNo,
         VpssHeading,
         items = [],
-        dateTime,
+        invoiceDate,
         grandtotalBeforeGST,
         sgstAmount,
         totalAmount
@@ -133,7 +133,7 @@ const VPSS = (
 
                         <View style={styles.labelValueStyles}>
                             <Text style={styles.label}>DATE</Text>
-                            <Text style={styles.value}>{dateTime}</Text>
+                            <Text style={styles.value}>{invoiceDate}</Text>
                         </View>
 
                         <View style={styles.labelValueStyles}>
@@ -187,7 +187,7 @@ const VPSS = (
                         justifyContent: "space-between",
                         fontSize: 11,
                         width: "40%",
-
+                        alignSelf: "flex-end",
                         marginTop: 10,
                         marginRight: 30,
                     }}
@@ -206,7 +206,7 @@ const VPSS = (
                         <Text style={{ marginTop: 10 }}>{sgstAmount}</Text>
                         <Text style={{ marginTop: 10, fontWeight: "bold" }}>Rs. {totalAmount}</Text>
                         <Text style={{ marginTop: 10, fontWeight: "bold" }}>Rs.{totalAmount}</Text>
-                        <Text style={{ marginTop: 10, color: "gray", }}>{dateTime}</Text>
+                        <Text style={{ marginTop: 10, color: "gray", }}>{invoiceDate}</Text>
                     </View>
                 </View>
                 <View

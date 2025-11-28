@@ -82,7 +82,7 @@ const PkSuppliesbill = ({
     address,
     items = [],
     invoiceNo,
-    dateTime,
+    invoiceDate,
     HeaderTitles = [],
     totalAmount,
     totalFinalAmount,
@@ -91,6 +91,7 @@ const PkSuppliesbill = ({
     dueDate,
     paymentDate,
     ChallanDate
+
 
 }) => {
     return (
@@ -189,7 +190,7 @@ const PkSuppliesbill = ({
                                 }}
                             >
                                 <Text>Invoice Date:</Text>
-                                <Text style={{ color: "gray" }}>{dateTime}</Text>
+                                <Text style={{ color: "gray" }}>{invoiceDate}</Text>
                             </View>
                             <View
                                 style={{
@@ -431,7 +432,7 @@ const PkSuppliesbill = ({
                                     gap: 20,
                                 }}
                             >
-                                <Text> Challan
+                                <Text>Challan
                                     Number:</Text>
                                 <Text style={{ color: "gray" }}>101420216121</Text>
                             </View>
@@ -444,7 +445,7 @@ const PkSuppliesbill = ({
                                     gap: 20,
                                 }}
                             >
-                                <Text style={{ width: 100 }}>  Extra
+                                <Text style={{ width: 100 }}>Extra
                                     Information:</Text>
                                 <Text style={{ color: "gray" }}>WE ARE NOT RESPONSIBLE ANY DAMAGE OCCUR WHILE TRANSPORTATION</Text>
                             </View>
@@ -743,7 +744,7 @@ const PkSuppliesbill = ({
                             </View>
                             <View>
                                 <Text style={{ fontSize: 8 }}>Invoice Date </Text>
-                                <Text style={{ color: "black", fontSize: 12 }}>{dateTime}</Text>
+                                <Text style={{ color: "black", fontSize: 12 }}>{invoiceDate}</Text>
                             </View>
                             <View>
                                 <Text style={{ fontSize: 8 }}>Billing To </Text>

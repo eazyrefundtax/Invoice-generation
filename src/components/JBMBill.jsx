@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
 const JBMBill = ({
     name,
     phone,
-    getDate,
+    invoiceDate,
     totalNetRate,
     items = [],
     tableHead = []
@@ -96,7 +96,7 @@ const JBMBill = ({
                         <Text> Please find the Best and Final quotation as per your requirement</Text>
                     </View>
                     <View>
-                        <Text style={{ marginTop: 20, }}>Date:{getDate}</Text>
+                        <Text style={{ marginTop: 20, }}>Date:{invoiceDate}</Text>
                     </View>
                 </View>
                 <View style={{

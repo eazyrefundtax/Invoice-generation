@@ -88,7 +88,7 @@ const WashTogBill = ({
   address,
   items = [],
   InvoiceNo,
-  dateTime,
+  invoiceDate,
   HeaderTitles,
   grandtotalBeforeGST,
   onlyCGST,
@@ -156,7 +156,7 @@ const WashTogBill = ({
                 }}
               >
                 <Text>Invoice Date:</Text>
-                <Text style={{ color: "gray" }}>{dateTime}</Text>
+                <Text style={{ color: "gray" }}>{invoiceDate}</Text>
               </View>
             </View>
 
@@ -456,7 +456,7 @@ const WashTogBill = ({
               <View>
                 <Text style={{ fontSize: 8 }}>Invoice Date </Text>
                 <Text style={{ color: "black", fontSize: 12 }}>
-                  {dateTime}
+                  {invoiceDate}
                 </Text>
               </View>
 

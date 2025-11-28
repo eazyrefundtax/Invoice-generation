@@ -105,10 +105,10 @@ const AnuFurniture = (
     invoiceNo,
     tableHead,
     items = [],
-    dateTime,
+    invoiceDate,
     grandtotalBeforeGST,
     sgstAmount,
-    totalAmount
+    totalAmount,
 
   }) => {
   return (
@@ -136,7 +136,7 @@ const AnuFurniture = (
 
             <View style={styles.labelValueStyles}>
               <Text style={styles.label}>DATE</Text>
-              <Text style={styles.value}>{dateTime}</Text>
+              <Text style={styles.value}>{invoiceDate}</Text>
             </View>
 
             <View style={styles.labelValueStyles}>
@@ -224,7 +224,7 @@ const AnuFurniture = (
             <Text style={{ marginTop: 10 }}>{sgstAmount}</Text>
             <Text style={{ marginTop: 10, fontWeight: "bold" }}>Rs. {totalAmount}</Text>
             <Text style={{ marginTop: 10, fontWeight: "bold" }}>{totalAmount}</Text>
-            <Text style={{ marginTop: 15, color: "gray", }}>{dateTime}</Text>
+            <Text style={{ marginTop: 15, color: "gray", }}>{invoiceDate}</Text>
           </View>
         </View>
         <View
@@ -257,7 +257,7 @@ const AnuFurniture = (
           />
           <View>
             <Text style={{ fontWeight: "bold", fontSize: 10, }}>Date Signed</Text>
-            <Text style={{ color: "gray", fontSize: 10, }}>{dateTime}</Text>
+            <Text style={{ color: "gray", fontSize: 10, }}>{invoiceDate}</Text>
           </View>
         </View>
 

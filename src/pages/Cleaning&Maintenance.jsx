@@ -9,6 +9,11 @@ import TextField from "@mui/material/TextField";
 import WashTogBill from "../components/WashTogBill.jsx";
 import UrbanCompany1Bill from "../components/urbanCompany1Bill.jsx";
 import CleaningPk from "../components/CleaningPk.jsx";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { format } from "date-fns";
+
+
 
 const CleaningMaintainces = () => {
   const [open, setOpen] = useState(false);
@@ -16,6 +21,8 @@ const CleaningMaintainces = () => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
+  const [invoiceDate, setInvoiceDate] = useState("");
+
   const [dueDate, setDueDate] = useState("");
   const [reductions, setReductions] = useState("");
   const [interestAmount, setInterestAmount] = useState("");
@@ -33,6 +40,7 @@ const CleaningMaintainces = () => {
     setShowError(false);
     setName("");
     setPhone("");
+    setInvoiceDate("");
     setAddress("");
     setDueDate("");
     setReductions("");
@@ -62,6 +70,7 @@ const CleaningMaintainces = () => {
     { name: "Amount", width: "12%", value: "itemtotal" },
     { name: "Total", width: "12%", value: "total" },
   ];
+
 
   const Bills = [
     { id: 1, img: WashTog },
@@ -186,6 +195,7 @@ const CleaningMaintainces = () => {
         address={address}
         phone={phone}
         InvoiceNo={invoiceNumber}
+        invoiceDate={invoiceDate}
         dueDate={dueDate}
         dateTime={currentDate}
         items={itemsWithTotal}
@@ -236,6 +246,7 @@ const CleaningMaintainces = () => {
         name={name}
         address={address}
         InvoiceNo={invoiceNumber}
+        invoiceDate={invoiceDate}
         dateTime={currentDate}
         items={itemsWithTotal}
         HeaderTitles={[
@@ -291,6 +302,7 @@ const CleaningMaintainces = () => {
         InvoiceNo={invoiceNumber1}
         InvoiceNo2={inVoiceNumber2}
         dueDate={dueDate}
+        invoiceDate={invoiceDate}
         dateTime={currentDate}
         ucitem={ucitem}
         ucPlatformPrice={ucPlatformPrice}
@@ -349,180 +361,455 @@ const CleaningMaintainces = () => {
 
             {/* Bill 1 */}
             {selectedBill?.id === 1 && (
-              <div className="flex flex-col gap-5 mt-4">
-                <TextField label="Name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  className="bg-white w-full rounded-md" />
-                {
-                  name === "" && showError &&
-                  <p className="text-sm text-red-500 font-medium">*This field is required.</p>
-                }
+              <div className="flex flex-col gap-6 mt-6 bg-gray-50 p-6 rounded-xl shadow-sm">
 
-                <div className=" flex flex-col sm:flex-row gap-3">
-                  <TextField label="Address"
-                    value={address}
-                    onChange={(e) => setAddress(e.target.value)}
-                    className="bg-white w-full rounded-md" />
-                  {
-                    address === "" && showError &&
-                    <p className="text-sm text-red-500 font-medium">*This field is required.</p>}
+                <h2 className="text-xl font-semibold text-gray-800 mb-4">Wastog</h2>
 
-                  <TextField
-                    label="Reductions Amount"
-                    value={reductions}
-                    onChange={(e) =>
-                      setReductions(e.target.value.replace(/[^0-9]/g, ""))}
-                    className="bg-white w-full rounded-md" />
-                </div>
 
-                {items.map((item, index) => (
-                  <div key={index} className="flex flex-col gap-3 border p-3 rounded-md bg-white">
-                    <div className="flex justify-between items-center">
-                      <p className="font-semibold text-base sm:text-lg">Item {index + 1}</p>
-                      {items.length > 1 && <button className="text-red-500 text-sm font-medium cursor-pointer" onClick={() => handleRemoveItem(index)}>Remove</button>}
-                    </div>
-
-                    <TextField label="Item" value={item.item} onChange={(e) => handleItemChange(index, "item", e.target.value)} className="bg-white w-full rounded-md" />
-
-                    <div className="flex flex-col sm:flex-row gap-3">
-                      <TextField label="Quantity" type="text" value={item.quantity} onChange={(e) => handleItemChange(index, "quantity", e.target.value.replace(/[^0-9]/g, ""))} className="bg-white w-full sm:w-1/2 rounded-md" />
-                      <TextField label="Price" type="text" value={item.price} onChange={(e) => handleItemChange(index, "price", e.target.value.replace(/[^0-9]/g, ""))} className="bg-white w-full sm:w-1/2 rounded-md" />
-                    </div>
-
-                    {showError && (item.item === "" || item.quantity === "" || item.price === "") && <p className="text-sm text-red-500 font-medium">*All fields are required for this item.</p>}
+                {/* Name + Date */}
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <div className="flex flex-col w-full">
+                    <TextField
+                      label="Customer Name"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      className="bg-white rounded-md"
+                    />
+                    {name === "" && showError && (
+                      <p className="text-sm text-red-500 mt-1 font-medium">*This field is required.</p>
+                    )}
                   </div>
-                ))}
 
-                <button onClick={handleAddItem} className="bg-gray-700 text-white py-2 px-4 rounded-md w-fit hover:bg-gray-800 cursor-pointer">+ Add Item</button>
-
-                <button onClick={handleCreateBill1} className="w-full bg-black text-white py-2 px-6 rounded mt-4 cursor-pointer hover:bg-gray-900">Create Bill</button>
-              </div>
-            )}
-
-            {/* Bill 2 */}
-            {selectedBill?.id === 2 && (
-              <div className="flex flex-col gap-5 mt-4">
-                <TextField
-                  label="Name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  className="bg-white w-full rounded-md"
-                />
-                {name === "" && showError && (
-                  <p className="text-sm text-red-500 font-medium">
-                    *This field is required.
-                  </p>
-                )}
-
-                <div className="flex gap-3">
-                  <TextField
-                    label="Address"
-                    value={address}
-                    onChange={(e) => setAddress(e.target.value)}
-                    className="bg-white w-full rounded-md"
-                  />
-                  {address === "" && showError && (
-                    <p className="text-sm text-red-500 font-medium">
-                      *This field is required.
-                    </p>
-                  )}
-                  <TextField
-                    label="Interest"
-                    value={interestAmount}
-                    onChange={(e) => setInterestAmount(e.target.value.replace(/[^0-9]/g, ""))}
-                    className="bg-white w-full rounded-md" />
-                  {interestAmount === "" && showError && (
-                    <p className="text-sm text-red-500 font-medium">
-                      *This field is required.
-                    </p>
-                  )}
+                  <div className="flex flex-col w-full">
+                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                      <DatePicker
+                        label="Invoice Date"
+                        value={invoiceDate ? new Date(invoiceDate) : null}
+                        onChange={(newValue) => {
+                          if (newValue)
+                            setInvoiceDate(format(newValue, "MMM dd, yyyy"));
+                        }}
+                        slotProps={{
+                          textField: {
+                            fullWidth: true,
+                            sx: {
+                              backgroundColor: "white",
+                              borderRadius: "8px",
+                            },
+                          },
+                        }}
+                      />
+                      {invoiceDate === "" && showError && (
+                        <p className="text-sm text-red-500 mt-1 font-medium">*This field is required.</p>
+                      )}
+                    </LocalizationProvider>
+                  </div>
                 </div>
 
+                {/* Address + Reductions */}
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <div className="flex flex-col w-full">
+                    <TextField
+                      label="Address"
+                      value={address}
+                      onChange={(e) => setAddress(e.target.value)}
+                      className="bg-white rounded-md"
+                    />
+                    {address === "" && showError && (
+                      <p className="text-sm text-red-500 mt-1 font-medium">*This field is required.</p>
+                    )}
+                  </div>
+
+                  <div className="flex flex-col w-full">
+                    <TextField
+                      label="Reductions Amount"
+                      value={reductions}
+                      onChange={(e) =>
+                        setInterestAmount(e.target.value.replace(/[^0-9]/g, ""))
+                      }
+                      className="bg-white rounded-md"
+                    />
+                    {reductions === "" && showError && (
+                      <p className="text-sm text-red-500 mt-1 font-medium">*This field is required.</p>
+                    )}
+                  </div>
+                </div>
+
+                {/* Items */}
                 {items.map((item, index) => (
                   <div
                     key={index}
-                    className="flex flex-col gap-3 border p-3 rounded-md bg-white">
+                    className="bg-white border rounded-lg p-4 flex flex-col gap-4 shadow-sm"
+                  >
                     <div className="flex justify-between items-center">
-                      <p className="font-semibold text-base sm:text-lg">
+                      <p className="font-semibold text-lg text-gray-800">
                         Item {index + 1}
                       </p>
-                      {items.length > 1 &&
+                      {items.length > 1 && (
                         <button
-                          className="text-red-500 text-sm font-medium cursor-pointer"
-                          onClick={() => handleRemoveItem(index)}>
+                          className="text-red-500 text-sm font-medium hover:underline"
+                          onClick={() => handleRemoveItem(index)}
+                        >
                           Remove
                         </button>
-                      }
+                      )}
                     </div>
 
                     <TextField
-                      label="Item"
+                      label="Item Name"
                       value={item.item}
                       onChange={(e) => handleItemChange(index, "item", e.target.value)}
-                      className="bg-white w-full rounded-md"
+                      className="bg-white rounded-md"
                     />
 
-                    <div className="flex flex-col sm:flex-row gap-3">
+                    <div className="flex flex-col sm:flex-row gap-4">
                       <TextField
                         label="Quantity"
                         type="text"
                         value={item.quantity}
-                        onChange={(e) => handleItemChange(index, "quantity", e.target.value.replace(/[^0-9]/g, ""))}
-                        className="bg-white w-full sm:w-1/2 rounded-md"
+                        onChange={(e) =>
+                          handleItemChange(
+                            index,
+                            "quantity",
+                            e.target.value.replace(/[^0-9]/g, "")
+                          )
+                        }
+                        className="bg-white rounded-md w-full"
                       />
+
                       <TextField
                         label="Price"
                         type="text"
                         value={item.price}
-                        onChange={(e) => handleItemChange(index, "price", e.target.value.replace(/[^0-9]/g, ""))}
-                        className="bg-white w-full sm:w-1/2 rounded-md"
+                        onChange={(e) =>
+                          handleItemChange(
+                            index,
+                            "price",
+                            e.target.value.replace(/[^0-9]/g, "")
+                          )
+                        }
+                        className="bg-white rounded-md w-full"
                       />
                     </div>
 
-                    {showError && (item.item === "" || item.quantity === "" || item.price === "") &&
-                      <p className="text-sm text-red-500 font-medium">
-                        *All fields are required for this item.
-                      </p>
-                    }
+                    {showError &&
+                      (item.item === "" ||
+                        item.quantity === "" ||
+                        item.price === "") && (
+                        <p className="text-sm text-red-500 font-medium">
+                          *All fields are required for this item.
+                        </p>
+                      )}
                   </div>
                 ))}
 
+                {/* Add Item Button */}
                 <button
                   onClick={handleAddItem}
-                  className="bg-gray-700 text-white py-2 px-4 rounded-md w-fit hover:bg-gray-800 cursor-pointer">
+                  className="bg-gray-700 text-white py-2 px-4 rounded-md w-fit hover:bg-gray-800 transition"
+                >
                   + Add Item
                 </button>
+
+                {/* Create Bill Button */}
                 <button
-                  onClick={handleCreateBill2}
-                  type="submit"
-                  className="w-full bg-black text-white py-2 px-6 rounded mt-4 cursor-pointer hover:bg-gray-900">
+                  onClick={handleCreateBill1}
+                  className="w-full bg-black text-white py-3 rounded-lg mt-2 text-lg hover:bg-gray-900 transition"
+                >
                   Create Bill
                 </button>
               </div>
             )}
 
-            {/* Bill 3 */}
-            {selectedBill?.id === 3 && (
-              <div className="flex flex-col gap-5 mt-4">
-                <TextField label="Name" value={name} onChange={(e) => setName(e.target.value)} className="bg-white w-full rounded-md" />
-                {name === "" && showError && <p className="text-sm text-red-500 font-medium">*This field is required.</p>}
 
-                <TextField label="Address" value={address} onChange={(e) => setAddress(e.target.value)} className="bg-white w-full rounded-md" />
-                {address === "" && showError && <p className="text-sm text-red-500 font-medium">*This field is required.</p>}
+            {/* Bill 2 */}
+            {selectedBill?.id === 2 && (
+              <div className="flex flex-col gap-6 mt-6 bg-gray-50 p-6 rounded-xl shadow-sm">
+                <h2 className="text-xl font-semibold text-gray-800 mb-4">PK Service BIll  </h2>
 
-                <TextField label="Item" value={ucitem} onChange={(e) => setucItem(e.target.value)} className="bg-white w-full rounded-md" />
+                {/* Name + Date */}
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <div className="flex flex-col w-full">
+                    <TextField
+                      label="Customer Name"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      className="bg-white rounded-md"
+                    />
+                    {name === "" && showError && (
+                      <p className="text-sm text-red-500 mt-1 font-medium">*This field is required.</p>
+                    )}
+                  </div>
 
-                <div className="flex flex-col sm:flex-row gap-3">
-                  <TextField label="Platform price" type="text" value={ucPlatformPrice} onChange={(e) => setucPlatformPrice(e.target.value.replace(/[^0-9]/g, ""))} className="bg-white w-full sm:w-1/2 rounded-md" />
-                  <TextField label="Item Price" type="text" value={ucprice} onChange={(e) => setucPrice(e.target.value.replace(/[^0-9]/g, ""))} className="bg-white w-full sm:w-1/2 rounded-md" />
+                  <div className="flex flex-col w-full">
+                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                      <DatePicker
+                        label="Invoice Date"
+                        value={invoiceDate ? new Date(invoiceDate) : null}
+                        onChange={(newValue) => {
+                          if (newValue) setInvoiceDate(format(newValue, "MMM dd, yyyy"));
+                        }}
+                        slotProps={{
+                          textField: {
+                            fullWidth: true,
+                            sx: {
+                              backgroundColor: "white",
+                              borderRadius: "8px",
+                            },
+                          },
+                        }}
+                      />
+                      {invoiceDate === "" && showError && (
+                        <p className="text-sm text-red-500 mt-1 font-medium">*This field is required.</p>
+                      )}
+                    </LocalizationProvider>
+                  </div>
                 </div>
 
-                {showError && (ucitem === "" || ucPlatformPrice === "" || ucprice === "") && <p className="text-sm text-red-500 font-medium">*All fields are required for this item.</p>}
+                {/* Address + Interest */}
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <div className="flex flex-col w-full">
+                    <TextField
+                      label="Address"
+                      value={address}
+                      onChange={(e) => setAddress(e.target.value)}
+                      className="bg-white rounded-md"
+                    />
+                    {address === "" && showError && (
+                      <p className="text-sm text-red-500 mt-1 font-medium">*This field is required.</p>
+                    )}
+                  </div>
 
-                <button onClick={handleCreateBill3} className="w-full bg-black text-white py-2 px-6 rounded mt-4 cursor-pointer hover:bg-gray-900">Create Bill</button>
+                  <div className="flex flex-col w-full">
+                    <TextField
+                      label="Interest Amount"
+                      value={interestAmount}
+                      onChange={(e) =>
+                        setInterestAmount(e.target.value.replace(/[^0-9]/g, ""))
+                      }
+                      className="bg-white rounded-md"
+                    />
+                    {interestAmount === "" && showError && (
+                      <p className="text-sm text-red-500 mt-1 font-medium">*This field is required.</p>
+                    )}
+                  </div>
+                </div>
+
+                {/* Items */}
+                {items.map((item, index) => (
+                  <div
+                    key={index}
+                    className="bg-white border rounded-lg p-4 flex flex-col gap-4 shadow-sm"
+                  >
+                    <div className="flex justify-between items-center">
+                      <p className="font-semibold text-lg text-gray-800">Item {index + 1}</p>
+                      {items.length > 1 && (
+                        <button
+                          className="text-red-500 text-sm font-medium hover:underline"
+                          onClick={() => handleRemoveItem(index)}
+                        >
+                          Remove
+                        </button>
+                      )}
+                    </div>
+
+                    <TextField
+                      label="Item Name"
+                      value={item.item}
+                      onChange={(e) => handleItemChange(index, "item", e.target.value)}
+                      className="bg-white rounded-md"
+                    />
+
+                    <div className="flex flex-col sm:flex-row gap-4">
+                      <TextField
+                        label="Quantity"
+                        type="text"
+                        value={item.quantity}
+                        onChange={(e) =>
+                          handleItemChange(
+                            index,
+                            "quantity",
+                            e.target.value.replace(/[^0-9]/g, "")
+                          )
+                        }
+                        className="bg-white rounded-md w-full"
+                      />
+
+                      <TextField
+                        label="Price"
+                        type="text"
+                        value={item.price}
+                        onChange={(e) =>
+                          handleItemChange(
+                            index,
+                            "price",
+                            e.target.value.replace(/[^0-9]/g, "")
+                          )
+                        }
+                        className="bg-white rounded-md w-full"
+                      />
+                    </div>
+
+                    {showError &&
+                      (item.item === "" || item.quantity === "" || item.price === "") && (
+                        <p className="text-sm text-red-500 font-medium">
+                          *All fields are required for this item.
+                        </p>
+                      )}
+                  </div>
+                ))}
+
+                {/* Add Item */}
+                <button
+                  onClick={handleAddItem}
+                  className="bg-gray-700 text-white py-2 px-4 rounded-md w-fit hover:bg-gray-800 transition"
+                >
+                  + Add Item
+                </button>
+
+                {/* Create Bill */}
+                <button
+                  onClick={handleCreateBill2}
+                  className="w-full bg-black text-white py-3 rounded-lg mt-2 text-lg hover:bg-gray-900 transition"
+                >
+                  Create Bill
+                </button>
               </div>
             )}
+
+
+            {/* Bill 3 */}
+            {selectedBill?.id === 3 && (
+              <div className="flex flex-col gap-6 mt-6 bg-gray-50 p-6 rounded-xl shadow-sm">
+
+                {/* Name + Date */}
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <div className="flex flex-col w-full">
+                    <TextField
+                      label="Customer Name"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      className="bg-white rounded-md"
+                    />
+                    {name === "" && showError && (
+                      <p className="text-sm text-red-500 mt-1 font-medium">
+                        *This field is required.
+                      </p>
+                    )}
+                  </div>
+
+                  <div className="flex flex-col w-full">
+                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                      <DatePicker
+                        label="Invoice Date"
+                        value={invoiceDate ? new Date(invoiceDate) : null}
+                        onChange={(newValue) => {
+                          if (newValue) setInvoiceDate(format(newValue, "MMM dd, yyyy"));
+                        }}
+                        slotProps={{
+                          textField: {
+                            fullWidth: true,
+                            sx: {
+                              backgroundColor: "white",
+                              borderRadius: "8px",
+                            },
+                          },
+                        }}
+                      />
+                    </LocalizationProvider>
+
+                    {invoiceDate === "" && showError && (
+                      <p className="text-sm text-red-500 mt-1 font-medium">
+                        *This field is required.
+                      </p>
+                    )}
+                  </div>
+                </div>
+
+                {/* Address + Item */}
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <div className="flex flex-col w-full">
+                    <TextField
+                      label="Address"
+                      value={address}
+                      onChange={(e) => setAddress(e.target.value)}
+                      className="bg-white rounded-md"
+                    />
+                    {address === "" && showError && (
+                      <p className="text-sm text-red-500 mt-1 font-medium">
+                        *This field is required.
+                      </p>
+                    )}
+                  </div>
+
+                  <div className="flex flex-col w-full">
+                    <TextField
+                      label="Item"
+                      value={ucitem}
+                      onChange={(e) => setucItem(e.target.value)}
+                      className="bg-white rounded-md"
+                    />
+                    {ucitem === "" && showError && (
+                      <p className="text-sm text-red-500 mt-1 font-medium">
+                        *This field is required.
+                      </p>
+                    )}
+                  </div>
+                </div>
+
+                {/* Prices */}
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <div className="flex flex-col w-full">
+                    <TextField
+                      label="Platform Price"
+                      type="text"
+                      value={ucPlatformPrice}
+                      onChange={(e) =>
+                        setucPlatformPrice(e.target.value.replace(/[^0-9]/g, ""))
+                      }
+                      className="bg-white rounded-md w-full"
+                    />
+                    {ucPlatformPrice === "" && showError && (
+                      <p className="text-sm text-red-500 mt-1 font-medium">
+                        *This field is required.
+                      </p>
+                    )}
+                  </div>
+                  <div className="flex flex-col w-full">
+                    <TextField
+                      label="Item Price"
+                      type="text"
+                      value={ucprice}
+                      onChange={(e) =>
+                        setucPrice(e.target.value.replace(/[^0-9]/g, ""))
+                      }
+                      className="bg-white rounded-md"
+                    />
+                    {ucprice === "" && showError && (
+                      <p className="text-sm text-red-500 mt-1 font-medium">
+                        *This field is required.
+                      </p>
+                    )}
+                  </div>
+                </div>
+
+                {/* {showError &&
+                  (ucitem === "" || ucPlatformPrice === "" || ucprice === "") && (
+                    <p className="text-sm text-red-500 font-medium">
+                      *All fields are required for this item.
+                    </p>
+                  )} */}
+
+                {/* Submit */}
+                <button
+                  onClick={handleCreateBill3}
+                  className="w-full bg-black text-white py-3 rounded-lg mt-2 text-lg hover:bg-gray-900 transition"
+                >
+                  Create Bill
+                </button>
+              </div>
+            )}
+
           </div>
         </div>
       )}

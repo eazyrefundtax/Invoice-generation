@@ -19,6 +19,21 @@ const EazyRefund = () => {
     const [showError, setShowError] = useState(false);
     const [selectedBill, setSelectedBill] = useState(null);
 
+    const resetForm = () => {
+        setOpen(false);
+        setDate("");
+        SetAmount("");
+        setDate("");
+        setSelectedBill(null);
+        setShowError(false);
+    }
+
+    const clearForm = () => {
+        setOpen(false);
+        setSelectedBill()
+        resetForm();
+    }
+
     const ER = [
         { id: 1, image: Ezyrefund },
         { id: 2, image: Er5 },
@@ -54,9 +69,11 @@ const EazyRefund = () => {
         const nextDate = addDays(new Date(date), 7);
         return format(nextDate, "dd MMM, yyyy");
     };
+
+
     // Bill one
     const handleCreateBill1 = async () => {
-        if (!amount || !date) {
+        if (amount === "" || date === "") {
             setShowError(true);
             return;
         }
@@ -82,8 +99,7 @@ const EazyRefund = () => {
         document.body.removeChild(link);
         URL.revokeObjectURL(url);
 
-        SetAmount("");
-        setDate("");
+        clearForm("");
     };
 
     //2nd Bill
@@ -114,8 +130,7 @@ const EazyRefund = () => {
         document.body.removeChild(link);
         URL.revokeObjectURL(url);
 
-        SetAmount("");
-        setDate("");
+        clearForm("");
     };
 
 
@@ -128,8 +143,7 @@ const EazyRefund = () => {
                     src={bill.image}
                     alt={`bill-${bill.id}`}
                     className="h-100 w-[250px] md:w-[300px] hover:scale-105 duration-300 cursor-pointer border border-black rounded-lg"
-                    onClick={() => handleModelOpen(bill)}
-                />
+                    onClick={() => handleModelOpen(bill)} />
             ))}
             {open && (
                 <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50 px-2">
@@ -138,7 +152,7 @@ const EazyRefund = () => {
                             <p className="text-xl sm:text-2xl font-semibold">Details</p>
                             <button
                                 className="text-black text-2xl font-bold cursor-pointer"
-                                onClick={() => setOpen(false)}
+                                onClick={resetForm}
                             >
                                 <RxCross1 />
                             </button>
@@ -168,7 +182,7 @@ const EazyRefund = () => {
                                             },
                                         }}
                                     />
-                                    {amount === "" && showError && (
+                                    {!amount && showError && (
                                         <p className="text-sm text-red-500 font-medium mt-1">
                                             *This field is required.
                                         </p>
@@ -194,6 +208,12 @@ const EazyRefund = () => {
                                                 },
                                             }}
                                         />
+
+                                        {!date && showError && (
+                                            <p className="text-sm text-red-500 font-medium mt-1">
+                                                *This field is required.
+                                            </p>
+                                        )}
                                     </LocalizationProvider>
                                 </div>
 
@@ -256,10 +276,15 @@ const EazyRefund = () => {
                                                 },
                                             }}
                                         />
+
+                                        {!date && showError && (
+                                            <p className="text-sm text-red-500 font-medium mt-1">
+                                                *This field is required.
+                                            </p>
+                                        )}
                                     </LocalizationProvider>
                                 </div>
 
-                                {/* Submit Button */}
                                 <button
                                     onClick={handleCreateBill2}
                                     className="w-full bg-gradient-to-r from-gray-800 to-black text-white py-3 px-6 rounded-xl font-medium text-lg shadow-md hover:from-black hover:to-gray-700 transition-all duration-200"

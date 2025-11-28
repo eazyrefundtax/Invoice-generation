@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     }
 });
 
-const Royal = ({ name, address, dateTime, dueDate, RoyalTitles = [], items = [], grandtotalBeforeGST, sgstAmount, totalAmount, invoiceNo }) => (
+const Royal = ({ name, address, invoiceDate, dueDate, RoyalTitles = [], items = [], grandtotalBeforeGST, sgstAmount, totalAmount, invoiceNo }) => (
     <Document>
         <Page size="A4" style={styles.page}>
 
@@ -151,7 +151,7 @@ const Royal = ({ name, address, dateTime, dueDate, RoyalTitles = [], items = [],
                         </View>
                         <View>
                             <Text style={styles.datesLabel}>Invoice Date</Text>
-                            <Text style={styles.datesValue}>{dateTime}</Text>
+                            <Text style={styles.datesValue}>{invoiceDate}</Text>
                         </View>
                         <View>
                             <Text style={styles.datesLabel}>Due Date</Text>

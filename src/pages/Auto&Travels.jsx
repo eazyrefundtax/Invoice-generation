@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import image1 from "../assets/PkrepairBill.jpg";
 import pkTravels from "../assets/pkTravels.png";
+import pkTravels1 from "../assets/AutoServicesBill.png";
 import { RxCross1 } from "react-icons/rx";
 import TextField from "@mui/material/TextField";
 import PkTravel from "../components/pkTravel.jsx";
@@ -42,8 +42,8 @@ const AutoTravels = () => {
   };
 
   const Travelbill = [
-    { id: 1, img: image1 },
-    { id: 2, img: pkTravels },
+    { id: 1, img: pkTravels },
+    { id: 2, img: pkTravels1 },
   ];
   const HeaderTitles = [
     { name: "S.no", width: "5%", value: "s.no" },
@@ -224,7 +224,7 @@ const AutoTravels = () => {
   };
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 px-4 sm:px-8 md:px-16 gap-6 justify-items-center">
+    <div className="flex flex-col sm:flex-row justify-center items-center gap-6 px-4 sm:px-8 md:px-16">
       {Travelbill.map((bill) => (
         <img
           key={bill.id}
@@ -247,29 +247,34 @@ const AutoTravels = () => {
               </button>
             </div>
             {selectedBill?.id === 1 && (
-              <div className="flex flex-col gap-5 mt-4">
-                <div className="flex flex-row gap-3">
+              <div className="mt-6 bg-white shadow-lg rounded-2xl p-6 sm:p-8 transition-all duration-300">
+
+                <h2 className="text-xl font-semibold text-gray-800 mb-4">Travel Details</h2>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+
                   {/* Name */}
+                  <div>
+                    <TextField
+                      fullWidth
+                      label="Customer Name"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      className="bg-white rounded-md"
+                    />
+                    {showError && name === "" && (
+                      <p className="text-sm text-red-500 mt-1">*This field is required.</p>
+                    )}
+                  </div>
 
-                  <TextField
-                    label="Name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    className="bg-white w-full rounded-md"
-                  />
-                  {name === "" && showError && (
-                    <p className="text-sm text-red-500 font-medium">
-                      *This field is required.
-                    </p>
-                  )}
-
-                  <LocalizationProvider dateAdapter={AdapterDateFns}>
-                    <div className="flex flex-row gap-4 w-full">
+                  {/* Invoice Date */}
+                  <div>
+                    <LocalizationProvider dateAdapter={AdapterDateFns}>
                       <DatePicker
                         label="Invoice Date"
                         value={invoiceDate ? new Date(invoiceDate) : null}
                         onChange={(newValue) => {
-                          if (newValue) setInvoiceDate(format(newValue, "MMM dd,yyyy"))
+                          if (newValue) setInvoiceDate(format(newValue, "MMM dd, yyyy"));
                         }}
                         slotProps={{
                           textField: {
@@ -277,149 +282,164 @@ const AutoTravels = () => {
                             sx: {
                               backgroundColor: "white",
                               borderRadius: "8px",
-                            }
-                          }
+                            },
+                          },
                         }}
                       />
-                    </div>
-                  </LocalizationProvider>
+                    </LocalizationProvider>
+
+                    {showError && invoiceDate === "" && (
+                      <p className="text-sm text-red-500 mt-1">*This field is required.</p>
+                    )}
+                  </div>
+
                 </div>
 
-                <div className="flex flex-row gap-3">
-                  {/* PickUp */}
-                  <TextField
-                    label="PickUp"
-                    value={pickup}
-                    onChange={(e) => setPickUP(e.target.value)}
-                    className="bg-white w-full rounded-md"
-                  />
-                  {pickup === "" && showError && (
-                    <p className="text-sm text-red-500 font-medium">
-                      *This field is required.
-                    </p>
-                  )}
 
-                  {/* Drop */}
-                  <TextField
-                    label="Drop"
-                    value={drop}
-                    onChange={(e) => setDrop(e.target.value)}
-                    className="bg-white w-full rounded-md"
-                  />
-                  {drop === "" && showError && (
-                    <p className="text-sm text-red-500 font-medium">
-                      *This field is required.
-                    </p>
-                  )}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-4">
+
+                  {/* PickUp Location */}
+                  <div>
+                    <TextField
+                      fullWidth
+                      label="Pickup Location"
+                      value={pickup}
+                      onChange={(e) => setPickUP(e.target.value)}
+                      className="bg-white rounded-md"
+                    />
+                    {showError && pickup === "" && (
+                      <p className="text-sm text-red-500 mt-1">*This field is required.</p>
+                    )}
+                  </div>
+
+                  {/* Drop Location */}
+                  <div>
+                    <TextField
+                      fullWidth
+                      label="Drop Location"
+                      value={drop}
+                      onChange={(e) => setDrop(e.target.value)}
+                      className="bg-white rounded-md"
+                    />
+                    {showError && drop === "" && (
+                      <p className="text-sm text-red-500 mt-1">*This field is required.</p>
+                    )}
+                  </div>
                 </div>
 
-                <div className="flex justify-center items-center">
+
+                {/* Amount */}
+                <div className="mt-4">
                   <TextField
+                    fullWidth
                     label="Amount"
-                    type="text"
                     value={amount}
-                    onChange={(e) =>
-                      setAmount(e.target.value.replace(/[^0-9]/g, "")
-                      )
-                    }
-                    className="bg-white w-full sm:w-1/2 rounded-md"
+                    onChange={(e) => setAmount(e.target.value.replace(/[^0-9]/g, ""))}
+                    className="bg-white rounded-md"
                   />
+                  {showError && amount === "" && (
+                    <p className="text-sm text-red-500 mt-1">*This field is required.</p>
+                  )}
                 </div>
-                {/* Create Bill */}
+
+
+                {/* Create Button */}
                 <button
                   onClick={handleCreateBill1}
-                  type="submit"
-                  className="w-full bg-black text-white py-2 px-6 rounded mt-4 cursor-pointer hover:bg-gray-900"
+                  className="w-full bg-black text-white py-3 px-6 rounded-xl mt-6 
+               hover:bg-gray-900 font-semibold transition-all duration-200"
                 >
                   Create Bill
                 </button>
+
               </div>
+
             )}
 
 
             {selectedBill?.id === 2 && (
-              <div className="flex flex-col gap-5 mt-4">
-                <div className="flex flex-row gap-3">
+              <div className="flex flex-col gap-6 mt-5 bg-white p-6 rounded-2xl shadow-md">
+                <h2 className="text-xl font-semibold text-gray-800 mb-4">Repair Details</h2>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+
                   {/* Name */}
-                  <TextField
-                    label="Name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    className="bg-white w-full rounded-md"
-                  />
-                  {name === "" && showError && (
-                    <p className="text-sm text-red-500 font-medium">
-                      *This field is required.
-                    </p>
-                  )}
+                  <div className="flex flex-col">
+                    <TextField
+                      label="Customer Name"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      fullWidth
+                      className="bg-white rounded-md"
+                    />
+                    {name === "" && showError && (
+                      <p className="text-xs text-red-500 mt-1">*This field is required.</p>
+                    )}
+                  </div>
 
                   {/* Invoice Date */}
-                  <LocalizationProvider dateAdapter={AdapterDateFns}>
-                    <DatePicker
-                      label="Invoice Date"
-                      value={invoiceDate ? new Date(invoiceDate) : null}
-                      onChange={(newValue) => {
-                        if (newValue) setInvoiceDate(format(newValue, "MMM dd, yyyy"));
-                      }}
-                      slotProps={{
-                        textField: {
-                          fullWidth: true,
-                          sx: {
-                            backgroundColor: "white",
-                            borderRadius: "8px",
-                          }
-                        }
-                      }}
-                    />
-                  </LocalizationProvider>
+                  <div className="flex flex-col">
+                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                      <DatePicker
+                        label="Invoice Date"
+                        value={invoiceDate ? new Date(invoiceDate) : null}
+                        onChange={(newValue) => {
+                          if (newValue) setInvoiceDate(format(newValue, "MMM dd, yyyy"));
+                        }}
+                        slotProps={{
+                          textField: {
+                            fullWidth: true,
+                            sx: { backgroundColor: "white", borderRadius: "8px" },
+                          },
+                        }}
+                      />
+                    </LocalizationProvider>
+
+                    {!invoiceDate && showError && (
+                      <p className="text-xs text-red-500 mt-1">*This field is required.</p>
+                    )}
+                  </div>
+
                 </div>
 
-                {invoiceDate === "" && showError && (
-                  <p className="text-sm text-red-500 font-medium">
-                    *Invoice Date is required.
-                  </p>
-                )}
-
-                {/* Item List */}
                 {items.map((item, index) => (
                   <div
                     key={index}
-                    className="flex flex-col gap-3 border p-3 rounded-md bg-white"
+                    className="border p-4 rounded-xl bg-gray-50 shadow-sm flex flex-col gap-4"
                   >
                     <div className="flex justify-between items-center">
-                      <p className="font-semibold text-base sm:text-lg">
-                        Item {index + 1}
-                      </p>
-                      {items.length > 1 &&
+                      <p className="font-semibold text-lg text-gray-800">Item {index + 1}</p>
+
+                      {items.length > 1 && (
                         <button
-                          className="text-red-500 text-sm font-medium cursor-pointer"
+                          className="text-red-600 text-sm font-medium hover:underline"
                           onClick={() => handleRemoveItem(index)}
                         >
                           Remove
                         </button>
-                      }
+                      )}
                     </div>
 
-                    {/* Item Name */}
+                    {/* Item Field */}
                     <TextField
-                      label="Item"
+                      label="Item Name"
                       value={item.item}
                       onChange={(e) => handleItemChange(index, "item", e.target.value)}
-                      className="bg-white w-full rounded-md"
+                      fullWidth
+                      className="bg-white rounded-md"
                     />
 
-                    {/* Quantity + Price */}
-                    <div className="flex flex-col sm:flex-row gap-3">
+                    {/* Quantity & Price */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <TextField
                         label="Quantity"
                         type="text"
                         value={item.quantity}
                         onChange={(e) =>
-                          handleItemChange(
-                            index,
-                            "quantity",
-                            e.target.value.replace(/[^0-9]/g, ""))}
-                        className="bg-white w-full sm:w-1/2 rounded-md"
+                          handleItemChange(index, "quantity", e.target.value.replace(/[^0-9]/g, ""))
+                        }
+                        fullWidth
+                        className="bg-white rounded-md"
                       />
 
                       <TextField
@@ -427,38 +447,29 @@ const AutoTravels = () => {
                         type="text"
                         value={item.price}
                         onChange={(e) =>
-                          handleItemChange(
-                            index,
-                            "price",
-                            e.target.value.replace(/[^0-9]/g, "")
-                          )
+                          handleItemChange(index, "price", e.target.value.replace(/[^0-9]/g, ""))
                         }
-                        className="bg-white w-full sm:w-1/2 rounded-md"
+                        fullWidth
+                        className="bg-white rounded-md"
                       />
                     </div>
 
-                    {/* Error */}
-                    {showError &&
-                      (item.item === "" || item.price === "" || item.quantity) && (
-                        <p className="text-sm text-red-500 font-medium">
-                          *All fields are required for this item.
-                        </p>
-                      )}
+                    {showError && (item.item === "" || item.quantity === "" || item.price === "") && (
+                      <p className="text-xs text-red-500 font-medium">*All item fields are required.</p>
+                    )}
                   </div>
                 ))}
 
-                {/* Add + Create Bill */}
                 <button
                   onClick={handleAddItem}
-                  className="bg-gray-700 text-white py-2 px-4 rounded-md w-fit hover:bg-gray-800 cursor-pointer"
+                  className="bg-gray-700 text-white py-2 px-5 rounded-lg w-fit hover:bg-gray-800 transition"
                 >
                   + Add Item
                 </button>
 
                 <button
                   onClick={handleCreateBill2}
-                  type="submit"
-                  className="w-full bg-black text-white py-2 px-6 rounded mt-4 cursor-pointer hover:bg-gray-900"
+                  className="w-full bg-black text-white py-3 rounded-xl text-lg font-semibold hover:bg-gray-900 transition"
                 >
                   Create Bill
                 </button>
@@ -467,10 +478,12 @@ const AutoTravels = () => {
             )}
 
 
+
           </div>
 
         </div>
-      )}
+      )
+      }
     </div >
   );
 };

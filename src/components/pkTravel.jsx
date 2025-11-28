@@ -216,6 +216,7 @@ const pkTravel = ({ name, pickup, drop, amount, totalAmount, gstAmount, amountIn
                     }}
                 >
                     <View style={{ width: "48%" }}>
+
                         <Text style={[styles.billedLabel, { fontSize: 10, color: "#555" }]}>
                             PickUp Location
                         </Text>

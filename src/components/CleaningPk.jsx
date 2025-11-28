@@ -88,7 +88,7 @@ const CleaningPk = ({
   address,
   items = [],
   InvoiceNo,
-  dateTime,
+  invoiceDate,
   HeaderTitles = [],
   grandtotalBeforeGST,
   amountInWords,
@@ -187,7 +187,7 @@ const CleaningPk = ({
                 }}
               >
                 <Text>Invoice Date:</Text>
-                <Text style={{ color: "gray" }}>{dateTime}</Text>
+                <Text style={{ color: "gray" }}>{invoiceDate}</Text>
               </View>
             </View>
 
@@ -407,7 +407,7 @@ const CleaningPk = ({
                     <Text style={{
                       flex: 1,
                       textAlign: "left",
-                    }}>{dateTime}</Text>
+                    }}>{invoiceDate}</Text>
                     <Text style={{
                       flex: 1,
                       textAlign: "left",
@@ -533,7 +533,7 @@ const CleaningPk = ({
 
               <View style={{ marginRight: 40 }}>
                 <Text style={{ fontSize: 8 }}>Invoice Date</Text>
-                <Text style={{ color: "black", fontSize: 12 }}>{dateTime}</Text>
+                <Text style={{ color: "black", fontSize: 12 }}>{invoiceDate}</Text>
               </View>
 
               <View>

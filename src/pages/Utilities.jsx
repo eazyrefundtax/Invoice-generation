@@ -11,6 +11,12 @@ import { subMonths, startOfMonth, endOfMonth, format, getDaysInMonth } from "dat
 import TextField from "@mui/material/TextField";
 import ElectricBill from "../components/ElectricBill";
 import ActWifiBill from "../components/ActWifi";
+import Flatpickr from "react-flatpickr";
+import "flatpickr/dist/themes/material_green.css";
+
+
+
+
 
 const Utilities = () => {
   const [open, setOpen] = useState(false);
@@ -25,6 +31,7 @@ const Utilities = () => {
   const [showError, setShowError] = useState(false);
   const [selectedBill, setSelectedBill] = useState(null);
   const [invoiceDate, setinvoiceDate] = useState(null);
+  const [billedDate, setBilledDate] = useState("");
   const [BillingPeriod, setBillingPeriod] = useState("")
   const [formattedInvoiceDate, setFormattedInvoiceDate] = useState("");
   const [dueDate, setDueDate] = useState("");
@@ -33,6 +40,22 @@ const Utilities = () => {
   const [daysInMonth, setDaysInMonth] = useState(0);
   const [prevMonthDates, setPrevMonthDates] = useState([]);
 
+
+
+  const clearForm = () => {
+    setFormData({ name: "", totalAmount: "", phone: "" });
+    setOpen(false);
+    setBilledDate("");
+    setShowError(false);
+    setAddres("");
+    setinvoiceDate("");
+    setBilledDate("");
+  }
+  const resetform = () => {
+    setOpen(false)
+    setSelectedBill(null)
+    clearForm()
+  }
   const images = [
     { id: 1, image: UtilitiesBill },
     { id: 2, image: Wifi },
@@ -75,6 +98,7 @@ const Utilities = () => {
     }
   };
 
+
   const randomNumber = () => Math.floor(1e10 + Math.random() * 9e10).toString();
   const UserID = () => Math.floor(1e10 + Math.random() * 9e11).toString();
   const ActinvoiceNO = () => Math.floor(100000000 + Math.random() * 999999999);
@@ -110,6 +134,7 @@ const Utilities = () => {
         name={name}
         totalAmount={totalAmount}
         phone={phone}
+        billedDate={billedDate}
         OrderNo={randomNumber()}
         billPaymentOfNumber={randomNumber()}
         generateRandom11Digit={randomNumber()}
@@ -124,10 +149,9 @@ const Utilities = () => {
     link.click();
     URL.revokeObjectURL(url);
 
-    setFormData({ name: "", totalAmount: "", phone: "" });
-    setOpen(false);
-    setShowError(false);
-    setSelectedBill(null);
+
+    resetform()
+
   };
 
   {/*2nd Bill */ }
@@ -146,6 +170,7 @@ const Utilities = () => {
         phone={phone}
         addres={addres}
         invoiceDate={formattedInvoiceDate}
+        billedDate={billedDate}
         BillingPeriod={BillingPeriod}
         dueDate={dueDate}
         afterDue={afterDue}
@@ -169,34 +194,35 @@ const Utilities = () => {
     link.click();
     URL.revokeObjectURL(url);
 
+    resetform();
 
-    setFormData({ name: "", totalAmount: "", phone: "" });
-    setOpen(false);
-    setShowError(false);
-    setAddres("");
-    setinvoiceDate("");
-    setSelectedBill(null);
+
 
   };
+  const handleModalOpen = (bill) => {
+    clearForm();
+    setSelectedBill(bill);
+    setOpen(true);
+  }
+
 
 
   return (
     <div className="flex flex-col sm:flex-row justify-center items-center gap-6 px-4 sm:px-8 md:px-16">
 
       {/* Bill Images */}
-      {images.map(({ id, image }) => (
+      {images.map((bill) => (
         <img
-          key={id}
-          src={image}
+          key={bill.id}
+          src={bill.image}
           alt="Bill"
-          className="w-75 h-110 rounded-lg border border-black cursor-pointer hover:scale-105 duration-300 shadow-sm"
-          onClick={() => {
-            setSelectedBill({ id });
-            setOpen(true);
-          }}
+          className="w-75 h-110 rounded-lg border border-black cursor-pointer 
+                   hover:scale-105 duration-300 shadow-sm"
+          onClick={() => handleModalOpen(bill)}
         />
       ))}
 
+      {/* MODAL */}
       {open && (
         <div
           className="fixed inset-0 flex items-center justify-center bg-black/70 z-50 p-4 animate-fadeIn"
@@ -208,68 +234,117 @@ const Utilities = () => {
           >
             <button
               className="absolute top-4 right-4 text-black text-xl"
-              onClick={() => setOpen(false)}
+              onClick={resetform}
             >
               <RxCross1 />
             </button>
 
             {/* BILL 1 */}
             {selectedBill?.id === 1 && (
-              <div className="flex flex-col gap-6 mt-4 bg-white rounded-2xl shadow-md p-6 sm:p-8 transition-all duration-300">
-                {/* Header */}
-                <div className="text-center mb-2">
-                  <h2 className="text-2xl font-semibold text-gray-800">Urban Company Bill</h2>
-                  <p className="text-sm text-gray-500 mt-1">
-                    Please enter customer details to generate the bill.
+              <div className="flex flex-col gap-8 mt-5 bg-white rounded-3xl shadow-xl p-6 sm:p-10 transition-all duration-300">
+                <div className="text-center">
+                  <h2 className="text-3xl font-bold text-gray-900 tracking-tight">
+                    Urban Company Bill
+                  </h2>
+                  <p className="text-sm text-gray-500 mt-2">
+                    Fill in the details below to generate your bill.
                   </p>
                 </div>
 
-                {/* Input Fields */}
-                <div className="flex flex-col gap-5">
-                  {["name", "totalAmount", "phone"].map((field, i) => (
-                    <div key={i} className="flex flex-col">
-                      <TextField
-                        label={
-                          field === "name"
-                            ? "Customer Name"
-                            : field === "totalAmount"
-                              ? "Total Amount Paid"
-                              : "Phone Number"
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+
+                  {/* Name */}
+                  <div className="flex flex-col">
+                    <TextField
+                      label="Customer Name"
+                      fullWidth
+                      variant="outlined"
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      InputProps={{ className: "bg-gray-50 rounded-xl h-[48px]" }}
+                    />
+                    {formData.name === "" && showError && (
+                      <p className="text-xs text-red-600 mt-1">*This field is required.</p>
+                    )}
+                  </div>
+
+                  {/* Phone */}
+                  <div className="flex flex-col">
+                    <TextField
+                      label="Phone Number"
+                      fullWidth
+                      variant="outlined"
+                      value={formData.phone}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          phone: e.target.value.replace(/[^0-9]/g, "").slice(0, 10),
+                        })
+                      }
+                      InputProps={{ className: "bg-gray-50 rounded-xl h-[48px]" }}
+                    />
+                    {formData.phone === "" && showError && (
+                      <p className="text-xs text-red-600 mt-1">*Phone number is required.</p>
+                    )}
+                  </div>
+
+                  {/* Total Amount */}
+                  <div className="flex flex-col">
+                    <TextField
+                      label="Total Amount Paid"
+                      fullWidth
+                      variant="outlined"
+                      value={formData.totalAmount}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          totalAmount: e.target.value.replace(/[^0-9]/g, ""),
+                        })
+                      }
+                      InputProps={{ className: "bg-gray-50 rounded-xl h-[48px]" }}
+                    />
+                    {formData.totalAmount === "" && showError && (
+                      <p className="text-xs text-red-600 mt-1">*Total amount is required.</p>
+                    )}
+                  </div>
+
+                  {/* Date */}
+                  <div className="flex flex-col">
+                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                      <DatePicker
+                        label="Due Date"
+                        value={billedDate ? new Date(billedDate) : null}
+                        onChange={(newValue) =>
+                          newValue && setBilledDate(format(newValue, "MMM dd, yyyy"))
                         }
-                        variant="outlined"
-                        fullWidth
-                        value={formData[field]}
-                        onChange={(e) => {
-                          let value = e.target.value;
-                          if (field === "phone") {
-                            value = value.replace(/[^0-9]/g, "").slice(0, 10);
-                          }
-                          setFormData({ ...formData, [field]: value });
-                        }}
-                        InputProps={{
-                          className:
-                            "bg-gray-50 rounded-lg focus-within:border-gray-700  transition-all duration-200",
+                        slotProps={{
+                          textField: {
+                            fullWidth: true,
+                            sx: {
+                              backgroundColor: "white",
+                              borderRadius: "12px",
+                            },
+                          },
                         }}
                       />
-                      {formData[field] === "" && showError && (
-                        <p className="text-xs text-red-500 mt-1 italic">
-                          *This field is required.
-                        </p>
-                      )}
-                    </div>
-                  ))}
+                    </LocalizationProvider>
+
+                    {billedDate === "" && showError && (
+                      <p className="text-xs text-red-600 mt-1">*Due date is required.</p>
+                    )}
+                  </div>
+
                 </div>
 
-                {/* Divider */}
-                <div className="border-t border-gray-200 mt-2"></div>
+                <div className="border-t border-gray-200"></div>
 
-                {/* Submit Button */}
-                <div className="flex justify-center mt-2">
+                <div className="flex justify-center">
                   <button
                     onClick={handleCreateBill1}
-                    className="w-full sm:w-auto px-6 py-3 bg-black text-white rounded-lg font-semibold hover:bg-gray-800 shadow-md hover:shadow-lg transition-all duration-200"
+                    className="w-full sm:w-auto px-8 py-3 bg-black text-white text-lg font-medium rounded-xl 
+                             hover:bg-gray-900 shadow-md hover:shadow-lg active:scale-95 transition-all"
                   >
-                    Create Bill
+                    Generate Bill
                   </button>
                 </div>
               </div>
@@ -277,139 +352,147 @@ const Utilities = () => {
 
             {/* BILL 2 */}
             {selectedBill?.id === 2 && (
-              <div className="bg-white border border-gray-200 shadow-sm rounded-xl p-8 mt-6">
+              <div className="bg-white border border-gray-200 shadow-xl rounded-2xl p-5 mt-6 space-y-10">
 
                 {/* Header */}
-                <div className="mb-8">
-                  <h2 className="text-xl font-semibold text-gray-900">Customer Details</h2>
-                  <p className="text-gray-500 text-sm mt-1">
-                    Provide information to proceed with bill generation.
-                  </p>
+                <div className="text-center ">
+                  <h2 className="text-3xl font-bold text-gray-900">Customer Details</h2>
                 </div>
 
-                {/*  Name */}
-                <div className="mb-6">
+                {/* Full Name */}
+                <div className="flex flex-col gap-1">
                   <TextField
-                    label="Full Name"
-                    variant="outlined"
-                    value={formData.name}
-                    onChange={(e) =>
-                      setFormData({ ...formData, name: e.target.value })
-                    }
                     fullWidth
+                    variant="outlined"
+                    label="Name"
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     InputProps={{
                       className:
-                        "bg-gray-50  rounded-md",
+                        "bg-gray-50 rounded-xl h-[48px] focus-within:border-black",
                     }}
                   />
                   {formData.name === "" && showError && (
-                    <p className="text-xs text-red-500 italic mt-1">*Required</p>
+                    <p className="text-xs text-red-500 italic">*This Field is Required</p>
                   )}
                 </div>
 
                 {/* Total Amount */}
-                <div className="mb-6">
+                <div className="flex flex-col gap-1">
                   <TextField
-                    label="Total Amount Paid"
+                    fullWidth
                     variant="outlined"
+                    label="Amount"
                     value={formData.totalAmount}
                     onChange={(e) =>
-                      setFormData({ ...formData, totalAmount: e.target.value })
+                      setFormData({
+                        ...formData,
+                        totalAmount: e.target.value.replace(/[^0-9]/g, ""),
+                      })
                     }
-                    fullWidth
                     InputProps={{
                       className:
-                        "bg-gray-50 focus-within:ring-gray-700 rounded-md",
+                        "bg-gray-50 rounded-xl h-[48px] focus-within:border-black",
                     }}
                   />
                   {formData.totalAmount === "" && showError && (
-                    <p className="text-xs text-red-500 italic mt-1">*Required</p>
+                    <p className="text-xs text-red-500 italic">*This Field is Required</p>
                   )}
                 </div>
 
                 {/* Phone + Date */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
 
-                  {/* Phone */}
-                  <div>
+                  {/* Phone Number */}
+                  <div className="flex flex-col gap-1">
+                    <label className="text-sm font-medium text-gray-800"></label>
                     <TextField
-                      label="Phone Number"
-                      variant="outlined"
-                      value={formData.phone}
-                      onChange={(e) => {
-                        let value = e.target.value.replace(/[^0-9]/g, "").slice(0, 10);
-                        setFormData({ ...formData, phone: value });
-                      }}
                       fullWidth
+
+                      label="Phone Number"
+                      value={formData.phone}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          phone: e.target.value.replace(/[^0-9]/g, "").slice(0, 10),
+                        })
+                      }
                       InputProps={{
                         className:
-                          "bg-gray-50 focus-within:ring-gray-700 rounded-md",
+                          "bg-gray-50 rounded-xl h-[48px]  focus-within:border-black",
                       }}
                     />
                     {formData.phone === "" && showError && (
-                      <p className="text-xs text-red-500 italic mt-1">*Required</p>
+                      <p className="text-xs text-red-500 italic">*This Field is Required</p>
                     )}
                   </div>
 
-                  {/* Due Date */}
-                  <div>
-                    <LocalizationProvider dateAdapter={AdapterDateFns}>
-                      <DatePicker
-                        label="Due Date"
-                        value={invoiceDate}
-                        onChange={handleDateChange}
-                        slotProps={{
-                          textField: {
-                            fullWidth: true,
-                            sx: {
-                              bgcolor: "#f9fafb",
-                              // borderRadius: "6px",
-                            },
-                          },
-                        }}
-                      />
-                    </LocalizationProvider>
+                  {/* Due Date - Flatpickr (Styled Date Picker) */}
+                  <div className="flex flex-col gap-1">
+                    <label className="text-sm font-medium text-gray-800"></label>
+
+                    <Flatpickr
+                      value={invoiceDate || null}
+                      placeholder="Invoice Date"
+                      onChange={(selectedDates) => {
+                        if (selectedDates.length > 0) {
+                          handleDateChange(selectedDates[0]);
+                        }
+                      }}
+                      options={{ dateFormat: "M d, Y" }}
+                      className="w-full px-4 py-3 bg-gray-50 rounded border border-gray-300 focus:outline-none focus:border-black  text-gray-800 "
+                    />
+
+                    {invoiceDate === "" && showError && (
+                      <p className="text-xs text-red-500 italic">*This Field is Required</p>
+                    )}
                   </div>
                 </div>
 
-                {/*Address */}
-                <div className="mb-6">
+                {/* Address */}
+                <div className="flex flex-col gap-1">
                   <TextField
-                    label="Address"
-                    multiline
-                    rows={3}
-                    value={addres}
-                    onChange={(e) => setAddres(e.target.value)}
                     fullWidth
+                    label="Address"
+                    value={addres}
                     variant="outlined"
+                    onChange={(e) => setAddres(e.target.value)}
                     InputProps={{
                       className:
-                        "bg-gray-50 focus-within:ring-gray-700 rounded-md",
+                        "bg-gray-50 rounded-xl  focus-within:border-black",
                     }}
                   />
                   {addres === "" && showError && (
-                    <p className="text-xs text-red-500 italic mt-1">*Required</p>
+                    <p className="text-xs text-red-500 italic">*This Field is Required</p>
                   )}
                 </div>
 
-                <div className="border-t border-gray-200 my-8"></div>
-                {/* Submit */}
+                {/* Divider */}
+                {/* <div className="border-t border-gray-300"></div> */}
+
+                {/* Submit Button */}
                 <div className="flex justify-center">
                   <button
                     onClick={handleCreateBill2}
-                    className="px-8 py-3 bg-gray-900 text-white font-medium rounded-md shadow-sm hover:bg-black transition-all"
+                    className="w-full sm:w-auto px-10 py-3 bg-black text-white 
+                   rounded-xl font-semibold shadow-md hover:bg-gray-900 
+                   transition-all active:scale-95"
                   >
-                    Create Bill
+                    Generate Bill
                   </button>
                 </div>
+
               </div>
             )}
+
+
           </div>
         </div>
       )}
-    </div>
 
+    </div>
   );
+
 };
 
 export default Utilities;

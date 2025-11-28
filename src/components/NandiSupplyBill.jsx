@@ -85,7 +85,7 @@ const NandiSupplyBill = ({
   shippingAddress,
   items = [],
   invoiceNo,
-  dateTime,
+  invoiceDate,
   HeaderTitles = [],
   finalWithInterest,
   totalAmount,
@@ -97,6 +97,7 @@ const NandiSupplyBill = ({
   fullPercenytPaid,
   initialPayment,
   finalPayment,
+  dueDate,
 }) => {
   return (
     <Document>
@@ -194,7 +195,7 @@ const NandiSupplyBill = ({
                 }}
               >
                 <Text>Invoice Date:</Text>
-                <Text style={{ color: "gray" }}>{dateTime}</Text>
+                <Text style={{ color: "gray" }}>{invoiceDate}</Text>
               </View>
               <View
                 style={{
@@ -206,7 +207,7 @@ const NandiSupplyBill = ({
                 }}
               >
                 <Text>Due Date:</Text>
-                <Text style={{ color: "gray" }}>{dateTime}</Text>
+                <Text style={{ color: "gray" }}>{dueDate}</Text>
               </View>
             </View>
 
@@ -746,7 +747,7 @@ const NandiSupplyBill = ({
               </View>
               <View>
                 <Text style={{ fontSize: 8 }}>Invoice Date </Text>
-                <Text style={{ color: "black", fontSize: 12 }}>{dateTime}</Text>
+                <Text style={{ color: "black", fontSize: 12 }}>{invoiceDate}</Text>
               </View>
               <View>
                 <Text style={{ fontSize: 8 }}>Billing To </Text>

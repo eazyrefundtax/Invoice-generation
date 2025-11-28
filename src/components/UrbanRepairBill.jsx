@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
 const UrbanRepairBill = ({
   name,
   address,
-  dateTime,
+  invoiceDate,
   InvoiceNo,
   InvoiceNo2,
   ucitem,
@@ -104,7 +104,7 @@ const UrbanRepairBill = ({
               <Text style={{ marginTop: 10, marginBottom: 5 }}>
                 Invoice Date
               </Text>
-              <Text style={{ marginBottom: 5 }}>{dateTime}</Text>
+              <Text style={{ marginBottom: 5 }}>{invoiceDate}</Text>
             </View>
             <View style={{ borderBottomWidth: 1, borderBottomColor: "gray" }}>
               <Text style={{ marginTop: 10, marginBottom: 5 }}>
@@ -367,7 +367,7 @@ const UrbanRepairBill = ({
               <Text style={{ marginTop: 10, marginBottom: 5 }}>
                 Invoice Date
               </Text>
-              <Text style={{ marginBottom: 5 }}>{dateTime}</Text>
+              <Text style={{ marginBottom: 5 }}>{invoiceDate}</Text>
             </View>
             <View style={{ borderBottomWidth: 1, borderBottomColor: "gray" }}>
               <Text style={{ marginTop: 10, marginBottom: 5 }}>
