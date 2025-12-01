@@ -18,9 +18,33 @@ const LandScapings = () => {
   const [address, setAddress] = useState("");
   const [dueDate, setDueDate] = useState("");
   const [invoiceDate, setInvoiceDate] = useState("");
+  const [selectedBill, setSelectedBill] = useState(null);
+
 
   const [items, setItems] = useState([{ item: "", Discription: "", quantity: "", price: "" }]);
   const [showError, setShowError] = useState(false);
+
+
+  const resetform = () => {
+    setOpen(false);
+    setName("");
+    setAddress("");
+    setPhone("");
+    setDueDate("");
+    setInvoiceDate("");
+    setItems([{ item: "", description: "", quantity: "", price: "" }]);
+    setShowError(false);
+  }
+  const clearForm = () => {
+    resetform();
+    setSelectedBill(null);
+    setOpen(false);
+  }
+
+  const images = [
+    { id: 1, image: landScaping },
+  ];
+
 
   const HeaderTitles = [
     { name: "Date", width: "15%", value: "Date" },
@@ -42,16 +66,6 @@ const LandScapings = () => {
   const grandtotal = itemTotal
     .reduce((sum, item) => sum + Number(item.amount), 0)
     .toFixed(2);
-
-  const currentDate = new Date().toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  });
-
-  const handleModalOpen = () => {
-    setOpen(true);
-  };
 
   const handleAddItem = () => {
     setItems([...items, { item: "", description: "", quantity: "", price: "" }]);
@@ -78,16 +92,16 @@ const LandScapings = () => {
     const blob = await pdf(
       <LandScaping
         name={name}
-        address={address}
         phone={phone}
-        issueDate={currentDate}
-        items={itemTotal}
-        Invoice={invoiceNo}
+        invoiceDate={invoiceDate}
         dueDate={dueDate}
+        Invoice={invoiceNo}
+        items={itemTotal}
         HeaderTitles={HeaderTitles}
         grandtotal={grandtotal}
       />
     ).toBlob();
+
 
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
@@ -96,26 +110,28 @@ const LandScapings = () => {
     link.click();
     URL.revokeObjectURL(url);
 
-    setOpen(false);
-    setName("");
-    setAddress("");
-    setPhone("");
-    setDueDate("");
-    setInvoiceDate("");
-    setItems([{ item: "", description: "", quantity: "", price: "" }]);
-    setShowError(false);
+    clearForm();
   };
+
+  const handleModalOpen = (bill) => {
+    resetform();
+    setSelectedBill(bill)
+    setOpen(true)
+  }
 
   return (
     <div className="flex justify-center px-4 sm:px-8 md:px-16">
 
       {/* Image */}
-      <img
-        src={landScaping}
-        alt="Land Scaping"
-        className="h-auto w-[250px] md:w-[300px] hover:scale-105 duration-300 cursor-pointer border border-black rounded-lg"
-        onClick={handleModalOpen}
-      />
+      {images.map((bill) => (
+        <img
+          key={bill.id}
+          src={bill.image}
+          alt="Land Scaping"
+          className="h-auto w-[250px] md:w-[300px] hover:scale-105 duration-300 cursor-pointer border border-black rounded-lg"
+          onClick={() => handleModalOpen(bill)}
+        />
+      ))}
 
       {/* POPUP */}
       {open && (
@@ -128,198 +144,199 @@ const LandScapings = () => {
               <h2 className="text-2xl font-bold text-gray-800">Customer Details</h2>
               <button
                 className="text-gray-700 hover:text-red-600 text-2xl cursor-pointer transition"
-                onClick={() => setOpen(false)}
+                onClick={clearForm}
               >
                 <RxCross1 />
               </button>
             </div>
+            {selectedBill?.id == 1 && (
+              <div className="flex flex-col gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
-            <div className="flex flex-col gap-6">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-
-                {/* Name */}
-                <div className="flex flex-col gap-1">
-                  <TextField
-                    label="Name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    fullWidth
-                    InputProps={{ className: "bg-gray-50 rounded-lg" }}
-                  />
-                  {showError && !name && (
-                    <p className="text-xs text-red-500 italic">*Required</p>
-                  )}
-                </div>
-
-                <div className="flex flex-col gap-1">
-                  <TextField
-                    label="Phone"
-                    value={phone}
-                    onChange={(e) => {
-                      const val = e.target.value.replace(/[^0-9]/g, "");
-                      if (val.length <= 10) setPhone(val);
-                    }}
-                    fullWidth
-                    InputProps={{ className: "bg-gray-50 rounded-lg" }}
-                  />
-                  {showError && !phone && (
-                    <p className="text-xs text-red-500 italic">*Required</p>
-                  )}
-                </div>
-              </div>
-
-              {/* Address */}
-              <div className="flex flex-col gap-1">
-                <TextField
-                  label="Address"
-                  value={address}
-                  onChange={(e) => setAddress(e.target.value)}
-                  fullWidth
-                  InputProps={{ className: "bg-gray-50 rounded-lg" }}
-                />
-                {showError && !address && (
-                  <p className="text-xs text-red-500 italic">*Required</p>
-                )}
-              </div>
-
-              {/* Phone + Date */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-
-                {/* Phone */}
-
-
-                {/* Due Date */}
-                <div className="flex flex-col gap-1">
-                  <TextField
-                    label="Due Date"
-                    type="date"
-                    value={dueDate}
-                    onChange={(e) => setDueDate(e.target.value)}
-                    InputLabelProps={{ shrink: true }}
-                    fullWidth
-                    InputProps={{ className: "bg-gray-50 rounded-lg" }}
-                  />
-                </div>
-
-
-
-
-                {/* Invoice Date Picker */}
-                <div className="flex flex-col gap-1">
-                  <LocalizationProvider dateAdapter={AdapterDateFns}>
-                    <DatePicker
-                      label="Invoice Date"
-                      value={invoiceDate ? new Date(invoiceDate) : null}
-                      onChange={(newValue) => {
-                        if (newValue) setInvoiceDate(format(newValue, "MMM dd, yyyy"));
-                      }}
-                      slotProps={{
-                        textField: {
-                          fullWidth: true,
-                          sx: {
-                            backgroundColor: "#f9fafb",
-                            borderRadius: "10px",
-                            borderColor: "black",
-                            "& .MuiOutlinedInput-root > fieldset": {
-                              borderColor: "black",
-                            },
-                            "& .MuiOutlinedInput-root:hover > fieldset": {
-                              borderColor: "black",
-                            },
-                            "& .MuiOutlinedInput-root.Mui-focused > fieldset": {
-                              borderColor: "black",
-                            },
-                            "& .MuiInputLabel-root": { color: "black" },
-                            "& .MuiInputLabel-root.Mui-focused": { color: "black" },
-                          },
-                        },
-                      }}
+                  {/* Name */}
+                  <div className="flex flex-col gap-1">
+                    <TextField
+                      label="Name"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      fullWidth
+                      InputProps={{ className: "bg-gray-50 rounded-lg" }}
                     />
-                  </LocalizationProvider>
-                  {showError && !invoiceDate && (
-                    <p className="text-xs text-red-500 italic">*Required</p>
-                  )}
-                </div>
-
-              </div>
-
-              {/* Items Section */}
-              {items.map((item, index) => (
-                <div key={index}
-                  className="p-4 border rounded-xl bg-gray-50 flex flex-col gap-4 shadow-sm">
-
-                  {/* Row Header */}
-                  <div className="flex justify-between items-center">
-                    <h3 className="font-semibold text-gray-800">Item {index + 1}</h3>
-                    {items.length > 1 && (
-                      <button
-                        className="text-red-500 hover:text-red-700 text-sm font-medium"
-                        onClick={() => handleRemoveItem(index)}
-                      >
-                        Remove
-                      </button>
+                    {showError && !name && (
+                      <p className="text-xs text-red-500 italic">*Required</p>
                     )}
                   </div>
 
-                  {/* Item Name */}
-                  <TextField
-                    label="Item Name"
-                    value={item.item}
-                    onChange={(e) => handleItemChange(index, "item", e.target.value)}
-                    fullWidth
-                    InputProps={{ className: "bg-white rounded-md" }}
-                  />
-
-                  {/* Description */}
-                  <TextField
-                    label="Description"
-                    value={item.description}
-                    onChange={(e) => handleItemChange(index, "description", e.target.value)}
-                    fullWidth
-                    InputProps={{ className: "bg-white rounded-md" }}
-                  />
-
-                  {/* Qty + Price */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="flex flex-col gap-1">
                     <TextField
-                      label="Quantity"
-                      value={item.quantity}
-                      onChange={(e) =>
-                        handleItemChange(index, "quantity", e.target.value.replace(/[^0-9]/g, ""))
-                      }
-                      InputProps={{ className: "bg-white rounded-md" }}
+                      label="Phone"
+                      value={phone}
+                      onChange={(e) => {
+                        const val = e.target.value.replace(/[^0-9]/g, "");
+                        if (val.length <= 10) setPhone(val);
+                      }}
+                      fullWidth
+                      InputProps={{ className: "bg-gray-50 rounded-lg" }}
                     />
+                    {showError && !phone && (
+                      <p className="text-xs text-red-500 italic">*Required</p>
+                    )}
+                  </div>
+                </div>
 
+                {/* Address */}
+                <div className="flex flex-col gap-1">
+                  <TextField
+                    label="Address"
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
+                    fullWidth
+                    InputProps={{ className: "bg-gray-50 rounded-lg" }}
+                  />
+                  {showError && !address && (
+                    <p className="text-xs text-red-500 italic">*Required</p>
+                  )}
+                </div>
+
+                {/* Phone + Date */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+                  {/* Phone */}
+
+
+                  {/* Due Date */}
+                  <div className="flex flex-col gap-1">
                     <TextField
-                      label="Price"
-                      value={item.price}
-                      onChange={(e) =>
-                        handleItemChange(index, "price", e.target.value.replace(/[^0-9]/g, ""))
-                      }
-                      InputProps={{ className: "bg-white rounded-md" }}
+                      label="Due Date"
+                      type="date"
+                      value={dueDate}
+                      onChange={(e) => setDueDate(e.target.value)}
+                      InputLabelProps={{ shrink: true }}
+                      fullWidth
+                      InputProps={{ className: "bg-gray-50 rounded-lg" }}
                     />
                   </div>
 
+
+
+
+                  {/* Invoice Date Picker */}
+                  <div className="flex flex-col gap-1">
+                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                      <DatePicker
+                        label="Invoice Date"
+                        value={invoiceDate ? new Date(invoiceDate) : null}
+                        onChange={(newValue) => {
+                          if (newValue) setInvoiceDate(format(newValue, "MMM dd, yyyy"));
+                        }}
+                        slotProps={{
+                          textField: {
+                            fullWidth: true,
+                            sx: {
+                              backgroundColor: "#f9fafb",
+                              borderRadius: "10px",
+                              borderColor: "black",
+                              "& .MuiOutlinedInput-root > fieldset": {
+                                borderColor: "black",
+                              },
+                              "& .MuiOutlinedInput-root:hover > fieldset": {
+                                borderColor: "black",
+                              },
+                              "& .MuiOutlinedInput-root.Mui-focused > fieldset": {
+                                borderColor: "black",
+                              },
+                              "& .MuiInputLabel-root": { color: "black" },
+                              "& .MuiInputLabel-root.Mui-focused": { color: "black" },
+                            },
+                          },
+                        }}
+                      />
+                    </LocalizationProvider>
+                    {showError && !invoiceDate && (
+                      <p className="text-xs text-red-500 italic">*Required</p>
+                    )}
+                  </div>
+
                 </div>
-              ))}
 
-              {/* Add Item */}
-              <button
-                onClick={handleAddItem}
-                className="bg-gray-700 text-white py-2 px-4 rounded-lg shadow hover:bg-gray-800 w-fit"
-              >
-                + Add Item
-              </button>
+                {/* Items Section */}
+                {items.map((item, index) => (
+                  <div key={index}
+                    className="p-4 border rounded-xl bg-gray-50 flex flex-col gap-4 shadow-sm">
 
-              {/* Create Bill Button */}
-              <button
-                onClick={handleCreateBill}
-                className="bg-black text-white text-lg py-3 rounded-lg shadow-md
+                    {/* Row Header */}
+                    <div className="flex justify-between items-center">
+                      <h3 className="font-semibold text-gray-800">Item {index + 1}</h3>
+                      {items.length > 1 && (
+                        <button
+                          className="text-red-500 hover:text-red-700 text-sm font-medium"
+                          onClick={() => handleRemoveItem(index)}
+                        >
+                          Remove
+                        </button>
+                      )}
+                    </div>
+
+                    {/* Item Name */}
+                    <TextField
+                      label="Item Name"
+                      value={item.item}
+                      onChange={(e) => handleItemChange(index, "item", e.target.value)}
+                      fullWidth
+                      InputProps={{ className: "bg-white rounded-md" }}
+                    />
+
+                    {/* Description */}
+                    <TextField
+                      label="Description"
+                      value={item.description}
+                      onChange={(e) => handleItemChange(index, "description", e.target.value)}
+                      fullWidth
+                      InputProps={{ className: "bg-white rounded-md" }}
+                    />
+
+                    {/* Qty + Price */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <TextField
+                        label="Quantity"
+                        value={item.quantity}
+                        onChange={(e) =>
+                          handleItemChange(index, "quantity", e.target.value.replace(/[^0-9]/g, ""))
+                        }
+                        InputProps={{ className: "bg-white rounded-md" }}
+                      />
+
+                      <TextField
+                        label="Price"
+                        value={item.price}
+                        onChange={(e) =>
+                          handleItemChange(index, "price", e.target.value.replace(/[^0-9]/g, ""))
+                        }
+                        InputProps={{ className: "bg-white rounded-md" }}
+                      />
+                    </div>
+
+                  </div>
+                ))}
+
+                {/* Add Item */}
+                <button
+                  onClick={handleAddItem}
+                  className="bg-gray-700 text-white py-2 px-4 rounded-lg shadow hover:bg-gray-800 w-fit"
+                >
+                  + Add Item
+                </button>
+
+                {/* Create Bill Button */}
+                <button
+                  onClick={handleCreateBill}
+                  className="bg-black text-white text-lg py-3 rounded-lg shadow-md
                    hover:bg-gray-900 active:scale-95 transition-all mt-4"
-              >
-                Create Bill
-              </button>
-            </div>
+                >
+                  Create Bill
+                </button>
+              </div>
+            )}
           </div>
         </div>
       )}

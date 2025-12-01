@@ -60,6 +60,7 @@ const styles = StyleSheet.create({
     marginBottom: "20px",
     alignSelf: "flex-start",
   },
+
   body: {
     display: "flex",
     flexDirection: "column",
