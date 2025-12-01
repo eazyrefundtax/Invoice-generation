@@ -217,9 +217,6 @@ const LandScapings = () => {
                     />
                   </div>
 
-
-
-
                   {/* Invoice Date Picker */}
                   <div className="flex flex-col gap-1">
                     <LocalizationProvider dateAdapter={AdapterDateFns}>
