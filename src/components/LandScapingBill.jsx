@@ -188,7 +188,8 @@ const LandScaping = ({
             <View style={{ flexDirection: "row", gap: 12, fontSize: 10 }}>
               <Text>Subtotal</Text>
               <Text> INR {grandtotal}</Text>
-            </View>
+            </View>                                                                                                                      m, ,                                                   j
+
 
             <View
               style={{
@@ -207,7 +208,7 @@ const LandScaping = ({
           </View>
 
         </View>
-        {/* FIXED FOOTER */}
+        {/*  FOOTER */}
         <View fixed style={styles.footer}>
           <View style={{ alignItems: "center", marginTop: 30 }}>
             <Text style={{ fontSize: 10 }}>Thanks you for Your business</Text>
@@ -241,3 +242,4 @@ const LandScaping = ({
 };
 
 export default LandScaping;
+

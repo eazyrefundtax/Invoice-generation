@@ -400,8 +400,6 @@ const NandiSupplyBill = ({
             </View>
           </View>
 
-
-
           {/* Table */}
           <View style={{ marginBottom: 140 }}>
             <View style={{ marginTop: 20, borderRadius: 5 }}>
@@ -425,8 +423,8 @@ const NandiSupplyBill = ({
                   ))}
               </View>
             </View>
-            {/* Rows */}
 
+            {/* Rows */}
             {items?.map((item, index) => (
               <View style={styles.tableRow} key={index} wrap={false}>
                 <Text style={[styles.cell, { width: "3%" }]}>{index + 1}</Text>
@@ -475,132 +473,133 @@ const NandiSupplyBill = ({
               <Text style={{ marginTop: 20, color: "#23940A", fontSize: 12 }}>
                 {amountInWords}
               </Text>
-
-              <Text style={{ paddingTop: 25, }}>Payment</Text>
-              <View style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                width: "70%",
-                marginTop: 5,
-                backgroundColor: "#23940A",
-                borderTopLeftRadius: 3,
-                borderTopRightRadius: 3,
-                paddingVertical: 4,
-                paddingHorizontal: 10,
-                color: "white",
-                fontFamily: "inter",
-              }}>
-                <Text style={{
+              <View wrap={false}>
+                <Text style={{ paddingTop: 25, }}>Payment</Text>
+                <View style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  width: "70%",
+                  marginTop: 5,
+                  backgroundColor: "#23940A",
+                  borderTopLeftRadius: 3,
+                  borderTopRightRadius: 3,
+                  paddingVertical: 4,
+                  paddingHorizontal: 10,
                   color: "white",
-                  fontSize: 10,
-                  textAlign: "center",
-                  width: "33%"
-                }}>Date</Text>
-                <Text style={{
+                  fontFamily: "inter",
+                }}>
+                  <Text style={{
+                    color: "white",
+                    fontSize: 10,
+                    textAlign: "center",
+                    width: "33%"
+                  }}>Date</Text>
+                  <Text style={{
+                    color: "white",
+                    fontSize: 10,
+                    textAlign: "center",
+                    width: "33%"
+                  }}>Mode</Text>
+                  <Text style={{
+                    color: "white",
+                    fontSize: 10,
+                    textAlign: "center",
+                    width: "33%"
+                  }}>Amount</Text>
+                </View>
+                <View style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  width: "70%",
+                  marginTop: 5,
+                  paddingVertical: 4,
+                  paddingHorizontal: 10,
                   color: "white",
-                  fontSize: 10,
-                  textAlign: "center",
-                  width: "33%"
-                }}>Mode</Text>
-                <Text style={{
+                  fontFamily: "inter",
+                }}>
+                  <Text style={{
+                    color: "black",
+                    fontSize: 10,
+                    textAlign: "center",
+                    width: "33%"
+                  }}>{initialPayment}</Text>
+                  <Text style={{
+                    color: "black",
+                    fontSize: 10,
+                    textAlign: "center",
+                    width: "33%"
+                  }}>Cash Payment</Text>
+                  <Text style={{
+                    color: "black",
+                    fontSize: 10,
+                    textAlign: "center",
+                    width: "33%"
+                  }}>₹{percentPaid}</Text>
+
+                </View>
+                <View style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  width: "70%",
+                  marginTop: 5,
+                  paddingVertical: 4,
+                  paddingHorizontal: 10,
                   color: "white",
-                  fontSize: 10,
-                  textAlign: "center",
-                  width: "33%"
-                }}>Amount</Text>
-              </View>
-              <View style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                width: "70%",
-                marginTop: 5,
-                paddingVertical: 4,
-                paddingHorizontal: 10,
-                color: "white",
-                fontFamily: "inter",
-              }}>
-                <Text style={{
-                  color: "black",
-                  fontSize: 10,
-                  textAlign: "center",
-                  width: "33%"
-                }}>{initialPayment}</Text>
-                <Text style={{
-                  color: "black",
-                  fontSize: 10,
-                  textAlign: "center",
-                  width: "33%"
-                }}>Cash Payment</Text>
-                <Text style={{
-                  color: "black",
-                  fontSize: 10,
-                  textAlign: "center",
-                  width: "33%"
-                }}>₹{percentPaid}</Text>
+                  fontFamily: "inter",
+                }}>
+                  <Text style={{
+                    color: "black",
+                    fontSize: 10,
+                    textAlign: "center",
+                    width: "33%"
+                  }}>{finalPayment}</Text>
+                  <Text style={{
+                    color: "black",
+                    fontSize: 10,
+                    textAlign: "center",
+                    width: "33%"
+                  }}>Cash Payment</Text>
+                  <Text style={{
+                    color: "black",
+                    fontSize: 10,
+                    textAlign: "center",
+                    width: "33%"
+                  }}>₹{fullPercenytPaid}</Text>
 
-              </View>
-              <View style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                width: "70%",
-                marginTop: 5,
-                paddingVertical: 4,
-                paddingHorizontal: 10,
-                color: "white",
-                fontFamily: "inter",
-              }}>
-                <Text style={{
-                  color: "black",
-                  fontSize: 10,
-                  textAlign: "center",
-                  width: "33%"
-                }}>{finalPayment}</Text>
-                <Text style={{
-                  color: "black",
-                  fontSize: 10,
-                  textAlign: "center",
-                  width: "33%"
-                }}>Cash Payment</Text>
-                <Text style={{
-                  color: "black",
-                  fontSize: 10,
-                  textAlign: "center",
-                  width: "33%"
-                }}>₹{fullPercenytPaid}</Text>
+                </View>
+                <View style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  width: "70%",
+                  marginTop: 5,
+                  paddingVertical: 4,
+                  paddingHorizontal: 10,
+                  color: "white",
+                  fontFamily: "inter",
+                }}>
+                  <Text style={{
+                    color: "black",
+                    fontSize: 10,
+                    textAlign: "center",
+                    width: "33%"
+                  }}></Text>
+                  <Text style={{
+                    color: "black",
+                    fontSize: 10,
+                    textAlign: "center",
+                    width: "33%",
+                    fontWeight: "bold",
+                  }}>Total</Text>
+                  <Text style={{
+                    color: "black",
+                    fontSize: 10,
+                    textAlign: "center",
+                    width: "33%",
+                    fontWeight: "bold",
+                  }}>₹{Number(totalFinalAmount).toFixed(2)}
+                  </Text>
 
-              </View>
-              <View style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                width: "70%",
-                marginTop: 5,
-                paddingVertical: 4,
-                paddingHorizontal: 10,
-                color: "white",
-                fontFamily: "inter",
-              }}>
-                <Text style={{
-                  color: "black",
-                  fontSize: 10,
-                  textAlign: "center",
-                  width: "33%"
-                }}></Text>
-                <Text style={{
-                  color: "black",
-                  fontSize: 10,
-                  textAlign: "center",
-                  width: "33%",
-                  fontWeight: "bold",
-                }}>Total</Text>
-                <Text style={{
-                  color: "black",
-                  fontSize: 10,
-                  textAlign: "center",
-                  width: "33%",
-                  fontWeight: "bold",
-                }}>₹{Number(totalFinalAmount).toFixed(2)}
-                </Text>
-
+                </View>
               </View>
             </View>
             <View style={{ fontSize: 10, width: "30%" }}>

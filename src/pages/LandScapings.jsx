@@ -6,6 +6,8 @@ import { pdf } from "@react-pdf/renderer";
 import TextField from "@mui/material/TextField";
 import LandScaping from "../components/LandScapingBill";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import Flatpickr from "react-flatpickr";
+import "flatpickr/dist/flatpickr.css";
 import { format } from "date-fns";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { DatePicker } from "@mui/x-date-pickers";
@@ -23,7 +25,6 @@ const LandScapings = () => {
 
   const [items, setItems] = useState([{ item: "", Discription: "", quantity: "", price: "" }]);
   const [showError, setShowError] = useState(false);
-
 
   const resetform = () => {
     setOpen(false);
@@ -138,7 +139,6 @@ const LandScapings = () => {
         <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50 px-3">
           <div className="bg-white rounded-2xl shadow-2xl w-full sm:w-[650px] md:w-[750px] lg:w-[900px] relative 
                   p-8 max-h-[90vh] overflow-y-auto transform transition-all animate-fadeIn">
-
             {/* Header */}
             <div className="flex justify-between items-center border-b pb-3 mb-6">
               <h2 className="text-2xl font-bold text-gray-800">Customer Details</h2>
@@ -198,60 +198,81 @@ const LandScapings = () => {
                   )}
                 </div>
 
-                {/* Phone + Date */}
+                {/* Date */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
-                  {/* Phone */}
-
-
-                  {/* Due Date */}
+                  {/* Invoice Date */}
                   <div className="flex flex-col gap-1">
-                    <TextField
-                      label="Due Date"
-                      type="date"
-                      value={dueDate}
-                      onChange={(e) => setDueDate(e.target.value)}
-                      InputLabelProps={{ shrink: true }}
-                      fullWidth
-                      InputProps={{ className: "bg-gray-50 rounded-lg" }}
+                    <Flatpickr
+                      value={invoiceDate}
+                      onChange={([selected]) => {
+                        if (selected) {
+                          const formatted = format(selected, "MMM dd, yyyy");
+                          setInvoiceDate(formatted);
+                        }
+                      }}
+                      options={{
+                        dateFormat: "M d, Y",
+                      }}
+                      render={({ ...props }, ref) => (
+                        <TextField
+                          {...props}
+                          inputRef={ref}
+                          label="Invoice Date"
+                          fullWidth
+                          value={invoiceDate}
+                          InputLabelProps={{ shrink: true }}
+                          sx={{
+                            backgroundColor: "#f9fafb",
+                            borderRadius: "10px",
+                            "& .MuiOutlinedInput-root > fieldset": { borderColor: "black" },
+                            "& .MuiOutlinedInput-root:hover > fieldset": { borderColor: "black" },
+                            "& .MuiOutlinedInput-root.Mui-focused > fieldset": { borderColor: "black" },
+                            "& .MuiInputLabel-root": { color: "black" },
+                            "& .MuiInputLabel-root.Mui-focused": { color: "black" },
+                          }}
+                        />
+                      )}
                     />
-                  </div>
 
-                  {/* Invoice Date Picker */}
-                  <div className="flex flex-col gap-1">
-                    <LocalizationProvider dateAdapter={AdapterDateFns}>
-                      <DatePicker
-                        label="Invoice Date"
-                        value={invoiceDate ? new Date(invoiceDate) : null}
-                        onChange={(newValue) => {
-                          if (newValue) setInvoiceDate(format(newValue, "MMM dd, yyyy"));
-                        }}
-                        slotProps={{
-                          textField: {
-                            fullWidth: true,
-                            sx: {
-                              backgroundColor: "#f9fafb",
-                              borderRadius: "10px",
-                              borderColor: "black",
-                              "& .MuiOutlinedInput-root > fieldset": {
-                                borderColor: "black",
-                              },
-                              "& .MuiOutlinedInput-root:hover > fieldset": {
-                                borderColor: "black",
-                              },
-                              "& .MuiOutlinedInput-root.Mui-focused > fieldset": {
-                                borderColor: "black",
-                              },
-                              "& .MuiInputLabel-root": { color: "black" },
-                              "& .MuiInputLabel-root.Mui-focused": { color: "black" },
-                            },
-                          },
-                        }}
-                      />
-                    </LocalizationProvider>
                     {showError && !invoiceDate && (
                       <p className="text-xs text-red-500 italic">*Required</p>
                     )}
+                  </div>
+
+                  {/* Due Date */}
+                  <div className="flex flex-col gap-1">
+                    <Flatpickr
+                      value={dueDate}
+                      onChange={([selected]) => {
+                        if (selected) {
+                          const formatted = format(selected, "MMM dd, yyyy");
+                          setDueDate(formatted);
+                        }
+                      }}
+                      options={{
+                        dateFormat: "M d, Y",
+                      }}
+                      render={({ ...props }, ref) => (
+                        <TextField
+                          {...props}
+                          inputRef={ref}
+                          label="Due Date"
+                          fullWidth
+                          value={dueDate}
+                          InputLabelProps={{ shrink: true }}
+                          sx={{
+                            backgroundColor: "#f9fafb",
+                            borderRadius: "10px",
+                            "& .MuiOutlinedInput-root > fieldset": { borderColor: "black" },
+                            "& .MuiOutlinedInput-root:hover > fieldset": { borderColor: "black" },
+                            "& .MuiOutlinedInput-root.Mui-focused > fieldset": { borderColor: "black" },
+                            "& .MuiInputLabel-root": { color: "black" },
+                            "& .MuiInputLabel-root.Mui-focused": { color: "black" },
+                          }}
+                        />
+                      )}
+                    />
                   </div>
 
                 </div>
@@ -260,7 +281,6 @@ const LandScapings = () => {
                 {items.map((item, index) => (
                   <div key={index}
                     className="p-4 border rounded-xl bg-gray-50 flex flex-col gap-4 shadow-sm">
-
                     {/* Row Header */}
                     <div className="flex justify-between items-center">
                       <h3 className="font-semibold text-gray-800">Item {index + 1}</h3>

@@ -410,7 +410,6 @@ const Supplies = () => {
       />
     ).toBlob();
 
-
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
@@ -446,7 +445,6 @@ const Supplies = () => {
         const image = item.image ? await convertFileToDataUrl(item.image) : null;
         const price = Number(item.price) || 0;
         const quantity = Number(item.quantity) || 0;
-
         const itemTotal = price * quantity;
         const discountRate = itemTotal * 0.10;
         const netRate = itemTotal - discountRate;
@@ -529,7 +527,6 @@ const Supplies = () => {
       .toFixed(2);
     const sgstAmount = (grandtotalBeforeGST * 0.025).toFixed(2);
     const totalAmount = (Number(grandtotalBeforeGST) + (Number(sgstAmount)) * 2).toFixed(2);
-
     const invoiceNumber = generateInvoiceNo();
     const today = new Date();
     const options = { year: "numeric", month: "short", day: "numeric" };
@@ -575,11 +572,8 @@ const Supplies = () => {
     const updatedItems = items.map((item) => {
       const price = Number(item.price) || 0;
       const quantity = Number(item.quantity) || 0;
-
       const itemTotal = price * quantity;
-      const total = itemTotal * 1.18
-
-
+      const total = itemTotal * 1.18;
 
       return {
         ...item,
@@ -1328,7 +1322,6 @@ const Supplies = () => {
                 </div>
               </div>
             )}
-
 
             {/* 4th bill */}
             {selectedBill?.id === 4 && (
