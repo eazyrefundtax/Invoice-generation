@@ -14,7 +14,6 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { format } from "date-fns";
 
 
-
 const CleaningMaintainces = () => {
   const [open, setOpen] = useState(false);
   const [selectedBill, setSelectedBill] = useState(null);
@@ -372,6 +371,7 @@ const CleaningMaintainces = () => {
                     <TextField
                       label="Customer Name"
                       value={name}
+                      placeholder="Eg - John"
                       onChange={(e) => setName(e.target.value)}
                       className="bg-white rounded-md"
                     />
@@ -411,6 +411,7 @@ const CleaningMaintainces = () => {
                   <div className="flex flex-col w-full">
                     <TextField
                       label="Address"
+                      placeholder="Eg - Hyderabad"
                       value={address}
                       onChange={(e) => setAddress(e.target.value)}
                       className="bg-white rounded-md"
@@ -423,12 +424,14 @@ const CleaningMaintainces = () => {
                   <div className="flex flex-col w-full">
                     <TextField
                       label="Reductions Amount"
+                      placeholder="Eg - 20000"
                       value={reductions}
                       onChange={(e) =>
-                        setInterestAmount(e.target.value.replace(/[^0-9]/g, ""))
+                        setReductions(e.target.value.replace(/[^0-9]/g, ""))
                       }
                       className="bg-white rounded-md"
                     />
+
                     {reductions === "" && showError && (
                       <p className="text-sm text-red-500 mt-1 font-medium">*This field is required.</p>
                     )}
@@ -457,6 +460,7 @@ const CleaningMaintainces = () => {
 
                     <TextField
                       label="Item Name"
+                      placeholder="Eg - House Cleaning plan"
                       value={item.item}
                       onChange={(e) => handleItemChange(index, "item", e.target.value)}
                       className="bg-white rounded-md"
@@ -466,6 +470,7 @@ const CleaningMaintainces = () => {
                       <TextField
                         label="Quantity"
                         type="text"
+                        placeholder="Eg - 1"
                         value={item.quantity}
                         onChange={(e) =>
                           handleItemChange(
@@ -480,6 +485,7 @@ const CleaningMaintainces = () => {
                       <TextField
                         label="Price"
                         type="text"
+                        placeholder="Eg - 25000"
                         value={item.price}
                         onChange={(e) =>
                           handleItemChange(
@@ -521,7 +527,6 @@ const CleaningMaintainces = () => {
               </div>
             )}
 
-
             {/* Bill 2 */}
             {selectedBill?.id === 2 && (
               <div className="flex flex-col gap-6 mt-6 bg-gray-50 p-6 rounded-xl shadow-sm">
@@ -532,6 +537,7 @@ const CleaningMaintainces = () => {
                   <div className="flex flex-col w-full">
                     <TextField
                       label="Customer Name"
+                      placeholder="Eg - John"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       className="bg-white rounded-md"
@@ -571,6 +577,7 @@ const CleaningMaintainces = () => {
                   <div className="flex flex-col w-full">
                     <TextField
                       label="Address"
+                      placeholder="Hyderabad"
                       value={address}
                       onChange={(e) => setAddress(e.target.value)}
                       className="bg-white rounded-md"
@@ -584,6 +591,7 @@ const CleaningMaintainces = () => {
                     <TextField
                       label="Interest Amount"
                       value={interestAmount}
+                      placeholder="Eg - 25410"
                       onChange={(e) =>
                         setInterestAmount(e.target.value.replace(/[^0-9]/g, ""))
                       }
@@ -616,6 +624,7 @@ const CleaningMaintainces = () => {
                     <TextField
                       label="Item Name"
                       value={item.item}
+                      placeholder="Tiles Cleaning"
                       onChange={(e) => handleItemChange(index, "item", e.target.value)}
                       className="bg-white rounded-md"
                     />
@@ -624,6 +633,7 @@ const CleaningMaintainces = () => {
                       <TextField
                         label="Quantity"
                         type="text"
+                        placeholder="4"
                         value={item.quantity}
                         onChange={(e) =>
                           handleItemChange(
@@ -639,6 +649,7 @@ const CleaningMaintainces = () => {
                         label="Price"
                         type="text"
                         value={item.price}
+                        placeholder="Eg - 1500"
                         onChange={(e) =>
                           handleItemChange(
                             index,
@@ -688,6 +699,7 @@ const CleaningMaintainces = () => {
                     <TextField
                       label="Customer Name"
                       value={name}
+                      placeholder="Eg - John"
                       onChange={(e) => setName(e.target.value)}
                       className="bg-white rounded-md"
                     />
@@ -731,6 +743,7 @@ const CleaningMaintainces = () => {
                   <div className="flex flex-col w-full">
                     <TextField
                       label="Address"
+                      placeholder="Eg - Hyderabad"
                       value={address}
                       onChange={(e) => setAddress(e.target.value)}
                       className="bg-white rounded-md"
@@ -745,6 +758,7 @@ const CleaningMaintainces = () => {
                   <div className="flex flex-col w-full">
                     <TextField
                       label="Item"
+                      placeholder="Eg - House Maintenance"
                       value={ucitem}
                       onChange={(e) => setucItem(e.target.value)}
                       className="bg-white rounded-md"
@@ -762,6 +776,7 @@ const CleaningMaintainces = () => {
                   <div className="flex flex-col w-full">
                     <TextField
                       label="Platform Price"
+                      placeholder="Eg - 1700"
                       type="text"
                       value={ucPlatformPrice}
                       onChange={(e) =>
@@ -778,6 +793,7 @@ const CleaningMaintainces = () => {
                   <div className="flex flex-col w-full">
                     <TextField
                       label="Item Price"
+                      placeholder="Eg - 52800"
                       type="text"
                       value={ucprice}
                       onChange={(e) =>
@@ -787,18 +803,12 @@ const CleaningMaintainces = () => {
                     />
                     {ucprice === "" && showError && (
                       <p className="text-sm text-red-500 mt-1 font-medium">
-                        *This field is required.
+                        *All this field is required.
                       </p>
                     )}
                   </div>
                 </div>
 
-                {/* {showError &&
-                  (ucitem === "" || ucPlatformPrice === "" || ucprice === "") && (
-                    <p className="text-sm text-red-500 font-medium">
-                      *All fields are required for this item.
-                    </p>
-                  )} */}
 
                 {/* Submit */}
                 <button

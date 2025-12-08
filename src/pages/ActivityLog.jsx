@@ -174,11 +174,13 @@ const ActivityLogGenerator = () => {
                 label="Address"
                 fullWidth
                 value={address}
+                placeholder="Eg - Hyderabad"
                 onChange={(e) => setAddress(e.target.value)}
               />
               <TextField
                 label="Year"
                 type="price"
+                placeholder="Eg - 2026"
                 fullWidth
                 value={year}
                 onChange={(e) => setYear(e.target.value)}

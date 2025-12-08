@@ -106,7 +106,6 @@ const Repairs = () => {
     resetForm();
   }
 
-
   // 1st Bill - Urban Company
   const handleCreateBill1 = async () => {
 
@@ -132,7 +131,6 @@ const Repairs = () => {
         InvoiceNo2={invoiceNumber2}
         dueDate={dueDate}
         invoiceDate={invoiceDate}
-
         dateTime={currentDate}
         ucitem={ucitem}
         ucPlatformPrice={ucPlatformPrice}
@@ -162,8 +160,6 @@ const Repairs = () => {
       setErrors(true);
       return;
     }
-
-
 
     const invoiceNumber = generateInvoiceNo();
     const today = new Date();
@@ -261,6 +257,7 @@ const Repairs = () => {
                     <TextField
                       label="Customer Name"
                       value={name}
+                      placeholder="Eg - John"
                       onChange={(e) => setName(e.target.value)}
                       className="bg-white rounded-md"
                     />
@@ -309,6 +306,7 @@ const Repairs = () => {
                   <div className="flex flex-col w-full">
                     <TextField
                       label="Address"
+                      placeholder="Eg - Hyderabad"
                       value={address}
                       onChange={(e) => setAddress(e.target.value)}
                       className="bg-white rounded-md"
@@ -325,7 +323,7 @@ const Repairs = () => {
                     <TextField
                       label="Item"
                       value={ucitem}
-
+                      placeholder="Eg - House Repairs"
                       onChange={(e) => setucItem(e.target.value)}
                       className="bg-white rounded-md"
                     />
@@ -344,6 +342,7 @@ const Repairs = () => {
                   <div className="flex flex-col w-full">
                     <TextField
                       label="Platform Price"
+                      placeholder="Eg - 12000"
                       type="text"
                       value={ucPlatformPrice}
                       onChange={(e) =>
@@ -363,6 +362,7 @@ const Repairs = () => {
                     <TextField
                       label="Item Price"
                       type="text"
+                      placeholder="Eg - 120000"
                       value={ucprice}
                       onChange={(e) => setucPrice(e.target.value.replace(/[^0-9]/g, ""))}
                       className="bg-white rounded-md"
@@ -387,8 +387,6 @@ const Repairs = () => {
               </div>
             )}
 
-
-
             {/* PK Repair Bill */}
             {selectedBill?.id === 2 && (
               <div className="flex flex-col gap-6 mt-6 bg-gray-50 p-6 rounded-xl shadow-sm">
@@ -400,6 +398,7 @@ const Repairs = () => {
                       label="Customer Name"
                       type="text"
                       value={name}
+                      placeholder="Eg - John"
                       onChange={(e) => setName(e.target.value)}
                       className="bg-white rounded-md"
                       fullWidth
@@ -445,6 +444,7 @@ const Repairs = () => {
                   <TextField
                     label="Address"
                     value={address}
+                    placeholder="Eg - Hyderabad"
                     onChange={(e) => setAddress(e.target.value)}
                     className="bg-white rounded-md"
                     fullWidth
@@ -483,6 +483,7 @@ const Repairs = () => {
                     {/* Item Name */}
                     <TextField
                       label="Item Name"
+                      placeholder="Eg - Sand"
                       value={item.item}
                       error={!!errors[`item-${index}`]}
                       helperText={errors[`item-${index}`]}
@@ -495,6 +496,7 @@ const Repairs = () => {
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                       <TextField
                         label="Quantity"
+                        placeholder="Eg - 1"
                         value={item.quantity}
                         error={!!errors[`quantity-${index}`]}
                         helperText={errors[`quantity-${index}`]}
@@ -507,10 +509,10 @@ const Repairs = () => {
                         }
                         className="bg-white rounded-md"
                       />
-
                       <TextField
                         label="Price"
                         value={item.price}
+                        placeholder="Eg - 16000"
                         error={!!errors[`price-${index}`]}
                         helperText={errors[`price-${index}`]}
                         onChange={(e) =>
@@ -518,25 +520,22 @@ const Repairs = () => {
                             index,
                             "price",
                             e.target.value.replace(/[^0-9]/g, "")
-                          )
-                        }
+                          )}
                         className="bg-white rounded-md"
                       />
-
                       <TextField
                         label="GST (%)"
+                        placeholder="18"
                         value={item.gst || ""}
                         onChange={(e) =>
                           handleItemChange(
                             index,
                             "gst",
                             e.target.value.replace(/[^0-9.]/g, "")
-                          )
-                        }
+                          )}
                         className="bg-white rounded-md"
                       />
                     </div>
-
                     {/* Field Required Message */}
                     {errors &&
                       (item.item === "" ||
@@ -549,15 +548,12 @@ const Repairs = () => {
                       )}
                   </div>
                 ))}
-
                 {/* Add Item Button */}
                 <button
                   onClick={handleAddItem}
-                  className="bg-gray-800 text-white py-2 px-4 rounded-lg w-fit hover:bg-gray-900 transition-all"
-                >
+                  className="bg-gray-800 text-white py-2 px-4 rounded-lg w-fit hover:bg-gray-900 transition-all">
                   + Add Item
                 </button>
-
                 {/* Submit */}
                 <button
                   onClick={handleCreateBill2}
@@ -567,13 +563,9 @@ const Repairs = () => {
                 </button>
               </div>
             )}
-
-
           </div>
         </div >
-
-      )
-      }
+      )}
     </div >
   );
 };

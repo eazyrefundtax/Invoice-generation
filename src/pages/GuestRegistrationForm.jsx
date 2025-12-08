@@ -141,6 +141,7 @@ const GuestExcelGenerator = () => {
                   <TextField
                     label="Name"
                     value={guest.name}
+                    placeholder="Eg - John"
                     onChange={(e) =>
                       handleChange(index, "name", e.target.value)
                     }
@@ -150,6 +151,7 @@ const GuestExcelGenerator = () => {
                   <TextField
                     label="No. of Guests"
                     type="number"
+                    placeholder="Eg - 5"
                     value={guest.guests}
                     onChange={(e) =>
                       handleChange(index, "guests", e.target.value)
@@ -181,6 +183,7 @@ const GuestExcelGenerator = () => {
                   <TextField
                     label="Phone"
                     value={guest.phone}
+                    placeholder="Eg - 9898989898"
                     onChange={(e) =>
                       handleChange(index, "phone", e.target.value)
                     }
@@ -191,17 +194,18 @@ const GuestExcelGenerator = () => {
                     label="Email"
                     type="email"
                     value={guest.email}
+                    placeholder="Eg - John@gmail.com"
                     onChange={(e) =>
                       handleChange(index, "email", e.target.value)
                     }
                     fullWidth
                   />
 
+
                   {guests.length > 1 && (
                     <IconButton
                       color="error"
                       onClick={() => removeGuest(index)}
-
                     >
                       <AiOutlineDelete />
                     </IconButton>

@@ -158,12 +158,13 @@ const LandScapings = () => {
                     <TextField
                       label="Name"
                       value={name}
+                      placeholder="Eg - John"
                       onChange={(e) => setName(e.target.value)}
                       fullWidth
                       InputProps={{ className: "bg-gray-50 rounded-lg" }}
                     />
                     {showError && !name && (
-                      <p className="text-xs text-red-500 italic">*Required</p>
+                      <p className="text-xs text-red-500 italic">*This field is required.</p>
                     )}
                   </div>
 
@@ -171,6 +172,7 @@ const LandScapings = () => {
                     <TextField
                       label="Phone"
                       value={phone}
+                      placeholder="Eg - 9898989898"
                       onChange={(e) => {
                         const val = e.target.value.replace(/[^0-9]/g, "");
                         if (val.length <= 10) setPhone(val);
@@ -179,7 +181,7 @@ const LandScapings = () => {
                       InputProps={{ className: "bg-gray-50 rounded-lg" }}
                     />
                     {showError && !phone && (
-                      <p className="text-xs text-red-500 italic">*Required</p>
+                      <p className="text-xs text-red-500 italic">*This field is required.</p>
                     )}
                   </div>
                 </div>
@@ -189,12 +191,13 @@ const LandScapings = () => {
                   <TextField
                     label="Address"
                     value={address}
+                    placeholder="Hyderabad"
                     onChange={(e) => setAddress(e.target.value)}
                     fullWidth
                     InputProps={{ className: "bg-gray-50 rounded-lg" }}
                   />
                   {showError && !address && (
-                    <p className="text-xs text-red-500 italic">*Required</p>
+                    <p className="text-xs text-red-500 italic">*This field is required.</p>
                   )}
                 </div>
 
@@ -236,7 +239,7 @@ const LandScapings = () => {
                     />
 
                     {showError && !invoiceDate && (
-                      <p className="text-xs text-red-500 italic">*Required</p>
+                      <p className="text-xs text-red-500 italic">*This field is required.</p>
                     )}
                   </div>
 
@@ -273,6 +276,9 @@ const LandScapings = () => {
                         />
                       )}
                     />
+                    {showError && !invoiceDate && (
+                      <p className="text-xs text-red-500 italic">*This field is required.</p>
+                    )}
                   </div>
 
                 </div>
@@ -298,6 +304,7 @@ const LandScapings = () => {
                     <TextField
                       label="Item Name"
                       value={item.item}
+                      placeholder="Eg - Lawn Maintenance"
                       onChange={(e) => handleItemChange(index, "item", e.target.value)}
                       fullWidth
                       InputProps={{ className: "bg-white rounded-md" }}
@@ -307,6 +314,7 @@ const LandScapings = () => {
                     <TextField
                       label="Description"
                       value={item.description}
+                      placeholder="Eg - Grass Cutting"
                       onChange={(e) => handleItemChange(index, "description", e.target.value)}
                       fullWidth
                       InputProps={{ className: "bg-white rounded-md" }}
@@ -317,6 +325,7 @@ const LandScapings = () => {
                       <TextField
                         label="Quantity"
                         value={item.quantity}
+                        placeholder="Eg - 1"
                         onChange={(e) =>
                           handleItemChange(index, "quantity", e.target.value.replace(/[^0-9]/g, ""))
                         }
@@ -326,13 +335,20 @@ const LandScapings = () => {
                       <TextField
                         label="Price"
                         value={item.price}
+                        placeholder="Eg - 165899"
                         onChange={(e) =>
                           handleItemChange(index, "price", e.target.value.replace(/[^0-9]/g, ""))
                         }
                         InputProps={{ className: "bg-white rounded-md" }}
                       />
                     </div>
-
+                    {showError &&
+                      (item.item === "" ||
+                        item.description === "" ||
+                        item.quantity === "" ||
+                        item.price === "") && (
+                        <p className="text-xs text-red-500">*All fields are Required</p>
+                      )}
                   </div>
                 ))}
 

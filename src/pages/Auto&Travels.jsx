@@ -259,6 +259,7 @@ const AutoTravels = () => {
                       fullWidth
                       label="Customer Name"
                       value={name}
+                      placeholder="Eg - John"
                       onChange={(e) => setName(e.target.value)}
                       className="bg-white rounded-md"
                     />
@@ -303,6 +304,7 @@ const AutoTravels = () => {
                     <TextField
                       fullWidth
                       label="Pickup Location"
+                      placeholder="Eg - Hyderabad"
                       value={pickup}
                       onChange={(e) => setPickUP(e.target.value)}
                       className="bg-white rounded-md"
@@ -317,6 +319,7 @@ const AutoTravels = () => {
                     <TextField
                       fullWidth
                       label="Drop Location"
+                      placeholder="Eg - vizag"
                       value={drop}
                       onChange={(e) => setDrop(e.target.value)}
                       className="bg-white rounded-md"
@@ -333,6 +336,7 @@ const AutoTravels = () => {
                   <TextField
                     fullWidth
                     label="Amount"
+                    placeholder="Eg - 1000"
                     value={amount}
                     onChange={(e) => setAmount(e.target.value.replace(/[^0-9]/g, ""))}
                     className="bg-white rounded-md"
@@ -368,6 +372,7 @@ const AutoTravels = () => {
                     <TextField
                       label="Customer Name"
                       value={name}
+                      placeholder="Eg - John"
                       onChange={(e) => setName(e.target.value)}
                       fullWidth
                       className="bg-white rounded-md"
@@ -424,6 +429,7 @@ const AutoTravels = () => {
                     <TextField
                       label="Item Name"
                       value={item.item}
+                      placeholder="Eg - Oil Change"
                       onChange={(e) => handleItemChange(index, "item", e.target.value)}
                       fullWidth
                       className="bg-white rounded-md"
@@ -434,6 +440,7 @@ const AutoTravels = () => {
                       <TextField
                         label="Quantity"
                         type="text"
+                        placeholder="Eg - 2"
                         value={item.quantity}
                         onChange={(e) =>
                           handleItemChange(index, "quantity", e.target.value.replace(/[^0-9]/g, ""))
@@ -445,6 +452,7 @@ const AutoTravels = () => {
                       <TextField
                         label="Price"
                         type="text"
+                        placeholder="Eg - 600"
                         value={item.price}
                         onChange={(e) =>
                           handleItemChange(index, "price", e.target.value.replace(/[^0-9]/g, ""))

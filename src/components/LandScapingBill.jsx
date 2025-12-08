@@ -188,7 +188,7 @@ const LandScaping = ({
             <View style={{ flexDirection: "row", gap: 12, fontSize: 10 }}>
               <Text>Subtotal</Text>
               <Text> INR {grandtotal}</Text>
-            </View>                                                                                                                      m, ,                                                   j
+            </View>
 
 
             <View

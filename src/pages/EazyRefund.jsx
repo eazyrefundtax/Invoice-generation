@@ -171,6 +171,7 @@ const EazyRefund = () => {
                                     <TextField
                                         label="Enter Amount"
                                         type="text"
+                                        placeholder="Eg-500"
                                         value={amount}
                                         onChange={(e) => SetAmount(e.target.value.replace(/[^0-9.]/g, ""))}
                                         fullWidth
@@ -239,6 +240,7 @@ const EazyRefund = () => {
                                     <TextField
                                         label="Enter Amount"
                                         type="text"
+                                        placeholder="Eg-500"
                                         value={amount}
                                         onChange={(e) => SetAmount(e.target.value.replace(/[^0-9.]/g, ""))}
                                         fullWidth

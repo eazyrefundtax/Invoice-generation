@@ -259,6 +259,7 @@ const Utilities = () => {
                       label="Customer Name"
                       fullWidth
                       variant="outlined"
+                      placeholder="Eg - John"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       InputProps={{ className: "bg-gray-50 rounded-xl h-[48px]" }}
@@ -274,6 +275,7 @@ const Utilities = () => {
                       label="Phone Number"
                       fullWidth
                       variant="outlined"
+                      placeholder="Eg - 9898989898"
                       value={formData.phone}
                       onChange={(e) =>
                         setFormData({
@@ -294,6 +296,7 @@ const Utilities = () => {
                       label="Total Amount Paid"
                       fullWidth
                       variant="outlined"
+                      placeholder="Eg - 2500"
                       value={formData.totalAmount}
                       onChange={(e) =>
                         setFormData({
@@ -365,6 +368,7 @@ const Utilities = () => {
                     fullWidth
                     variant="outlined"
                     label="Name"
+                    placeholder="Eg - John"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     InputProps={{
@@ -383,6 +387,7 @@ const Utilities = () => {
                     fullWidth
                     variant="outlined"
                     label="Amount"
+                    placeholder="Eg - 1800"
                     value={formData.totalAmount}
                     onChange={(e) =>
                       setFormData({
@@ -411,6 +416,7 @@ const Utilities = () => {
 
                       label="Phone Number"
                       value={formData.phone}
+                      placeholder="Eg - 9898989898"
                       onChange={(e) =>
                         setFormData({
                           ...formData,
@@ -455,6 +461,7 @@ const Utilities = () => {
                     fullWidth
                     label="Address"
                     value={addres}
+                    placeholder="Eg - Hyderabad"
                     variant="outlined"
                     onChange={(e) => setAddres(e.target.value)}
                     InputProps={{
@@ -466,9 +473,6 @@ const Utilities = () => {
                     <p className="text-xs text-red-500 italic">*This Field is Required</p>
                   )}
                 </div>
-
-                {/* Divider */}
-                {/* <div className="border-t border-gray-300"></div> */}
 
                 {/* Submit Button */}
                 <div className="flex justify-center">
@@ -484,8 +488,6 @@ const Utilities = () => {
 
               </div>
             )}
-
-
           </div>
         </div>
       )}

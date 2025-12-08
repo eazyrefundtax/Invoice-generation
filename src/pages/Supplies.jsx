@@ -675,6 +675,7 @@ const Supplies = () => {
                     <TextField
                       label="Name"
                       value={name}
+                      placeholder="Eg - John"
                       onChange={(e) => setName(e.target.value)}
                       className="bg-white rounded-md"
                       fullWidth
@@ -690,6 +691,7 @@ const Supplies = () => {
                   <div className="flex flex-col w-full">
                     <TextField
                       label="Phone Number"
+                      placeholder="Eg - 9898989898"
                       type="text"
                       value={phone}
                       onChange={(e) => {
@@ -742,6 +744,7 @@ const Supplies = () => {
                     <TextField
                       label="Address"
                       value={address}
+                      placeholder="Eg - Hyderabad"
                       onChange={(e) => setAddress(e.target.value)}
                       className="bg-white rounded-md"
                       fullWidth
@@ -780,6 +783,7 @@ const Supplies = () => {
                     <TextField
                       label="Item"
                       value={item.item}
+                      placeholder="Eg - Launge chairs"
                       onChange={(e) => handleItemChange(index, "item", e.target.value)}
                       className="bg-white rounded-md"
                       fullWidth
@@ -792,6 +796,7 @@ const Supplies = () => {
                       <TextField
                         label="Quantity"
                         value={item.quantity}
+                        placeholder="Eg - 4"
                         onChange={(e) =>
                           handleItemChange(
                             index,
@@ -806,6 +811,7 @@ const Supplies = () => {
                       <TextField
                         label="Price"
                         value={item.price}
+                        placeholder="Eg - 1200"
                         onChange={(e) =>
                           handleItemChange(
                             index,
@@ -819,6 +825,7 @@ const Supplies = () => {
                       {/* Discount */}
                       <TextField
                         label="Discount (%)"
+                        placeholder="Eg - 5%"
                         value={item.discount || ""}
                         onChange={(e) =>
                           handleItemChange(
@@ -879,6 +886,7 @@ const Supplies = () => {
                       <TextField
                         label="Name"
                         value={name}
+                        placeholder="Eg - John"
                         onChange={(e) => setName(e.target.value)}
                         className="bg-white rounded-md"
                         fullWidth
@@ -893,6 +901,7 @@ const Supplies = () => {
                       <TextField
                         label="Address"
                         value={address}
+                        placeholder="Eg - Hyderabad"
                         onChange={(e) => setAddress(e.target.value)}
                         className="bg-white rounded-md"
                         fullWidth
@@ -911,6 +920,7 @@ const Supplies = () => {
                     <div className="flex flex-col mb-4">
                       <TextField
                         label="Name"
+                        placeholder="Eg - Maxi"
                         value={shippedName}
                         onChange={(e) => setShippedName(e.target.value)}
                         className="bg-white rounded-md"
@@ -925,6 +935,7 @@ const Supplies = () => {
                     <div className="flex flex-col">
                       <TextField
                         label="Address"
+                        placeholder="Eg - Vijawada"
                         value={shippingAddress}
                         onChange={(e) => setShippingAddress(e.target.value)}
                         className="bg-white rounded-md"
@@ -1048,6 +1059,7 @@ const Supplies = () => {
                     <TextField
                       label="Item"
                       value={item.item}
+                      placeholder="Eg - Bricks"
                       onChange={(e) => handleItemChange(index, "item", e.target.value)}
                       className="bg-white rounded-md"
                       fullWidth
@@ -1059,6 +1071,7 @@ const Supplies = () => {
                       <TextField
                         label="Quantity"
                         value={item.quantity}
+                        placeholder="Eg - 1500"
                         onChange={(e) =>
                           handleItemChange(index, "quantity", e.target.value.replace(/[^0-9]/g, ""))
                         }
@@ -1068,6 +1081,7 @@ const Supplies = () => {
                       <TextField
                         label="Price"
                         value={item.price}
+                        placeholder="Eg - 8"
                         onChange={(e) =>
                           handleItemChange(index, "price", e.target.value.replace(/[^0-9]/g, ""))
                         }
@@ -1076,6 +1090,7 @@ const Supplies = () => {
 
                       <TextField
                         label="GST (%)"
+                        placeholder="Eg - 12%"
                         value={item.gst || ""}
                         onChange={(e) =>
                           handleItemChange(index, "gst", e.target.value.replace(/[^0-9.]/g, ""))
@@ -1128,6 +1143,7 @@ const Supplies = () => {
                       <TextField
                         label="Name"
                         value={name}
+                        placeholder="Eg - John"
                         onChange={(e) => setName(e.target.value)}
                         fullWidth
                         className="bg-white rounded-md"
@@ -1141,6 +1157,7 @@ const Supplies = () => {
                       <TextField
                         label="Address"
                         value={address}
+                        placeholder="Eg - Hyderabads"
                         onChange={(e) => setAddress(e.target.value)}
                         fullWidth
                         className="bg-white rounded-md"
@@ -1159,6 +1176,7 @@ const Supplies = () => {
                       <TextField
                         label="Name"
                         value={shippedName}
+                        placeholder="Eg - Maxi"
                         onChange={(e) => setShippedName(e.target.value)}
                         fullWidth
                         className="bg-white rounded-md"
@@ -1171,6 +1189,7 @@ const Supplies = () => {
                     <div className="flex flex-col">
                       <TextField
                         label="Address"
+                        placeholder="Eg - Guntur"
                         value={shippingAddress}
                         onChange={(e) => setShippingAddress(e.target.value)}
                         fullWidth
@@ -1270,6 +1289,7 @@ const Supplies = () => {
                     <TextField
                       label="Item"
                       value={item.item}
+                      placeholder="Eg - Marble"
                       onChange={(e) => handleItemChange(index, "item", e.target.value)}
                       fullWidth
                       className="bg-white rounded-md"
@@ -1278,6 +1298,7 @@ const Supplies = () => {
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                       <TextField
                         label="Quantity"
+                        placeholder="Eg - 50"
                         value={item.quantity}
                         onChange={(e) => handleItemChange(index, "quantity", e.target.value.replace(/[^0-9]/g, ""))}
                         className="bg-white rounded-md"
@@ -1285,6 +1306,7 @@ const Supplies = () => {
 
                       <TextField
                         label="Price"
+                        placeholder="Eg - 4845"
                         value={item.price}
                         onChange={(e) => handleItemChange(index, "price", e.target.value.replace(/[^0-9]/g, ""))}
                         className="bg-white rounded-md"
@@ -1292,6 +1314,7 @@ const Supplies = () => {
 
                       <TextField
                         label="GST (%)"
+                        placeholder="Eg - 12%"
                         value={item.gst || ""}
                         onChange={(e) => handleItemChange(index, "gst", e.target.value.replace(/[^0-9.]/g, ""))}
                         className="bg-white rounded-md"
@@ -1335,6 +1358,7 @@ const Supplies = () => {
                     <TextField
                       label="Name"
                       value={name}
+                      placeholder="Eg - John"
                       onChange={(e) => setName(e.target.value)}
                       fullWidth
                       className="bg-white rounded-md"
@@ -1348,6 +1372,7 @@ const Supplies = () => {
                   <div className="flex flex-col">
                     <TextField
                       label="Phone Number"
+                      placeholder="Eg - 9898989898"
                       value={phone}
                       onChange={(e) => {
                         const value = e.target.value;
@@ -1409,6 +1434,7 @@ const Supplies = () => {
                     <TextField
                       label="Item"
                       value={item.item}
+                      placeholder="Eg - Hand Shower Bracket"
                       onChange={(e) => handleItemChange(index, "item", e.target.value)}
                       fullWidth
                       className="bg-white rounded-md"
@@ -1421,6 +1447,7 @@ const Supplies = () => {
                       <TextField
                         label="Quantity"
                         value={item.quantity}
+                        placeholder="Eg - 2"
                         onChange={(e) =>
                           handleItemChange(index, "quantity", e.target.value.replace(/[^0-9]/g, ""))
                         }
@@ -1430,6 +1457,7 @@ const Supplies = () => {
                       {/* Price */}
                       <TextField
                         label="Price"
+                        placeholder="Eg - 500"
                         value={item.price}
                         onChange={(e) =>
                           handleItemChange(index, "price", e.target.value.replace(/[^0-9]/g, ""))
@@ -1464,7 +1492,6 @@ const Supplies = () => {
                             </button>
                           </div>
                         )}
-
                       </div>
                     </div>
 
@@ -1507,6 +1534,7 @@ const Supplies = () => {
                     <TextField
                       label="Name"
                       value={name}
+                      placeholder="Eg - John"
                       onChange={(e) => setName(e.target.value)}
                       fullWidth
                       className="bg-white rounded-md"
@@ -1521,6 +1549,7 @@ const Supplies = () => {
                     <TextField
                       label="Phone Number"
                       value={phone}
+                      placeholder="Eg - 9898989898"
                       onChange={(e) => {
                         const value = e.target.value;
                         if (/^\d{0,10}$/.test(value)) SetPhone(value);
@@ -1534,12 +1563,14 @@ const Supplies = () => {
                     )}
                   </div>
                 </div>
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   {/* ADDRESS */}
                   <div className="flex flex-col">
                     <TextField
                       label="Address"
                       value={address}
+                      placeholder="Eg - Hyderabad"
                       onChange={(e) => setAddress(e.target.value)}
                       fullWidth
                       className="bg-white rounded-md"
@@ -1595,6 +1626,7 @@ const Supplies = () => {
                     <TextField
                       label="Item"
                       value={item.item}
+                      placeholder="Eg - Swimming Pool Tools"
                       onChange={(e) => handleItemChange(index, "item", e.target.value)}
                       fullWidth
                       className="bg-white rounded-md"
@@ -1605,6 +1637,7 @@ const Supplies = () => {
                       <TextField
                         label="Quantity"
                         value={item.quantity}
+                        placeholder="Eg - 1"
                         onChange={(e) =>
                           handleItemChange(index, "quantity", e.target.value.replace(/[^0-9]/g, ""))
                         }
@@ -1614,6 +1647,7 @@ const Supplies = () => {
                       <TextField
                         label="Price"
                         value={item.price}
+                        placeholder="Eg - 5000"
                         onChange={(e) =>
                           handleItemChange(index, "price", e.target.value.replace(/[^0-9]/g, ""))
                         }
@@ -1658,6 +1692,7 @@ const Supplies = () => {
                   <TextField
                     label="Name"
                     value={name}
+                    placeholder="Eg - John"
                     onChange={(e) => setName(e.target.value)}
                     className="bg-white rounded-md"
                     fullWidth
@@ -1672,6 +1707,7 @@ const Supplies = () => {
                   <TextField
                     label="Address"
                     value={address}
+                    placeholder="Eg - Hyderabad"
                     onChange={(e) => setAddress(e.target.value)}
                     className="bg-white rounded-md"
                     fullWidth
@@ -1756,6 +1792,7 @@ const Supplies = () => {
                     <TextField
                       label="Item"
                       value={item.item}
+                      placeholder="Eg - Dining Set"
                       onChange={(e) => handleItemChange(index, "item", e.target.value)}
                       className="bg-white rounded-md"
                       fullWidth
@@ -1766,6 +1803,7 @@ const Supplies = () => {
                       <TextField
                         label="Quantity"
                         value={item.quantity}
+                        placeholder="Eg - 1"
                         onChange={(e) =>
                           handleItemChange(
                             index,
@@ -1779,6 +1817,7 @@ const Supplies = () => {
                       <TextField
                         label="Price"
                         value={item.price}
+                        placeholder="Eg - 125000"
                         onChange={(e) =>
                           handleItemChange(
                             index,

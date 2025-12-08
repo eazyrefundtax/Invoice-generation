@@ -8,8 +8,6 @@ import React from "react";
 
 function App() {
 
-
-
   return (
     <AuthContextProvider>
       <React.Suspense fallback={
@@ -24,4 +22,4 @@ function App() {
   );
 }
 
-export default App;
+export default App; 
