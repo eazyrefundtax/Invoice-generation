@@ -248,7 +248,7 @@ const Repairs = () => {
             {/* Urban Company Bill */}
             {selectedBill?.id === 1 && (
               <div className="flex flex-col gap-6 mt-6 bg-gray-50 p-6 rounded-xl shadow-sm">
-
+                <h2 className="text-xl font-semibold text-gray-800 mb-4">Urban Company</h2>
                 {/* Name + Date */}
                 <div className="flex flex-col sm:flex-row gap-4">
 
@@ -294,9 +294,6 @@ const Repairs = () => {
                       </p>
                     )}
                   </div>
-
-
-
                 </div>
 
                 {/* Address + Item */}
@@ -390,7 +387,7 @@ const Repairs = () => {
             {/* PK Repair Bill */}
             {selectedBill?.id === 2 && (
               <div className="flex flex-col gap-6 mt-6 bg-gray-50 p-6 rounded-xl shadow-sm">
-
+                <h2 className="text-xl font-semibold text-gray-800 mb-4">PK Construction BIll  </h2>
                 {/* Customer Name */}
                 <div className="flex flex-col sm:flex-row gap-4">
                   <div className="flex flex-col w-full">
@@ -525,7 +522,7 @@ const Repairs = () => {
                       />
                       <TextField
                         label="GST (%)"
-                        placeholder="18"
+                        placeholder="Eg - 18%"
                         value={item.gst || ""}
                         onChange={(e) =>
                           handleItemChange(

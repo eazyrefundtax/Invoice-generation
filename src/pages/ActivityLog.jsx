@@ -190,7 +190,7 @@ const ActivityLogGenerator = () => {
           <DialogActions>
             <Button onClick={() => setOpen(false)}>Cancel</Button>
             <Button onClick={handleGenerateAndDownload} variant="contained" color="success">
-              Generate & Download
+              Download
             </Button>
           </DialogActions>
         </Dialog>

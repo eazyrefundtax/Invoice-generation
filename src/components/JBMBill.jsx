@@ -145,13 +145,13 @@ const JBMBill = ({
 
                 {items?.map((item, index) => (
                     <View style={styles.tableRow} key={index}>
-                        <Text style={[styles.cell, { width: "6%", borderLeftWidth: 1, borderColor: "#000", paddingTop: 23 }]}>{index + 1}</Text>
-                        <Text style={[styles.cell, { width: "30%", paddingTop: 23 }]}>{item.item}</Text>
-                        <View style={[styles.cell, { width: "15%", alignItems: "center", }]}>
+                        <Text style={[styles.cell, { width: "7%", borderLeftWidth: 1, borderColor: "#000", paddingTop: 23 }]}>{index + 1}</Text>
+                        <Text style={[styles.cell, { width: "40%", paddingTop: 23 }]}>{item.item}</Text>
+                        {/* <View style={[styles.cell, { width: "15%", alignItems: "center", }]}>
                             {item.image && <Image src={item.image} style={{ width: 50, height: 50 }} />}
-                        </View>
-                        <Text style={[styles.cell, { width: "8%", paddingTop: 23 }]}>{item.quantity}</Text>
-                        <Text style={[styles.cell, { width: "13%", paddingTop: 23 }]}>₹{item.price}</Text>
+                        </View> */}
+                        <Text style={[styles.cell, { width: "10%", paddingTop: 23 }]}>{item.quantity}</Text>
+                        <Text style={[styles.cell, { width: "15%", paddingTop: 23 }]}>₹{item.price}</Text>
                         <Text style={[styles.cell, { width: "14%", paddingTop: 23 }]}>₹{item.netRate}</Text>
                         <Text style={[styles.cell, { width: "14%", paddingTop: 23 }]}>₹{item.netRate}</Text>
                     </View>

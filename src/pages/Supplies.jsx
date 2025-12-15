@@ -468,11 +468,11 @@ const Supplies = () => {
         totalNetRate={totalNetRate}
         invoiceDate={invoiceDate}
         tableHead={[
-          { name: "S.No", width: "6%" },
-          { name: "Description", width: "30%" },
-          { name: "Image", width: "15%" },
-          { name: "Qty", width: "8%" },
-          { name: "MRP", width: "13%" },
+          { name: "S.No", width: "7%" },
+          { name: "Description", width: "40%" },
+          // { name: "Image", width: "15%" },
+          { name: "Qty", width: "10%" },
+          { name: "MRP", width: "15%" },
           { name: "Net Rate", width: "14%" },
           { name: "Amount", width: "14%" },
         ]}
@@ -487,8 +487,6 @@ const Supplies = () => {
     link.click();
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
-
-
 
     clearForm();
   };
@@ -1466,7 +1464,7 @@ const Supplies = () => {
                       />
 
                       {/* Image Upload */}
-                      <div className="flex flex-col w-full">
+                      {/* <div className="flex flex-col w-full">
 
                         {!item.image ? (
                           <TextField
@@ -1492,7 +1490,7 @@ const Supplies = () => {
                             </button>
                           </div>
                         )}
-                      </div>
+                      </div> */}
                     </div>
 
                     {/* Field Error */}

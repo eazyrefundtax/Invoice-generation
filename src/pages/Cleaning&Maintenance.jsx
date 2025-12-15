@@ -577,7 +577,7 @@ const CleaningMaintainces = () => {
                   <div className="flex flex-col w-full">
                     <TextField
                       label="Address"
-                      placeholder="Hyderabad"
+                      placeholder="Eg -  Hyderabad"
                       value={address}
                       onChange={(e) => setAddress(e.target.value)}
                       className="bg-white rounded-md"
@@ -624,7 +624,7 @@ const CleaningMaintainces = () => {
                     <TextField
                       label="Item Name"
                       value={item.item}
-                      placeholder="Tiles Cleaning"
+                      placeholder="Eg - Tiles Cleaning"
                       onChange={(e) => handleItemChange(index, "item", e.target.value)}
                       className="bg-white rounded-md"
                     />
@@ -633,7 +633,7 @@ const CleaningMaintainces = () => {
                       <TextField
                         label="Quantity"
                         type="text"
-                        placeholder="4"
+                        placeholder="Eg - 4"
                         value={item.quantity}
                         onChange={(e) =>
                           handleItemChange(
@@ -692,7 +692,7 @@ const CleaningMaintainces = () => {
             {/* Bill 3 */}
             {selectedBill?.id === 3 && (
               <div className="flex flex-col gap-6 mt-6 bg-gray-50 p-6 rounded-xl shadow-sm">
-
+                <h2 className="text-xl font-semibold text-gray-800 mb-4">Urban Company</h2>
                 {/* Name + Date */}
                 <div className="flex flex-col sm:flex-row gap-4">
                   <div className="flex flex-col w-full">
